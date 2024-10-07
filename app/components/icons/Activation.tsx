@@ -48,8 +48,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(20 19.9996) rotate(-15.0033) scale(21.3647 21.3644)"
             >
-              <stop stop-color="#F2A4FF" />
-              <stop offset="1" stop-color="#5200FF" />
+              <stop stopColor="#F2A4FF" />
+              <stop offset="1" stopColor="#5200FF" />
             </radialGradient>
           </defs>
         </>
@@ -89,8 +89,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(18.6865 21.3943) rotate(-30.1237) scale(23.0268 21.5109)"
             >
-              <stop stop-color="#F2A4FF" />
-              <stop offset="1" stop-color="#6D28FF" />
+              <stop stopColor="#F2A4FF" />
+              <stop offset="1" stopColor="#6D28FF" />
             </radialGradient>
             <radialGradient
               id="paint1_radial_875_45660"
@@ -100,8 +100,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(22.129 25.8202) rotate(77.8447) scale(16.3488 344.132)"
             >
-              <stop stop-color="#FFCD6B" />
-              <stop offset="1" stop-color="#EA5DD3" />
+              <stop stopColor="#FFCD6B" />
+              <stop offset="1" stopColor="#EA5DD3" />
             </radialGradient>
             <radialGradient
               id="paint2_radial_875_45660"
@@ -111,8 +111,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(20 19.9994) rotate(132.663) scale(25.0219 25.0219)"
             >
-              <stop stop-color="#00DDFB" />
-              <stop offset="1" stop-color="#0075FF" />
+              <stop stopColor="#00DDFB" />
+              <stop offset="1" stopColor="#0075FF" />
             </radialGradient>
             <radialGradient
               id="paint3_radial_875_45660"
@@ -122,8 +122,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(20 19.9994) rotate(-15.0033) scale(21.3647 21.3644)"
             >
-              <stop stop-color="#F2A4FF" />
-              <stop offset="1" stop-color="#5200FF" />
+              <stop stopColor="#F2A4FF" />
+              <stop offset="1" stopColor="#5200FF" />
             </radialGradient>
             <radialGradient
               id="paint4_radial_875_45660"
@@ -133,8 +133,8 @@ export const Activation = ({
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(21.3135 18.6052) rotate(149.876) scale(23.0268 21.5109)"
             >
-              <stop stop-color="#F2A4FF" />
-              <stop offset="1" stop-color="#6D28FF" />
+              <stop stopColor="#F2A4FF" />
+              <stop offset="1" stopColor="#6D28FF" />
             </radialGradient>
             <linearGradient
               id="paint5_linear_875_45660"
@@ -144,8 +144,8 @@ export const Activation = ({
               y2="-1.71862"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FFD2B9" />
-              <stop offset="1" stop-color="#FF6D6D" />
+              <stop stopColor="#FFD2B9" />
+              <stop offset="1" stopColor="#FF6D6D" />
             </linearGradient>
           </defs>
         </>
