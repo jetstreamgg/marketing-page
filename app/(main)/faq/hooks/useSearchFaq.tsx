@@ -19,8 +19,8 @@ export const useSearchFaq = ({
     () =>
       new Fuse(faqDataset, {
         keys: category ? ['categories'] : searchTerm?.length ? ['question', 'answer'] : [],
-        ignoreLocation: true,
-        threshold: 0.3,
+        ignoreLocation: !category,
+        threshold: category ? 0 : 0.3,
         includeMatches: true
       }),
     [category, searchTerm]

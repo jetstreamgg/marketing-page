@@ -12,7 +12,7 @@ Soon, you'll be able to use SKY to access Activation Token Rewards, and to parti
   },
   {
     question: 'What tokens can I use to access Sky Token Rewards?',
-    answer: 'Currently, only USDS can be used to access Sky Token Rewards.',
+    answer: 'Only USDS can be used to access Sky Token Rewards.',
     categories: ['Sky Token Rewards']
   },
   {

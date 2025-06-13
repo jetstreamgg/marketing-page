@@ -9,7 +9,7 @@ USDS is freely transferable and can be used in connection with any software prot
 
 The Sky Protocol is governed by a community of broad and diversified individuals and entities from around the world, who hold SKY tokens and support the Sky Ecosystem by participating in a system of decentralized onchain voting. USDS powers the open Sky Ecosystem.
 
-USDS is also currently available on networks other than Ethereum Mainnet, including Solana, Base, Arbitrum, Optimism and Unichain. You can follow the health of USDS and all Sky Protocol tokens using the [Sky Ecosystem Dashboard](https://info.sky.money).`,
+USDS is also available on networks other than Ethereum Mainnet, including Solana, Base, Arbitrum, Optimism and Unichain. You can follow the health of USDS and all Sky Protocol tokens using the [Sky Ecosystem Dashboard](https://info.sky.money).`,
     categories: ['Sky Tokens']
   },
   {
@@ -80,7 +80,7 @@ Delegates in receipt of token voting power can never directly access any SKY tok
 
 **Staking SKY to Delegate**
 
-When you supply SKY tokens to the Staking Engine using the Sky.money web app, you can access Staking Rewards and choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power your SKY tokens provide. Here's a brief overview:
+When you supply SKY tokens to the Staking Engine using the Sky.money web app, you can access Staking Rewards and may also choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power your SKY tokens provide. Here's a brief overview:
 
 * **Access Rewards.** Supply SKY tokens to access Staking Rewards, initially in the form of USDS. Staking Reward rates are determined by Sky Ecosystem Governance through the process of decentralized onchain voting.
 

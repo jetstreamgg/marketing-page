@@ -51,7 +51,7 @@ With Sky.money, you always remain in control of your supplied assets.`,
   },
   {
     question: 'Can I borrow assets using the Sky.money web app?',
-    answer: `Eligible users of the [Sky.money web app](https://app.sky.money/) can supply SKY tokens to the Staking Engine of the Sky Protocol and choose to create one or more positions, including a position that enables them to generate and borrow USDS against supplied SKY.
+    answer: `Eligible users of the [Sky.money web app](https://app.sky.money/) can supply SKY tokens to the Staking Engine of the Sky Protocol to access rewards and may also choose to create one or more positions, including a position that enables them to generate and borrow USDS against supplied SKY.
 
 If you create a borrow position, you can stake or un-stake your SKY collateral anytime, and withdraw or pay back USDS whenever you’d like. This means you are always able to actively manage your positions.
 
@@ -187,12 +187,12 @@ For more information, review the [Peg Stability Modules section](https://sky-atl
 * **Increased stability:** Reliable price data ensures efficient collateralization of stablecoins and minimizes the risk of under-collateralized borrowing, safeguarding pegs.
 * **Transparency and decentralization:** The use of multiple independent oracle feeds reduces a protocol’s or decentralized exchange’s reliance on any single source, promoting transparency and trust in a system.
 * **Flexibility and innovation:** The modular design of an oracle system allows for both integration of new data sources and feeds, and separation. In other words, oracles can be on- and off-boarded when needs arise.
-Sky Core currently uses oracles provided by [Chronicle](https://chroniclelabs.org/). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
+Sky Core uses oracles provided by [Chronicle](https://chroniclelabs.org/). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
     categories: ['Sky Protocol & Ecosystem']
   },
   {
     question: 'Who is the provider of oracles for the Sky Protocol?',
-    answer: `Sky Core currently uses oracles provided by [Chronicle](https://chroniclelabs.org/).`,
+    answer: `Sky Core uses oracles provided by [Chronicle](https://chroniclelabs.org/).`,
     categories: ['Sky Protocol & Ecosystem']
   },
   {
@@ -378,7 +378,7 @@ Delegates in receipt of token voting power can never directly access any SKY tok
 Delegating voting power may be a useful option for SKY token holders who have limited time to allocate to the process and who want to save on the cost of gas involved in voting on their own.  
 
 **Staking SKY to Delegate**
-When you supply SKY tokens to the Staking Engine using the [Sky.money web app](https://sky.money/), you can access Staking Rewards and choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power your SKY tokens provide. Here’s a brief overview:
+When you supply SKY tokens to the Staking Engine using the [Sky.money web app](https://sky.money/), you can access Staking Rewards and may also choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power your SKY tokens provide. Here’s a brief overview:
 
   * **Access Rewards.** Supply SKY tokens to access Staking Rewards, initially in the form of USDS. Staking Reward rates are determined by Sky Ecosystem Governance through the process of decentralized onchain voting.
 
