@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { faqDataset } from '../faqData';
+import { faqDataset } from '../faqData/faqData';
 import { useMemo } from 'react';
 
 const unrankedFaqItems = faqDataset.map(item => ({ item, score: 0, matches: [] }));

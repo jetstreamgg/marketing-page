@@ -10,21 +10,8 @@ import { Heading, Text } from '@/app/components/Typography';
 import { ChevronRight } from '@/app/components/icons';
 import SearchHeader from './SearchHeader';
 import { Socials } from '@/app/components/Socials';
+import { categories, ALL_FAQS } from '../faqData/types';
 
-// TODO: Replace with actual categories
-const ALL_FAQS = 'All FAQs';
-const categories = [
-  ALL_FAQS,
-  'Crypto (General)',
-  'Sky Protocol & Ecosystem',
-  'Sky Tokens',
-  'Upgrade',
-  'Trade',
-  'Sky Savings Rate',
-  'Sky Token Rewards',
-  'Staking Engine',
-  'Network Integrations'
-];
 const PAGE_SIZE = 10;
 
 export default function FaqList() {
