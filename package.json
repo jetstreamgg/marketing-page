@@ -50,7 +50,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "husky": "^8.0.3",
-    "knip": "^5.61.2",
+    "knip": "^5.62.0",
     "lint-staged": "^14.0.1",
     "postcss": "^8",
     "prettier": "^3.0.3",
