@@ -14,7 +14,10 @@
     "playwright": "pnpm exec playwright test --trace on",
     "playwright:open": "pnpm exec playwright open --browser=chromium",
     "typecheck": "tsc --noEmit",
-    "knip": "knip"
+    "knip": "knip",
+    "sync-content": "./scripts/sync-content.sh",
+    "bump-content-version": "./scripts/bump-content-version.sh",
+    "prebuild": "pnpm sync-content"
   },
   "dependencies": {
     "@jetstreamgg/sky-hooks": "^1.0.1",
