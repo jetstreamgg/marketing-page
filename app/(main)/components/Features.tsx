@@ -554,7 +554,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
         {/* Section 4 */}
         <Card
           variant="glass"
-          className="col-span-1 grid grid-cols-1 gap-5 rounded-3xl border p-4 tablet:col-span-2"
+          className="col-span-1 grid grid-cols-1 gap-5 rounded-3xl border p-4 tablet:col-span-2 tablet:grid-cols-2"
         >
           <FeatureCardLg
             href={`${baseUrl}/?network=${randomL2Name}`}
@@ -599,54 +599,39 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             emphasis="SkyLink"
             reverse={false}
             postTitle="SkyLink"
-            className={cn('col-span-1', soonSectionClassName)}
+            className="col-span-1"
             featurePageId="skylink"
             APY=""
             TVL=""
             APYDescription=""
             TVLDescription=""
           />
-          {/* <FeatureCard
-            href=""
-            cardClassName={soonSectionClassName}
-            descriptionElement={
-              <Text variant="p3">
-                Activation is on the way.
-                <br />
-                <br />
-                Subject to governance approval, you&apos;ll be able to supply SKY tokens to the Activation
-                module of the decentralised Sky Protocol to begin accumulating Activation Token Rewards in the
-                form of USDS or various Sky Star tokens—you choose.
-                <br />
-                <br />
-                Activate or Deactivate your SKY anytime, with no restrictions or fees. With Sky.money, you
-                always remain in control of funds.
-              </Text>
-            }
+          <FeatureCardLg
+            href={`${baseUrl}/?widget=expert`}
+            descriptionElement={<Text variant="p3">Expert widget</Text>}
+            postTitle="Expert"
             postTextElement={
-              <Text variant="p2">
-                When you supply SKY tokens to the Activation module, you begin to accumulate Activation Token
-                Rewards over time in the form of USDS or Sky Star tokens—you choose.
-                <br />
-                <br />
-                SKY supplied to Activation Rewards does not support delegation or voting.
-                <br />
-                <br />
-                You can Activate or Deactivate your SKY anytime, with no restrictions or fees. With Sky.money,
-                you always remain in control of funds.
-              </Text>
+              <>
+                <Text variant="p2" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                  expert text
+                </Text>
+              </>
             }
-            imgSrc="/features-activation.png"
-            imgClassname="-translate-y-[20%]"
+            imgSrc="/products_stake_1.png"
+            mobileImgSrc="/products_stake_1_mobile.png"
             buttonVariant="azure-2"
-            emphasis="Activation"
-            title="Get rewards with"
+            buttonText="Expert Module"
+            emphasis="StUSDS"
+            title="Expert Module"
             reverse={false}
-            isNotLaunched={true}
-            isMediumSize={true}
-            className="col-span-1 tablet:col-span-2 desktop:col-span-1"
-            featurePageId="activation"
-          /> */}
+            className="col-span-1 tablet:col-span-2 desktop:col-span-1 desktop:mb-32 desktop-xl:mb-0"
+            featurePageId="expert"
+            APY={data.stakeApy}
+            TVL={data.stakeTvl}
+            type="srr"
+            APYDescription="Staking Rewards Rates up to:"
+            TVLDescription="Staking Engine TVL"
+          />
         </Card>
       </div>
     </div>
