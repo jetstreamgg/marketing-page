@@ -14,6 +14,8 @@ export interface FetchedData {
   usdtPrice: string;
   stakeApy: string;
   stakeTvl: string;
+  stusdsApy: string;
+  stusdsTvl: string;
 }
 
 export const fetchData = async (): Promise<FetchedData> => {
@@ -87,6 +89,12 @@ export const fetchData = async (): Promise<FetchedData> => {
       stakeTvl:
         flattenedData.lse_total_tvl !== undefined
           ? '$' + formatNumber(parseFloat(flattenedData.lse_total_tvl), { compact: true, maxDecimals: 0 })
+          : '',
+      stusdsApy:
+        flattenedData.stusds_rate !== undefined ? formatPercent(parseFloat(flattenedData.stusds_rate)) : '',
+      stusdsTvl:
+        flattenedData.stusds_tvl !== undefined
+          ? '$' + formatNumber(parseFloat(flattenedData.stusds_tvl), { compact: true, maxDecimals: 0 })
           : ''
     };
   } catch (error) {
@@ -104,7 +112,9 @@ export const fetchData = async (): Promise<FetchedData> => {
       usdcPrice: '',
       usdtPrice: '',
       stakeApy: '',
-      stakeTvl: ''
+      stakeTvl: '',
+      stusdsApy: '',
+      stusdsTvl: ''
     };
   }
 };

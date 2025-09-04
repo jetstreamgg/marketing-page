@@ -35,6 +35,10 @@ export const menuSections: Record<
     {
       title: 'SkyLink',
       href: 'features#skylink'
+    },
+    {
+      title: 'Expert',
+      href: 'features#expert'
     }
   ],
   participate: [

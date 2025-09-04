@@ -150,10 +150,18 @@ export function FeaturesPageCard({
                                         <Text variant="p3" className="pr-2">
                                           {label}
                                         </Text>
-                                        {['rewards', 'savings', 'stake'].includes(id) &&
+                                        {['rewards', 'savings', 'stake', 'expert'].includes(id) &&
                                           statId === 'rate' && (
                                             <PopoverRateInfo
-                                              type={id === 'savings' ? 'ssr' : id === 'stake' ? 'srr' : 'str'}
+                                              type={
+                                                id === 'savings'
+                                                  ? 'ssr'
+                                                  : id === 'stake'
+                                                  ? 'srr'
+                                                  : id === 'expert'
+                                                  ? 'stusds'
+                                                  : 'str'
+                                              }
                                             />
                                           )}
                                       </div>

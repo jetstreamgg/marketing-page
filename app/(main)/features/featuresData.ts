@@ -4,6 +4,7 @@ import { TradeCard } from './components/cards/TradeCard';
 import { RewardsCard } from './components/cards/RewardsCard';
 import { SaveCard } from './components/cards/SaveCard';
 import { SkyLinkCard } from './components/cards/SkyLinkCard';
+import { ExpertCard } from './components/cards/ExpertCard';
 import { StakeCard } from './components/cards/StakeCard';
 
 type Feature = {
@@ -52,6 +53,12 @@ export const existingFeatures: Feature[] = [
     title: 'SkyLink',
     card: SkyLinkCard,
     id: 'skylink'
+  },
+  {
+    icon: SkyLink,
+    title: 'Expert',
+    card: ExpertCard,
+    id: 'expert'
   }
 ];
 

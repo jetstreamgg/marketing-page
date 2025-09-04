@@ -73,10 +73,18 @@ const content = {
         Sky Protocol.
       </Text>
     )
+  },
+  stusds: {
+    title: 'stUSDS',
+    description: (
+      <Text className="leading-5 text-white/80" variant="ui-small-regular">
+        Stusds rate
+      </Text>
+    )
   }
 };
 
-export const PopoverRateInfo = ({ type }: { type: 'str' | 'ssr' | 'psm' | 'srr' }) => {
+export const PopoverRateInfo = ({ type }: { type: 'str' | 'ssr' | 'psm' | 'srr' | 'stusds' }) => {
   if (!(type in content)) return null;
 
   return (

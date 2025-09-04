@@ -47,7 +47,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.afterEach(async () => {
-  console.log('in afterEach!');
   //signature rejection errors in console are expected
   const filteredErrorLogs = errorLogs.filter(log => !log.includes('reject sign'));
   expect(filteredErrorLogs).toEqual([]);
