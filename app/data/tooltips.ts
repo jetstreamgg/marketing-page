@@ -104,10 +104,10 @@ The SKY Borrow Rate is the current interest rate charged to SKY-backed borrowers
       'The ratio between the value of collateral you’ve provided and the amount you’ve borrowed against that collateral.'
   },
   {
-    id: 'liquidation-price',
-    title: 'Liquidation price',
+    id: 'liquidation-price-staking',
+    title: 'Liquidation price (Staking)',
     tooltip:
-      "If the value of your collateral (MKR or SKY) drops below the liquidation price noted here, some or all of your collateral may be auctioned to repay the amount of USDS that you borrowed. Note that a one-hour price update delay applies. In other words, when MKR or SKY drops below a user's liquidation price it will only start applying one hour later. This is called the OSM delay in technical terms, and it also applies to any legacy Maker MCD vault."
+      "If the value of your collateral (SKY) drops below the liquidation price noted here, some or all of your collateral may be auctioned to repay the amount of USDS that you borrowed. Note that a one-hour price update delay applies. In other words, when SKY drops below a user's liquidation price it will only start applying one hour later. This is called the OSM delay in technical terms, and it also applies to any legacy Maker MCD vault."
   },
   {
     id: 'risk-level',
@@ -126,6 +126,36 @@ The SKY Borrow Rate is the current interest rate charged to SKY-backed borrowers
     title: 'Debt ceiling utilization',
     tooltip:
       'If the debt ceiling utilization reaches 100%, no new USDS can be borrowed. The debt ceiling is a parameter determined by Sky Ecosystem Governance through a process of decentralized onchain voting.'
+  },
+  {
+    id: 'max-permitted-risk',
+    title: 'Max permitted risk',
+    tooltip:
+      'Risk cannot exceed the Max permitted risk level, determined by the capped OSM price and collateralization ratio requirements. To borrow more, stake additional SKY collateral.'
+  },
+  {
+    id: 'risk-floor',
+    title: 'Risk floor',
+    tooltip:
+      'Given the current amount of SKY deposited and USDS borrowed in this position, risk cannot be adjusted below the Risk floor. To lower the Risk floor, you must stake more SKY or repay USDS on the Unstake and Repay tab.'
+  },
+  {
+    id: 'risk-ceiling',
+    title: 'Risk ceiling',
+    tooltip:
+      'Given the current amount of SKY deposited and USDS borrowed in this position, risk cannot be increased above the Risk ceiling. To raise the Risk ceiling, you must unstake SKY or borrow additional USDS.'
+  },
+  {
+    id: 'risk-borrow',
+    title: 'Risk (borrow)',
+    tooltip:
+      'Risk can only be adjusted upward when borrowing. To adjust downward, you can stake more SKY or repay USDS on the Unstake and Repay tab.'
+  },
+  {
+    id: 'risk-repay',
+    title: 'Risk (repay)',
+    tooltip:
+      'Risk can only be adjusted downward when repaying. To adjust upward, you can unstake SKY or borrow more USDS on the Stake and Borrow tab.'
   },
   {
     id: 'choose-your-delegate',
@@ -156,13 +186,17 @@ Exit your positions now.`
 You don't have any open positions.`
   },
   {
+    id: 'liquidation-price-seal',
+    title: 'Liquidation price (Seal)',
+    tooltip:
+      "If the value of your collateral (MKR or SKY) drops below the liquidation price noted here, some or all of your collateral may be auctioned to repay the amount of USDS that you borrowed. Note that a one-hour price update delay applies. In other words, when MKR or SKY drops below a user's liquidation price it will only start applying one hour later. This is called the OSM delay in technical terms, and it also applies to any legacy Maker MCD vault."
+  },
+  {
     id: 'delayed-upgrade-penalty',
     title: 'Delayed Upgrade Penalty',
-    tooltip: `The Delayed Upgrade Penalty is a time-based upgrade mechanism approved by Sky Ecosystem Governance and designed to facilitate a smooth and prompt upgrade of MKR to SKY.
+    tooltip: `The Delayed Upgrade Penalty is a time-based upgrade [approved by Sky Ecosystem Governance](https://vote.sky.money/executive/template-executive-vote-delayed-upgrade-penalty-launch-agent-2-allocator-adjustment-lsev2-sky-a-liquidation-ratio-increase-first-monthly-settlement-cycle-ad-compensation-for-september-2025-atlas-core-development-usds-and-sky-payments-spark-proxy-spell-september-18-2025) and designed to facilitate a smooth and prompt upgrade of MKR to SKY.
 
-The vote to confirm the penalty will [be held on September 18, 2025](https://upgrademkrtosky.sky.money/). If the vote passes, the penalty will take effect on September 22, 2025.
-
-Once in effect, the amount of SKY received per MKR upgraded during the first three months will be reduced by 1%. The reduction will increase by an additional 1% every three months thereafter, until it reaches 100% in 25 years. The penalty will not apply to anyone upgrading their MKR to SKY before it kicks in.`
+The penalty, which took effect in September 2025, reduces the amount of SKY received per MKR upgraded by a rate of 1%. The reduction will increase by an additional 1% every three months thereafter, until it reaches 100% in 25 years.`
   },
   {
     id: 'eip-7702-bundled-transactions-not-supported',

@@ -83,7 +83,8 @@ export const fetchData = async (): Promise<FetchedData> => {
       stakeApy: (() => {
         const skySpkApy = flattenedData.sky_spk_apy ? parseFloat(flattenedData.sky_spk_apy) : 0;
         const skyUsdsApy = flattenedData.sky_usds_apy ? parseFloat(flattenedData.sky_usds_apy) : 0;
-        const higherApy = Math.max(skySpkApy, skyUsdsApy);
+        const skySkyApy = flattenedData.sky_sky_apy ? parseFloat(flattenedData.sky_sky_apy) : 0;
+        const higherApy = Math.max(skySpkApy, skyUsdsApy, skySkyApy);
         return higherApy > 0 ? formatPercent(higherApy) : '';
       })(),
       stakeTvl:

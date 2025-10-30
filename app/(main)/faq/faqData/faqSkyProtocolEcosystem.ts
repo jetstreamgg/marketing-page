@@ -75,7 +75,7 @@ For a deeper dive into the facets and checks and balances of governance, please 
   {
     question: 'How many tokens does the Sky Protocol feature, and will others be added?',
     answer:
-      'The Sky Protocol features four tokens: USDS, DAI, SKY and MKR. All Sky Protocol tokens are managed by Sky Ecosystem Governance through a system of decentralized onchain voting. The addition of new tokens, as well as any changes to current tokens, would need to be approved by Sky Ecosystem Governance.',
+      'The Sky Protocol features the following tokens: USDS, DAI, sUSDS, stUSDS, SKY and MKR. All Sky Protocol tokens are managed by Sky Ecosystem Governance through a system of decentralized onchain voting. The addition of new tokens, as well as any changes to current tokens, would need to be approved by Sky Ecosystem Governance.',
     categories: ['Sky Protocol & Ecosystem']
   },
   {

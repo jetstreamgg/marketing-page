@@ -19,12 +19,6 @@ L2s used with Ethereum not only offer users much lower fees and much faster spee
     categories: ['Network Integrations']
   },
   {
-    question: 'Which native Sky tokens can I trade on supported L2s?',
-    answer:
-      'USDS and sUSDS are available to trade on all supported Layer 2 (L2) networks. On Ethereum Mainnet, additional Sky ecosystem tokens such as SKY, MKR, and SPK are also available for trading.',
-    categories: ['Network Integrations']
-  },
-  {
     question: 'Which tokens can I trade on supported L2s?',
     answer: `Supported trading pairs vary by network:
 

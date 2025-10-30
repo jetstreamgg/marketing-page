@@ -41,7 +41,7 @@ If you create a borrow position, you can stake or un-stake your SKY collateral a
 
 The debt ceiling and Borrow Rate are parameters determined by Sky Ecosystem Governance through a process of decentralized, community-driven onchain voting. The total debt increases each block according to the Borrow Rate.
 
-USDS borrow positions are subject to liquidation risk if at any time the value of supplied collateral drops below the required threshold (liquidation price) and the position becomes undercollateralized. If this were to occur, the smart contract would automatically liquidate and auction the collateral, and any leftover collateral may be claimed through the [Unified Auctions portal](https://unified-auctions.makerdao.com/).`,
+USDS borrow positions are subject to liquidation risk if at any time the value of supplied collateral drops below the required threshold ([liquidation price](#tooltip-liquidation-price-staking)) and the position becomes undercollateralized. If this were to occur, the smart contract would automatically liquidate and auction the collateral, and any leftover collateral may be claimed through the [Unified Auctions portal](https://unified-auctions.makerdao.com/).`,
     categories: ['Sky.money']
   },
   {
