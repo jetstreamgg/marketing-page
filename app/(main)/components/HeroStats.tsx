@@ -2,7 +2,7 @@ import { Text } from '@/app/components/Typography';
 import { motion } from 'framer-motion';
 import { getSunriseDelay } from '@/app/constants';
 import { FetchedData } from '../fetchData';
-import { PopoverRateInfo } from '@/app/components/PopoverRateInfo';
+import { PopoverInfo } from '@/app/components/PopoverInfo';
 
 export function HeroStats({ data }: { data: FetchedData }) {
   return (
@@ -30,7 +30,7 @@ export function HeroStats({ data }: { data: FetchedData }) {
             <Text variant="p3" className="pr-2">
               Sky Savings Rate
             </Text>
-            <PopoverRateInfo type="ssr" />
+            <PopoverInfo type="ssr" />
           </div>
           <Text variant="n1" className="max-w-full break-words text-center">
             {data.saveApy}

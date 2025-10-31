@@ -17,6 +17,7 @@ const getContent = () => {
   const psmTooltip = getTooltipById('psm');
   const stakingRewardsRateTooltip = getTooltipById('staking-rewards-rates-srrs');
   const stusdsRateTooltip = getTooltipById('stusds-rate');
+  const liquidationPriceStakingTooltip = getTooltipById('liquidation-price-staking');
 
   return {
     str: {
@@ -58,14 +59,35 @@ const getContent = () => {
           {parseMarkdownLinks(stusdsRateTooltip?.tooltip)}
         </Text>
       )
+    },
+    'liquidation-price-staking': {
+      title: liquidationPriceStakingTooltip?.title || '',
+      description: (
+        <Text className="leading-5 text-white/80" variant="ui-small-regular">
+          {parseMarkdownLinks(liquidationPriceStakingTooltip?.tooltip)}
+        </Text>
+      )
     }
   };
 };
 
-export const PopoverRateInfo = ({ type }: { type: 'str' | 'ssr' | 'psm' | 'srr' | 'stusds' }) => {
+export const PopoverInfo = ({
+  type
+}: {
+  type: 'str' | 'ssr' | 'psm' | 'srr' | 'stusds' | 'sky-savings-rate' | 'liquidation-price-staking';
+}) => {
   const content = getContent();
 
-  if (!(type in content)) return null;
+  // Map FAQ tooltip IDs to existing IDs
+  const typeMapping: Record<string, keyof ReturnType<typeof getContent>> = {
+    'sky-savings-rate': 'ssr' // FAQ uses 'sky-savings-rate' instead of 'ssr'
+  };
+
+  const actualType = typeMapping[type] || type;
+
+  if (!(actualType in content)) return null;
+
+  const tooltipContent = content[actualType as keyof typeof content];
 
   return (
     <Popover>
@@ -73,9 +95,9 @@ export const PopoverRateInfo = ({ type }: { type: 'str' | 'ssr' | 'psm' | 'srr' 
         <Info />
       </PopoverTrigger>
       <PopoverContent align="center" side="top" className="backdrop-blur-lg">
-        {content[type].title && (
+        {tooltipContent.title && (
           <Text variant="ui-medium" className="text-[16px] leading-6">
-            {content[type].title}
+            {tooltipContent.title}
           </Text>
         )}
         <div className="flex w-full justify-end pb-2">
@@ -83,7 +105,7 @@ export const PopoverRateInfo = ({ type }: { type: 'str' | 'ssr' | 'psm' | 'srr' 
             <Close className="h-5 w-5 cursor-pointer" />
           </PopoverClose>
         </div>
-        {content[type].description}
+        {tooltipContent.description}
         <PopoverArrow />
       </PopoverContent>
     </Popover>

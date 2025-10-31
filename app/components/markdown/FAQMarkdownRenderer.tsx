@@ -1,5 +1,5 @@
 import { ExternalLink } from '../ExternalLink';
-import { PopoverRateInfo } from '../PopoverRateInfo';
+import { PopoverInfo } from '../PopoverInfo';
 import { Heading, Text, List, ListVariant, TextVariant } from '../Typography';
 import { SafeMarkdownRenderer } from './SafeMarkdownRenderer';
 
@@ -49,11 +49,18 @@ export const FAQMarkdownRenderer = ({
       a: ({ children, href, ...props }) => {
         // Handle tooltip syntax: [text](#tooltip-type)
         if (href?.startsWith('#tooltip-')) {
-          const tooltipType = href.replace('#tooltip-', '') as 'str' | 'ssr' | 'psm';
+          const tooltipId = href.replace('#tooltip-', '') as
+            | 'str'
+            | 'ssr'
+            | 'psm'
+            | 'srr'
+            | 'stusds'
+            | 'sky-savings-rate'
+            | 'liquidation-price-staking';
           return (
             <span className="inline-flex items-center gap-1">
               {children}
-              <PopoverRateInfo type={tooltipType} />
+              <PopoverInfo type={tooltipId} />
             </span>
           );
         }

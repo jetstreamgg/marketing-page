@@ -4,7 +4,7 @@ import ProductsStUSDS from '@/public/features_stUSDS_desktop.png';
 import ProductsStUSDSMobile from '@/public/features_stUSDS_mobile.png';
 import { useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { FetchedData } from '@/app/(main)/fetchData';
-import { PopoverRateInfo } from '@/app/components/PopoverRateInfo';
+import { PopoverInfo } from '@/app/components/PopoverInfo';
 import Link from 'next/link';
 
 export const ExpertCard = ({ data }: { data: FetchedData }) => {
@@ -25,7 +25,7 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
               </TextFeatureCard>
               <TextFeatureCard>
                 When you supply USDS to the stUSDS module of the protocol, you fund SKY-back borrowing to
-                access the stUSDS Rate <PopoverRateInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
+                access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
                 tokens serve as a digital record of your USDS interaction with the stUSDS module and any value
                 accrued to your position. For details, see{' '}
                 <Link className="hover:underline hover:underline-offset-4" href="/faq">

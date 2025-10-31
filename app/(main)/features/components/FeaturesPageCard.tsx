@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/ta
 import { graphikStdClassName } from '@/app/lib/fonts';
 import { cn } from '@/app/lib/utils';
 import { ReactNode, useState } from 'react';
-import { PopoverRateInfo } from '@/app/components/PopoverRateInfo';
+import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { ExternalLink } from '@/app/components/ExternalLink';
 
@@ -152,7 +152,7 @@ export function FeaturesPageCard({
                                         </Text>
                                         {['rewards', 'savings', 'stake', 'expert'].includes(id) &&
                                           statId === 'rate' && (
-                                            <PopoverRateInfo
+                                            <PopoverInfo
                                               type={
                                                 id === 'savings'
                                                   ? 'ssr'

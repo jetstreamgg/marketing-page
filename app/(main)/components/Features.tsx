@@ -16,7 +16,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Banner } from '@/app/components/Banner';
 import { FetchedData } from '../fetchData';
 import { ExternalLink } from '@/app/components/ExternalLink';
-import { PopoverRateInfo } from '@/app/components/PopoverRateInfo';
+import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { PopoverSealInfo } from '@/app/components/PopoverSealInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
@@ -53,7 +53,7 @@ const FeatureCardStats = ({
                 {APY}
                 {type && (
                   <span className="ml-1 inline-flex align-baseline">
-                    <PopoverRateInfo type={type} />
+                    <PopoverInfo type={type} />
                   </span>
                 )}
               </span>
@@ -565,7 +565,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
                 SKY stakers.
                 <br />
                 <br />
-                Use USDS to access the stUSDS Rate <PopoverRateInfo type="stusds" /> and encourage more
+                Use USDS to access the stUSDS Rate <PopoverInfo type="stusds" /> and encourage more
                 participation in SKY governance. No minimum supply amount is required.
               </Text>
             }
@@ -578,9 +578,9 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
                   <br />
                   <br />
                   When you supply USDS to the stUSDS module of the Protocol, you fund SKY-back borrowing to
-                  access the stUSDS Rate <PopoverRateInfo type="stusds" /> and receive stUSDS tokens. The
-                  stUSDS tokens serve as a digital record of your USDS interaction with the stUSDS module and
-                  any value accrued to your position.
+                  access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
+                  tokens serve as a digital record of your USDS interaction with the stUSDS module and any
+                  value accrued to your position.
                   <br />
                   <br />
                   stUSDS funds and supports liquidity for SKY stakers, encouraging more participation in SKY
