@@ -577,7 +577,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
                   the potential to capture a larger portion of protocol rewards.
                   <br />
                   <br />
-                  When you supply USDS to the stUSDS module of the Protocol, you fund SKY-back borrowing to
+                  When you supply USDS to the stUSDS module of the Protocol, you fund SKY-backed borrowing to
                   access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
                   tokens serve as a digital record of your USDS interaction with the stUSDS module and any
                   value accrued to your position.

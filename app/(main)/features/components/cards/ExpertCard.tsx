@@ -24,7 +24,7 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
                 holders, delegators and voters, leading to a more secure ecosystem.
               </TextFeatureCard>
               <TextFeatureCard>
-                When you supply USDS to the stUSDS module of the protocol, you fund SKY-back borrowing to
+                When you supply USDS to the stUSDS module of the protocol, you fund SKY-backed borrowing to
                 access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
                 tokens serve as a digital record of your USDS interaction with the stUSDS module and any value
                 accrued to your position. For details, see{' '}
