@@ -53,7 +53,7 @@ USDS is also available on networks other than Ethereum Mainnet, including Solana
   {
     question: 'Is USDS pegged to the U.S. dollar or soft-pegged to the U.S. dollar?',
     answer:
-      "USDS is soft-pegged to the U.S. dollar, meaning that it is designed to stay close to $1 in value, but doesn't guarantee a strict 1:1 value ratio with the U.S. dollar. Its value can fluctuate based on market conditions. For example, USDS might trade at \+/-$1, depending on supply and demand. Importantly, the stability of USDS is supported by various mechanisms within the Sky Protocol, including overcollateralization and the use of Peg Stability Modules (PSMs), which help manage its price relative to the dollar.",
+      "USDS is soft-pegged to the U.S. dollar, meaning that it is designed to stay close to $1 in value, but doesn't guarantee a strict 1:1 value ratio with the U.S. dollar. Its value can fluctuate based on market conditions. For example, USDS might trade at +/-$1, depending on supply and demand. Importantly, the stability of USDS is supported by various mechanisms within the Sky Protocol, including overcollateralization and the use of Peg Stability Modules (PSMs), which help manage its price relative to the dollar.",
     categories: ['Sky Tokens']
   },
   {

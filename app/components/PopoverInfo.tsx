@@ -13,7 +13,7 @@ import { parseMarkdownLinks } from '@/app/utils/parseMarkdownLinks';
 const getContent = () => {
   // Get tooltips from centralized system
   const rewardsRateTooltip = getTooltipById('rewards-rate');
-  const rateTooltip = getTooltipById('rate');
+  const rateTooltip = getTooltipById('sky-savings-rate');
   const psmTooltip = getTooltipById('psm');
   const stakingRewardsRateTooltip = getTooltipById('staking-rewards-rates-srrs');
   const stusdsRateTooltip = getTooltipById('stusds-rate');

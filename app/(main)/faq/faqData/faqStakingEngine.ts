@@ -51,12 +51,40 @@ Your SKY, as well as any Staking Rewards that you accumulate, are supplied to a 
   },
   {
     question: 'How are Staking Rewards rates determined?',
-    answer: `Staking Rewards rates are variable and may fluctuate.  
-Staking Rewards rates are determined by: 1) the current issuance rate of rewards (how many rewards are issued, as determined by Sky Ecosystem Governance), and 2) the current market price of SKY tokens at the time of calculation.
+    answer: `Staking Rewards rates are variable and may fluctuate.
 
-When you stake SKY tokens and choose to access USDS as a reward, the Staking Rewards you earn depend on the total USDS rewards issued divided by the total value of all SKY tokens staked at that moment. The value here is based on the current market price of SKY. If the price of SKY increases, the same amount of USDS rewards spread over higher-priced SKY means the percentage rate appears lower. Conversely, if the price of SKY goes down, the rate appears higher because the rewards are divided by a smaller total value.
+Staking Rewards rates are determined by: 1) the current issuance parameter of rewards (how many rewards are distributed, as determined by Sky Ecosystem Governance), and 2) the current market price of SKY tokens at the time of calculation.
+The rates shown in Sky.money are estimated annual rates that can change over time due to both Sky Ecosystem Governance decisions on reward issuance and fluctuations in the market price of SKY.
 
-The rates shown in Sky.money are estimated annual rates that can change over time due to both Sky Ecosystem Governance decisions on reward issuance and fluctuations in the market price of SKY. Rates are updated using data from a third-party provider (i.e., [BlockAnalitica](https://blockanalitica.com/)). Therefore, rates shown do not guarantee future results.`,
+Rates are updated using data from a third-party provider (i.e., [BlockAnalitica](https://blockanalitica.com/)). Therefore, rates shown do not guarantee future results.`,
+    categories: ['Staking Engine']
+  },
+  {
+    question: 'How do I change my Staking Reward selection?',
+    answer: `Go to the Stake & Borrow widget in the Sky.money app There, you will see your Staking position(s) and your reward choice for each position.
+
+If you currently receive USDS as your reward, you will see a message informing you that USDS rewards have been disabled and SKY has been added as a Staking Reward option. If you do not currently receive USDS as a reward, you will not see this message.
+
+To change your reward selection quickly, bypassing the borrow and delegate steps, click on the drop-down beside your reward ticker symbol (e.g., USDS, SPK) to see the current options, including SKY. After making your selection, the app will fast-forward you to the last step of managing your Staking position, where you can confirm the changes to enable their new position
+
+If you would rather manage your position(s) in the typical way, you would go to the Stake & Borrow widget and click on Manage Position to be taken through all of the Staking steps. At Step 2, you can change your reward choice. In the list of reward options, you’ll notice that USDS is shown, though it is disabled and the USDS reward rate is set to zero. Here, you can select your new reward.`,
+    categories: ['Staking Engine']
+  },
+  {
+    question:
+      'Now that USDS is disabled as a Staking Reward option, do I have to unstake before changing my Staking Reward selection?',
+    answer: 'No. You can change your Staking Reward selection without unstaking your SKY.',
+    categories: ['Staking Engine']
+  },
+  {
+    question: 'Do I need to repay the USDS that I’ve borrowed before changing my Staking Reward selection?',
+    answer: 'No. You can change your Staking Reward selection without repaying the USDS you’ve borrowed.',
+    categories: ['Staking Engine']
+  },
+  {
+    question: 'Is there a deadline for claiming my USDS Staking Rewards?',
+    answer:
+      'No. While USDS rewards are disabled as a Staking Reward option, and the USDS rate set to zero, the pool of USDS will remain forever so that you can claim your rewards anytime.',
     categories: ['Staking Engine']
   },
   {
@@ -87,7 +115,7 @@ For more information, see the [User Risk Documentation](https://docs.sky.money/u
   },
   {
     question: 'What happens if my USDS borrow position is liquidated?',
-    answer: `When you borrow USDS stablecoins against SKY tokens using the Staking Engine of the Sky Protocol or some other method, your position is subject to liquidation risk in the following scenario: If at any time the value of your supplied collateral drops below the required threshold ([liquidation price](#tooltip-liquidation-price-staking)), your position is undercollateralized and the smart contract will automatically liquidate it and auction your supplied collateral. Any leftover collateral can be claimed through the [Unified Auctions portal](https://unified-auctions.makerdao.com/).
+    answer: `When you [borrow](#tooltip-borrow) USDS stablecoins against SKY tokens using the Staking Engine of the Sky Protocol or some other method, your position is subject to liquidation risk in the following scenario: If at any time the value of your supplied collateral drops below the required threshold ([liquidation price](#tooltip-liquidation-price-staking)), your position is undercollateralized. That means it will be liquidated and your supplied collateral will be auctioned, coordinated through Sky Ecosystem Governance channels. Any leftover collateral can be claimed through the [Unified Auctions portal](https://unified-auctions.makerdao.com/).
 
 For more information, see the [User Risk Documentation](https://docs.sky.money/user-risks).`,
     categories: ['Staking Engine']
@@ -135,7 +163,7 @@ Staking Rewards are what you can access when you stake SKY to the Staking Engine
   {
     question: 'How does exiting a Staking Engine position work?',
     answer:
-      'You can exit your Staking Engine position(s) at any time—no exit fee applies—and draw or pay back USDS whenever you would like.',
+      'You can change your Staking Reward selection and exit your Staking Engine position(s) at any time (no exit fee applies), and draw or pay back USDS whenever you would like.',
     categories: ['Staking Engine']
   }
 ];
