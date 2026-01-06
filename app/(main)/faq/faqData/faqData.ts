@@ -1,7 +1,7 @@
 import type { FAQItem } from './types';
 import { cryptoGeneral } from './faqCryptoGeneral';
 import { skyProtocolEcosystem } from './faqSkyProtocolEcosystem';
-import { skyStars } from './faqSkyStars';
+import { skyAgentFrameworkAndStars } from './faqSkyAgentFrameworkAndStars';
 import { skymoney } from './faqSkymoney';
 import { skyTokens } from './faqSkyTokens';
 import { upgrade } from './faqUpgrade';
@@ -17,7 +17,7 @@ import { skyGovernance } from './faqSkyGovernance';
 export const faqDataset: FAQItem[] = [
   ...cryptoGeneral,
   ...skyProtocolEcosystem,
-  ...skyStars,
+  ...skyAgentFrameworkAndStars,
   ...skymoney,
   ...skyTokens,
   ...upgrade,

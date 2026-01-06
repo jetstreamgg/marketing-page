@@ -206,7 +206,7 @@ With the Sky.money web app, you always remain in control of your assets. You alo
     question: 'What is an example of a crypto-collateralized stablecoin?',
     answer: `A crypto-collateralized stablecoin is a type of decentralized digital currency that is typically soft-pegged to the value of a fiat currency, such as the U.S. dollar, and backed (collateralized) by other cryptocurrencies locked in a reserve or in a smart contract, which is sometimes referred to as a cryptocurrency vault.
 
-To maintain stability of crypto-collateralized stablecoins, algorithms and overcollateralization are among the most widely used mechanisms. Examples of crypto-collateralized stablecoins are USDS and DAI. USDS powers the Sky Ecosystem.`,
+To maintain stability of crypto-collateralized stablecoins, algorithms and overcollateralization are among the most widely used mechanisms. Examples of crypto-collateralized stablecoins are USDS and DAI. USDS powers Sky Ecosystem.`,
     categories: ['Crypto (General)']
   },
   {
@@ -287,7 +287,7 @@ For example, if you have USDS, a native stablecoin of the Sky Protocol, which is
 
 Smart contracts work a lot like vending machines. A vending machine automatically provides a product once you feed it a coin and choose the product you want. The machine does not call someone at the vending machine company to get permission or further instructions. Similarly, a smart contract automatically provides a specific output (O) when prompted by a specific input (I). For example, a smart contract deployed to serve an ecosystem can send assets to contractors (O) on the first of every month (I), without any help or interference from a payroll manager, bank or other financial institution.
 
-Most smart contracts are open source (transparent) and immutable in theory, meaning no one can change them once they're deployed. In DeFi ecosystems, including the Sky Ecosystem, smart contract changes can only be made through a system of decentralized community governance and onchain voting processes.`,
+Most smart contracts are open source (transparent) and immutable in theory, meaning no one can change them once they're deployed. In DeFi ecosystems, including Sky Ecosystem, smart contract changes can only be made through a system of decentralized community governance and onchain voting processes.`,
     categories: ['Crypto (General)']
   },
   {
@@ -396,7 +396,7 @@ A smart contract wallet, or "smart wallet," is a wallet managed through smart co
     question: 'What are governance tokens?',
     answer: `Governance tokens are cryptocurrencies that may represent voting power within decentralized autonomous organizations (DAOs) or ecosystems. Typically, anyone holding the governance tokens of a DeFi organization or community can vote on proposed changes affecting a project's protocol or ecosystem, including but not limited to, protocol upgrades, fee structures, risk management and treasury allocations. Governance tokens enable decentralized decision-making by providing the community of token holders with control over a project's future while fostering decentralization and user-driven development.
 
-Governance of the decentralized, non-custodial Sky Protocol and ecosystem is shared among a broad and diversified community comprising individuals and entities from around the world who hold SKY tokens, the native governance tokens of the Sky Ecosystem.`,
+Governance of the decentralized, non-custodial Sky Protocol and ecosystem is shared among a broad and diversified community comprising individuals and entities from around the world who hold SKY tokens, the native governance tokens of Sky Ecosystem.`,
     categories: ['Crypto (General)']
   },
   {
@@ -409,6 +409,33 @@ Governance of the decentralized, non-custodial Sky Protocol and ecosystem is sha
     question: 'What is impermanent loss?',
     answer:
       'Impermanent loss happens when you provide assets (trading pairs) to a liquidity pool and the prices of those assets change relative to each other, resulting in rebalancing that might ultimately mean the value of your combined liquidity is less than if you had simply held the assets separately. The occurrence is called "impermanent" because the losses are only realized when you withdraw the separate balances from the pool.',
+    categories: ['Crypto (General)']
+  },
+  {
+    question:
+      'How can cryptocurrency price fluctuations negatively impact the value of a crypto-collateralized stablecoin?',
+    answer:
+      'The collateral that backs a stablecoin is what allows it to be a stable medium of exchange. If the value of that collateral declines, the stablecoin becomes insufficiently backed and drops in value below its peg. While all stablecoins, including crypto-collateralized stablecoins, typically deviate a couple of cents from the peg now and then, a very small dip in the value of the asset backing a stablecoin is uneventful. However, a dramatic dip could cause severe de-pegging of a stablecoin and lead to a sell-off of that asset. Moreover, if that de-pegged stablecoin has a high market cap, meaning that a lot of people depend on its stability, the sell-off could cause fear to spread regarding the stability of other stablecoins, and lead to off-loading of stable assets throughout the market.',
+    categories: ['Crypto (General)']
+  },
+  {
+    question: 'What is a smart contract audit?',
+    answer: `A smart contract audit is a crucial process for identifying potential security risks within a smart contract. Since crypto projects rely heavily on smart contracts for transaction functions, decision-making, treasury management, and more, taking steps to find vulnerable code is paramount.
+
+### **What happens during an audit?**
+
+• **In-depth analysis.** Auditors meticulously examine smart contract code, line by line, to uncover vulnerabilities and flaws, access control issues, reentrancy attacks, and other risks.
+• **Security checks.** Auditors compare the code against common vulnerabilities and help to ensure adherence to secure coding practices.
+• **Functionality assessment. Auditors verify that the code behaves as intended and reflects the project’s governance design.
+• **Reporting and recommendations.** After identifying issues, auditors provide a detailed report outlining the vulnerabilities, their severity, and recommendations for fixing them.
+
+### **What does an audit accomplish?**
+
+• **Prevents costly exploits.** Identifying contract vulnerabilities before deployment helps avoid hacks and potential theft of project funds, protecting investments and the project's reputation.
+• **Builds trust and transparency.** A demonstrably secure smart contract audit inspires confidence and shows commitment to responsible governance.
+• **Mitigates legal risks.** A smart contract audit might reduce the risk of unintended consequences or losses
+
+A smart contract audit is an investment in a project’s future.`,
     categories: ['Crypto (General)']
   }
 ];

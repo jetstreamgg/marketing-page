@@ -109,7 +109,7 @@ For more information, see the [User Risk Documentation](https://docs.sky.money/u
   {
     question: 'Can I borrow USDS using ETH?',
     answer:
-      'Yes. For example, you can do so via the Borrow feature of [Spark](http://Spark.fi), but not via the Sky.money web app. Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.',
+      'Yes. For example, you can do so via the Borrow feature of [Spark](https://Spark.fi), but not via the Sky.money web app. Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.',
     categories: ['Staking Engine']
   },
   {

@@ -20,7 +20,7 @@ Eligible Sky.money web app users can:
 
 • **Access Staking Rewards.** Supply SKY tokens to the Staking Engine of the Sky Protocol to create a position, enabling you to access Staking Rewards, borrow USDS, and delegate the voting power of supplied SKY tokens to a recognized delegate or a contract you own. You may exit your position(s) at any time; no exit fee applies.
 
-• **Connect with SkyLink.** SkyLink is the Sky system that provides the rails for Sky Ecosystem projects, such as [Spark](https://spark.fi/), to link assets between the Sky Protocol on Ethereum Mainnet and supported L2 networks. This enables end users on L2s, such as Base and Arbitrum for example, to tap into Sky Protocol features via the Sky Ecosystem projects' rails.
+• **Connect with SkyLink.** SkyLink is the Sky system that provides the rails for Sky Ecosystem projects, such as [Spark](https://spark.fi/), to link assets between the Sky Protocol on Ethereum Mainnet and supported L2 networks. This enables end users on L2s, such as Base and Arbitrum for example, to tap into Sky Protocol features via Sky Ecosystem projects' rails.
 
 With Sky.money, you always remain in control of your supplied assets.`,
     categories: ['Sky.money']

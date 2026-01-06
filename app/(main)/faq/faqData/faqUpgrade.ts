@@ -95,7 +95,7 @@ For upgrade details and step-by-step upgrade instructions, please visit the [MKR
   },
   {
     question: 'What are the incentives to upgrade MKR to SKY?',
-    answer: `Upgrading is a critical step for the future of the Sky Ecosystem, as it ensures long-term stability and enhanced functionality of the decentralized Sky Protocol, governance participation, a more inclusive and robust governance community, and SKY holder access to Staking Rewards. Simply put, this upgrade strengthens the integrity, effectiveness and usefulness of the Sky Protocol while expanding governance participation.
+    answer: `Upgrading is a critical step for the future of Sky Ecosystem, as it ensures long-term stability and enhanced functionality of the decentralized Sky Protocol, governance participation, a more inclusive and robust governance community, and SKY holder access to Staking Rewards. Simply put, this upgrade strengthens the integrity, effectiveness and usefulness of the Sky Protocol while expanding governance participation.
 
 For the most current information regarding the SKY token, the Sky Protocol and Sky Ecosystem Governance, join the community conversations in the [Sky Forum](https://forum.sky.money/) and [Sky Discord](https://discord.com/invite/skyecosystem).`,
     categories: ['Upgrade']
