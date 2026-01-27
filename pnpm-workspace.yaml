@@ -1,7 +1,0 @@
-# Temporary exception for CVE-2026-23864 security patches (remove after 2026-02-01)
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  - next
-  - '@next/*'
-  - react
-  - react-dom
