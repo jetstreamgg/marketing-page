@@ -16,7 +16,8 @@ const cspHeader = `
       *.pusher.com
       *.pusherapp.com
       https://*.sentry.io
-      https://*.ingest.sentry.io;
+      https://*.ingest.sentry.io
+      https://cdn.markfi.xyz;
     style-src 'self' https://vercel.live 'unsafe-inline';
     img-src 'self' data: blob: https://vercel.live https://vercel.com;
     font-src 'self' https://vercel.live https://assets.vercel.com;
