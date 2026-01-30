@@ -3,7 +3,7 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live/ https://vercel.com https://static.cloudflareinsights.com https://*.sentry.io;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live/ https://vercel.com https://static.cloudflareinsights.com https://*.sentry.io https://cdn.markfi.xyz;
     connect-src 'self'
       https://cloudflareinsights.com
       https://cloudflare-eth.com
