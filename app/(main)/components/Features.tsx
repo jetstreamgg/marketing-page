@@ -457,7 +457,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           postTextElement={
             <Text variant="p2">
               Supply USDS to the Sky Token Rewards (STRs) module of the Sky Protocol to get Sky Token Rewards
-              in the form of SKY governance tokens and Sky Star tokens.
+              in the form of Sky Star tokens.
               <br />
               <br />
               The Sky Token Rewards Rate is different for each type of token rewarded, and always fluctuates,
@@ -569,35 +569,31 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             href={`${baseUrl}/?widget=expert`}
             descriptionElement={
               <Text variant="p3">
-                Expert modules unlock high-level functionality tailored to experienced users. stUSDS, the
-                first Expert token of the Sky Protocol, is a risk token that funds and supports liquidity for
-                SKY stakers.
+                Expert modules unlock advanced functionality tailored to experienced users.
                 <br />
-                <br />
-                Use USDS to access the stUSDS Rate <PopoverInfo type="stusds" /> and encourage more
-                participation in SKY governance. No minimum supply amount is required.
+                They include products like stUSDS and the Morpho vault, which use USDS to support liquidity,
+                enable advanced yield strategies, and expand participation across the Sky ecosystem.
               </Text>
             }
-            postTitle="stUSDS Rewards"
+            postTitle="Expert Rewards"
             postTextElement={
               <>
                 <Text variant="p3" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
-                  stUSDS is a risk token structured to absorb a greater share of system risk in exchange for
-                  the potential to capture a larger portion of protocol rewards.
+                  Expert rewards are for users willing to take on additional risk in exchange for the
+                  potential to earn higher protocol rewards.
                   <br />
                   <br />
-                  When you supply USDS to the stUSDS module of the Protocol, you fund SKY-backed borrowing to
-                  access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
-                  tokens serve as a digital record of your USDS interaction with the stUSDS module and any
-                  value accrued to your position.
+                  By supplying USDS to Expert modules such as stUSDS or the Morpho vault, your funds support
+                  advanced strategies across the Sky ecosystem, including liquidity provision and leveraged
+                  market activity.
                   <br />
                   <br />
-                  stUSDS funds and supports liquidity for SKY stakers, encouraging more participation in SKY
-                  governance, leading to a more secure ecosystem.
+                  In return, you gain access to Expert rates and rewards, which are variable and depend on
+                  market conditions.
                   <br />
                   <br />
-                  The asset mix of stUSDS can be viewed on the{' '}
-                  <ExternalLink href="https://info.sky.money/stusds" className="text-sky-700 underline">
+                  Asset exposure and positions can be viewed on the{' '}
+                  <ExternalLink href="https://info.sky.money" className="text-text underline">
                     Sky Ecosystem Dashboard
                   </ExternalLink>
                   .
@@ -607,8 +603,8 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             imgSrc="/products_stUSDS.png"
             mobileImgSrc="/products_stUSDS_mobile.png"
             buttonVariant="azure-2"
-            buttonText="Get stUSDS"
-            emphasis="Access stUSDS tokens"
+            buttonText="Get Expert rewards"
+            emphasis="Access Expert Rewards"
             title="with USDS"
             reverse={true}
             className="col-span-1 tablet:col-span-2 desktop:col-span-1"
