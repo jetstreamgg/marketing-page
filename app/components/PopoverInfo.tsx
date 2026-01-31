@@ -18,6 +18,7 @@ const getContent = () => {
   const psmTooltip = getTooltipById('psm');
   const stakingRewardsRateTooltip = getTooltipById('staking-rewards-rates-srrs');
   const stusdsRateTooltip = getTooltipById('stusds-rate');
+  const expertRateTooltip = getTooltipById('expert-rate');
   const liquidationPriceStakingTooltip = getTooltipById('liquidation-price-staking');
   const borrowTooltip = getTooltipById('borrow');
   const borrowRateTooltip = getTooltipById('borrow-rate');
@@ -61,6 +62,14 @@ const getContent = () => {
       description: (
         <Text className="whitespace-pre-line leading-5 text-white/80" variant="ui-small-regular">
           {parseMarkdownLinks(stusdsRateTooltip?.tooltip)}
+        </Text>
+      )
+    },
+    expert: {
+      title: expertRateTooltip?.title || '',
+      description: (
+        <Text className="whitespace-pre-line leading-5 text-white/80" variant="ui-small-regular">
+          {parseMarkdownLinks(expertRateTooltip?.tooltip)}
         </Text>
       )
     },
@@ -110,6 +119,7 @@ export const PopoverInfo = ({
     | 'psm'
     | 'srr'
     | 'stusds'
+    | 'expert'
     | 'sky-savings-rate'
     | 'liquidation-price-staking'
     | 'borrow'

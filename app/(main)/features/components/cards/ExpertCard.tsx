@@ -36,8 +36,8 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
             </>
           ),
           stats: [
-            { id: 'rate', label: 'stUSDS Rate', value: data.stusdsApy },
-            { id: 'tvl', label: 'stUSDS TVL', value: data.stusdsTvl }
+            { id: 'rate', label: 'Expert Rates up to:', value: data.stusdsApy },
+            { id: 'tvl', label: 'Expert TVL', value: data.stusdsTvl }
           ],
           buttonCta: 'Access stUSDS Rewards',
           url: `?widget=expert`,

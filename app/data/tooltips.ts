@@ -24,6 +24,12 @@ The rate is derived from the SKY Borrow Rate less the stUSDS Accessibility Rewar
 The SKY Borrow Rate is the current interest rate charged to SKY-backed borrowers and is dynamic and market-driven, based on the utilization of funds within the stUSDS contract.`
   },
   {
+    id: 'expert-rate',
+    title: 'Expert Rate',
+    //TODO: update with reviewed text
+    tooltip: `The rate shown is the highest available rate across Expert savings options, including stUSDS and Morpho vaults. Rates are variable and depend on market conditions. This estimate is for informational purposes only and does not guarantee future results.`
+  },
+  {
     id: 'utilization',
     title: 'Utilization',
     tooltip:

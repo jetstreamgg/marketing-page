@@ -37,7 +37,7 @@ const FeatureCardStats = ({
   shortenedAPYDescription?: string;
   TVLDescription: string;
   className?: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'expert';
   cardWidth: number;
   isMobile?: boolean;
 }) => {
@@ -108,7 +108,7 @@ const FeatureCardLg = ({
   featurePageId: string;
   APY: string;
   TVL: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'expert';
   APYDescription: string;
   TVLDescription: string;
   href: string;
@@ -611,9 +611,9 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             featurePageId="expert"
             APY={data.stusdsApy}
             TVL={data.stusdsTvl}
-            type="stusds"
-            APYDescription="stUSDS Rate"
-            TVLDescription="stUSDS TVL"
+            type="expert"
+            APYDescription="Expert Rates up to:"
+            TVLDescription="Expert TVL"
           />
           <FeatureCardLg
             href={`${baseUrl}/?network=${randomL2Name}`}

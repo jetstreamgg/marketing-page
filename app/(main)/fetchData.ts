@@ -19,13 +19,64 @@ export interface FetchedData {
   stusdsTvl: string;
 }
 
+// Morpho vault address for Sky.money USDS Risk Capital vault
+const MORPHO_VAULT_ADDRESS = '0xf42bca228D9bd3e2F8EE65Fec3d21De1063882d4';
+const MORPHO_API_URL = 'https://api.morpho.org/graphql';
+
+interface MorphoVaultData {
+  avgNetApy: number | null;
+  totalAssetsUsd: number | null;
+}
+
+async function fetchMorphoVaultData(): Promise<MorphoVaultData> {
+  try {
+    const response = await fetch(MORPHO_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: `query VaultRateAndTVL($address: String!, $chainId: Int!) {
+          vaultV2ByAddress(address: $address, chainId: $chainId) {
+            avgNetApy
+            totalAssetsUsd
+          }
+        }`,
+        variables: {
+          address: MORPHO_VAULT_ADDRESS.toLowerCase(),
+          chainId: 1
+        }
+      }),
+      next: { revalidate: 300 } // 5 minutes
+    });
+
+    const result = await response.json();
+    const vault = result?.data?.vaultV2ByAddress;
+
+    return {
+      avgNetApy: vault?.avgNetApy ?? null,
+      totalAssetsUsd: vault?.totalAssetsUsd ?? null
+    };
+  } catch (error) {
+    Sentry.captureException(error, {
+      tags: { type: 'api_error', endpoint: 'morpho-vault' }
+    });
+    console.error('Error fetching Morpho vault data:', error);
+    return { avgNetApy: null, totalAssetsUsd: null };
+  }
+}
+
 export const fetchData = async (): Promise<FetchedData> => {
   try {
     if (!process.env.API_URL) throw new Error('API_URL is not defined');
-    const response = await fetch(process.env.API_URL, {
-      next: { revalidate: 300 } //5 minutes
-    });
-    const data = await response.json();
+
+    // Fetch both data sources in parallel
+    const [apiResponse, morphoData] = await Promise.all([
+      fetch(process.env.API_URL, {
+        next: { revalidate: 300 } //5 minutes
+      }),
+      fetchMorphoVaultData()
+    ]);
+
+    const data = await apiResponse.json();
 
     // Flatten the array of objects into a single object
     const flattenedData = data.reduce(
@@ -92,12 +143,20 @@ export const fetchData = async (): Promise<FetchedData> => {
         flattenedData.lse_total_tvl !== undefined
           ? '$' + formatNumber(parseFloat(flattenedData.lse_total_tvl), { compact: true, maxDecimals: 0 })
           : '',
-      stusdsApy:
-        flattenedData.stusds_rate !== undefined ? formatPercent(parseFloat(flattenedData.stusds_rate)) : '',
-      stusdsTvl:
-        flattenedData.stusds_tvl !== undefined
-          ? '$' + formatNumber(parseFloat(flattenedData.stusds_tvl), { compact: true, maxDecimals: 0 })
-          : ''
+      // Expert Rate = Max(stUSDS rate, Morpho rate)
+      stusdsApy: (() => {
+        const stusdsRate = flattenedData.stusds_rate ? parseFloat(flattenedData.stusds_rate) : 0;
+        const morphoRate = morphoData.avgNetApy ?? 0;
+        const maxRate = Math.max(stusdsRate, morphoRate);
+        return maxRate > 0 ? formatPercent(maxRate) : '';
+      })(),
+      // Expert TVL = stUSDS TVL + Morpho vault TVL
+      stusdsTvl: (() => {
+        const stusdsTvl = flattenedData.stusds_tvl ? parseFloat(flattenedData.stusds_tvl) : 0;
+        const morphoTvl = morphoData.totalAssetsUsd ?? 0;
+        const combinedTvl = stusdsTvl + morphoTvl;
+        return combinedTvl > 0 ? '$' + formatNumber(combinedTvl, { compact: true, maxDecimals: 0 }) : '';
+      })()
     };
   } catch (error) {
     Sentry.captureException(error, {

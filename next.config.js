@@ -10,6 +10,7 @@ const cspHeader = `
       https://staging-api.sky.money
       https://api.sky.money
       https://api.ipify.org
+      https://api.morpho.org
       https://vercel.live/
       https://vercel.com
       wss://ws-us3.pusher.com
