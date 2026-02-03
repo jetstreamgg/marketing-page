@@ -601,7 +601,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
               </>
             }
             imgSrc="/products_expert.png"
-            mobileImgSrc="/products_stUSDS_mobile.png"
+            mobileImgSrc="/products_expert_mobile.png"
             buttonVariant="azure-2"
             buttonText="Get Expert rewards"
             emphasis="Access Expert Rewards"

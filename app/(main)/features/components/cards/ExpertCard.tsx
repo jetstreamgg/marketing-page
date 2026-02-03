@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FeaturesPageCard, TextFeatureCard } from '../FeaturesPageCard';
-import ProductsStUSDS from '@/public/features_stUSDS_desktop.png';
-import ProductsStUSDSMobile from '@/public/features_stUSDS_mobile.png';
+import ProductsExpert from '@/public/features_expert.png';
+import ProductsExpertMobile from '@/public/features_expert_mobile.png';
 import { useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { PopoverInfo } from '@/app/components/PopoverInfo';
@@ -49,7 +49,7 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
                 <Image
                   alt="Stusds module"
                   placeholder="blur"
-                  src={bpi === 0 ? ProductsStUSDSMobile : ProductsStUSDS}
+                  src={bpi === 0 ? ProductsExpertMobile : ProductsExpert}
                   className="absolute top-1/2 h-auto w-full -translate-y-1/2 rounded-[20px] tablet:left-0 tablet:top-full tablet:translate-x-8 tablet:translate-y-[calc(-100%+92px)] tablet:rounded-r-none tablet:rounded-bl-none desktop:static desktop:top-auto desktop:translate-x-10 desktop:translate-y-10 desktop:rounded-tl-[40px]"
                   quality={100}
                 />
