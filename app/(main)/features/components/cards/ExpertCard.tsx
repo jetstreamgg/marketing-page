@@ -15,23 +15,15 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
       id="expert"
       tabs={[
         {
-          title: 'Access stUSDS tokens with USDS',
+          title: 'Access Expert Rewards with USDS',
           content: (
             <>
               <TextFeatureCard>
-                stUSDS is a risk token designed for eligible Sky Protocol expert users. It funds and supports
-                liquidity for SKY stakers, encouraging more participation in SKY governance by active token
-                holders, delegators and voters, leading to a more secure ecosystem.
+                Expert modules unlock advanced functionality tailored to experienced users.
               </TextFeatureCard>
               <TextFeatureCard>
-                When you supply USDS to the stUSDS module of the protocol, you fund SKY-backed borrowing to
-                access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
-                tokens serve as a digital record of your USDS interaction with the stUSDS module and any value
-                accrued to your position. For details, see{' '}
-                <Link className="hover:underline hover:underline-offset-4" href="/faq">
-                  &quot;What is stUSDS?&quot;
-                </Link>{' '}
-                In the FAQs.
+                They include products like stUSDS and the Morpho vault, which use USDS to support liquidity,
+                enable advanced yield strategies, and expand participation across the Sky ecosystem.
               </TextFeatureCard>
             </>
           ),
