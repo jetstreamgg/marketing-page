@@ -3,7 +3,7 @@ import type { FAQItem } from './types';
 export const skymoney: FAQItem[] = [
   {
     question: 'What is the Sky.money web app, and what can I do with it?',
-    answer: `The non-custodial Sky.money web app is one of many free-to-access frontend gateways to the Sky Protocol, which is designed around the USDS stablecoin. It provides eligible users with access to all Sky Protocol tokens (sUSDS, USDS, DAI, SKY and MKR) and features, including the Sky Savings Rate (SSR), Sky Token Rewards (STRs), the Staking Engine, Expert modules, and more.
+    answer: `The non-custodial Sky.money web app is one of many free-to-access frontend gateways to the Sky Protocol, which is designed around the USDS stablecoin. It provides eligible users with access to all Sky Protocol tokens (USDS, DAI, sUSDS, stUSDS, SKY and MKR) and features, including the Sky Savings Rate (SSR), Sky Token Rewards (STRs), the Staking Engine, Expert modules, and more.
 
 Eligible Sky.money web app users can:
 

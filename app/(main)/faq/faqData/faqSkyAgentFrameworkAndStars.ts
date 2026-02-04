@@ -71,7 +71,7 @@ Some Star Agent Artifacts are high-level, focusing on vision, principles and com
   },
   {
     question: 'What is Grove?',
-    answer: `Grove is an institutional-grade credit infrastructure DeFi project designed to serve as the liquidity engine of decentralized finance. Incubated by [Steakhouse Financial](https://www.steakhouse.financial/) as a Star Agent within the decentralized Sky Ecosystem, Grove enables protocols, crypto-native organizations, and individual users to access institutional-grade yield. 
+    answer: `Grove is a credit infrastructure DeFi project designed to serve as the liquidity engine of decentralized finance. Incubated by [Steakhouse Financial](https://www.steakhouse.financial/) as a Star Agent within the decentralized Sky Ecosystem, Grove enables protocols, crypto-native organizations, and individual users to access institutional-grade yield. 
 
 Grove's founding team has facilitated over $5 billion of on-chain capital allocations, brings deep expertise from both traditional and decentralized finance, and is committed to building secure, scalable capital infrastructure for the next era of finance. To learn more, visit [Grove.finance](https://www.grove.finance/) and [Grove on X](https://x.com/grovedotfinance). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
     categories: ['Sky Agent Framework and Stars']

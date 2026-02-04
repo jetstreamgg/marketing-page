@@ -5,7 +5,7 @@ export const stakingEngine: FAQItem[] = [
     question: 'What is the Staking Engine?',
     answer: `The Staking Engine is a feature of the decentralized Sky Protocol. When you stake SKY tokens using the Sky.money web app, you can access Staking Rewards and may also choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power the SKY token provides. Here's a brief overview:
 
-• **Access Rewards.** Supply SKY tokens to access Staking Rewards in the form of SKY or Sky Star tokens. Staking Reward rates are determined by Sky Ecosystem Governance through the process of decentralized onchain voting.
+• **Access Rewards.** Supply SKY tokens to access Staking Rewards in the form of SKY. Staking Reward rates are determined by Sky Ecosystem Governance through the process of decentralized onchain voting.
 
 • **Borrow.** Borrow USDS against your supplied SKY. You can decide to pay back all of your debt, withdraw your staked SKY, and claim some or all of your rewards at any time. Your SKY and claimed rewards are then released from the Staking Engine smart contract back to your connected wallet. The USDS Borrow Rate and debt ceiling are determined by Sky Ecosystem Governance through the process of decentralized onchain voting. Your total debt increases each block according to the Borrow Rate.
 
@@ -18,11 +18,9 @@ Your SKY, as well as any Staking Rewards that you accumulate, are supplied to a 
     question: 'How do I stake my SKY using the Sky.money web app.',
     answer: `Using the Sky.money web app, you can stake your SKY in four steps:
 
-1. **Supply SKY.** Supply SKY to the Staking Engine to create one or more positions through which you access Staking Rewards and more.
+1. **Supply SKY.** Supply SKY to the Staking Engine to create one or more positions through which you access Staking Rewards and more. At this step, you can also choose to Borrow USDS against your SKY (optional). There is a minimum borrow amount set as a risk parameter by Sky Ecosystem Governance. Borrowing carries risk of liquidation.
 
-   At this step, you can also choose to Borrow USDS against your SKY (optional). There is a minimum borrow amount set as a risk parameter by Sky Ecosystem Governance. Borrowing carries risk of liquidation.
-
-2. **Choose Reward.** Choose from the Staking Reward options.
+2. **Choose Reward.** Choose from the Staking Reward options when available.
 3. **Delegate (optional)**. You may choose to transfer the voting power your staked SKY provides to a recognized delegate or a contract you own.
 4. **Confirm Staking Position.** Your SKY tokens, as well as any rewards that you accumulate, are supplied to a non-custodial smart contract such that no intermediary takes custody of those tokens.
 
@@ -38,11 +36,9 @@ Your SKY, as well as any Staking Rewards that you accumulate, are supplied to a 
   },
   {
     question: 'How are Staking Rewards funded?',
-    answer: `When you stake SKY tokens using the Sky.money web app, you can access Staking Rewards in the form of SKY or Sky Star Agent tokens. You may also choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power the SKY token provides. Rewards are funded as follows:
+    answer: `When you stake SKY tokens using the Sky.money web app, you can access Staking Rewards in the form of SKY. You may also choose to create one or more positions, including positions that enable you to generate and borrow USDS against your supplied SKY and to delegate the voting power the SKY token provides. Funding is as follows:
 
 • **SKY as Staking Rewards:** SKY rewards distributed to SKY stakers are funded by the Sky Protocol's treasury and originate from buybacks executed by the Smart Burn Engine. The specific sources, routing, and distribution of rewards are determined by Sky Ecosystem Governance and may change over time.
-
-• **Star Agent tokens as rewards:** Currently, Star Agent token rewards distributed to SKY stakers are funded using distributions to Sky from the Stars. This is not inflationary for the Sky Protocol, as these are external tokens acquired through investment.
 
 • **SKY-backed borrowing:** The capital for SKY-backed borrowing is provided by Expert Module users who deposit USDS to that module to access the stUSDS Rate and receive stUSDS in return. The stUSDS tokens serve as a digital record of their USDS interaction with the stUSDS module and any change to the value of their position. The rewards distributed to stUSDS holders come from the interest paid by SKY borrowers (the SKY Borrow Rate) and protocol revenues.`,
     categories: ['Staking Engine']
@@ -63,9 +59,9 @@ Rates are updated using data from a third-party provider (i.e., [BlockAnalitica]
 
 If you currently receive USDS as your reward, you will see a message informing you that USDS rewards have been disabled and SKY has been added as a Staking Reward option. If you do not currently receive USDS as a reward, you will not see this message.
 
-To change your reward selection quickly, bypassing the borrow and delegate steps, click on the drop-down beside your reward ticker symbol (e.g., USDS, SPK) to see the current options, including SKY. After making your selection, the app will fast-forward you to the last step of managing your Staking position, where you can confirm the change to activate your updated reward choice.
+To change your reward selection quickly, bypassing the borrow and delegate steps, click on the drop-down beside your reward ticker symbol to see the current option(s). After making your selection, the app will fast-forward you to the last step of managing your Staking position, where you can confirm the change to activate your updated reward choice.
 
-If you would rather manage your position(s) in the typical way, you would go to the Stake & Borrow widget and click on Manage Position to be taken through all of the Staking steps. At Step 2, you can change your reward choice. In the list of reward options, you’ll notice that USDS is shown, though it is disabled and the USDS reward rate is set to zero. Here, you can select your new reward.`,
+If you would rather manage your position(s) in the typical way, you would go to the Stake & Borrow widget and click on Manage Position to be taken through all of the Staking steps. At Step 2, you can change your reward choice.`,
     categories: ['Staking Engine']
   },
   {

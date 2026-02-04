@@ -4,7 +4,7 @@ export const skyTokens: FAQItem[] = [
   {
     question: 'What is SKY, and how can I get it and use it?',
     answer:
-      'SKY is the native governance token of the decentralized Sky Protocol and Ecosystem, and the upgrade of MKR. It is freely transferable and can be acquired on crypto exchanges or via dApps that support it. Depending on location or other criteria, eligible users of the Sky.money web app can trade USDS, USDT, ETH and USDC for SKY (and vice versa) within that app; supply USDS to the Sky Token Reward module of the Sky Protocol to access SKY (as well as other tokens) as a reward; and supply SKY tokens to the Staking Engine to access Staking Rewards and choose to create one or more positions, including positions that enable USDS borrowing against the supplied SKY and delegation of the voting power SKY tokens provide.',
+      'SKY is the native governance token of the decentralized Sky Protocol and Ecosystem, and the upgrade of MKR. It is freely transferable and can be acquired on crypto exchanges or via dApps that support it. Depending on location or other criteria, eligible users of the Sky.money web app can trade USDS, USDT, ETH and USDC for SKY (and vice versa) within that app. They can also supply SKY tokens to the Staking Engine to access Staking Rewards and choose to create one or more positions, including positions that enable USDS borrowing against the supplied SKY and delegation of the voting power SKY tokens provide.',
     categories: ['Sky Tokens']
   },
   {
@@ -62,7 +62,7 @@ USDS is also available on networks other than Ethereum Mainnet, including Solana
   {
     question: 'How can I use USDS?',
     answer:
-      'Like other decentralized stablecoins, USDS is freely transferable and can be used in connection with any software protocol or platform that supports it. Unlike other stablecoins, you can use USDS to participate in the Sky Savings Rate to accumulate additional USDS over time, and to access Sky Token Rewards, without giving up control of your digital assets. When you select SKY as your token reward, you can participate—if you choose to do so—in the governance of Sky Ecosystem.',
+      'Like other decentralized stablecoins, USDS is freely transferable and can be used in connection with any software protocol or platform that supports it. Unlike other stablecoins, you can use USDS to participate in the Sky Savings Rate to accumulate additional USDS over time, and to access Sky Token Rewards, without giving up control of your digital assets.',
     categories: ['Sky Tokens']
   },
   {
