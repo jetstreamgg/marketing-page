@@ -14,7 +14,7 @@ export const expertModules: FAQItem[] = [
   {
     question: 'Does it cost anything to access Expert modules?',
     answer:
-      'Accessing Expert modules via the Sky.money web app is free and neither controlled, imposed nor received by Skybase International nor the Sky Protocol. However, any time you supply assets to or withdraw assets from the stUSDS module of the Sky Protocol, you will incur a transaction fee, called a gas fee, for using the Ethereum blockchain network.',
+      'Accessing Expert modules via the Sky.money web app is free and neither controlled, imposed nor received by Skybase nor the Sky Protocol. However, any time you supply assets to or withdraw assets from the stUSDS module of the Sky Protocol, you will incur a transaction fee, called a gas fee, for using the Ethereum blockchain network.',
     categories: ['Expert modules']
   },
   {
