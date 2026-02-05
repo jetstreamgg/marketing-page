@@ -25,7 +25,12 @@
  *
  * NO CUSTOM PAGE VIEW EVENTS:
  * We rely on PostHog's standard $pageview instead of custom marketing_page_view.
- * To distinguish marketing vs app events, filter by $host in PostHog dashboards.
+ *
+ * DISTINGUISHING MARKETING VS APP EVENTS:
+ * We register a super property `app_name: 'marketing'` that's attached to every event.
+ * - In production: Can also filter by $host (sky.money vs app.sky.money)
+ * - In development/preview: URLs may be similar, so app_name is the reliable filter
+ * - When the web app integrates PostHog, it will use `app_name: 'app'`
  */
 
 import posthog from 'posthog-js';
@@ -81,6 +86,13 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
     cross_subdomain_cookie: true,
 
     loaded: posthogClient => {
+      // Register super property to distinguish marketing site events from app events.
+      // This is attached to every event (including automatic ones like $pageview).
+      // Allows filtering by app_name in PostHog dashboards across all environments.
+      posthogClient.register({
+        app_name: 'marketing'
+      });
+
       // Debug mode logs all events to browser console in development
       // Helpful for verifying events fire correctly
       if (process.env.NODE_ENV === 'development') {
@@ -101,7 +113,9 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
  * PAGE VIEW TRACKING:
  * We rely on PostHog's automatic $pageview (capture_pageview: 'history_change')
  * instead of custom events. PostHog auto-captures UTM params from URL.
- * To distinguish marketing vs app events later, filter by $host in dashboards.
+ *
+ * APP IDENTIFICATION:
+ * Every event includes `app_name: 'marketing'` super property for filtering.
  *
  * KILL SWITCH: Set NEXT_PUBLIC_POSTHOG_ENABLED=false to disable all tracking
  * without code changes (useful for debugging or compliance issues).
