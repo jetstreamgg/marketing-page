@@ -4,6 +4,7 @@ import { ButtonArrow } from '@/app/components/ui/button';
 import { IconButtonOpenClose } from '@/app/components/ui/button-client';
 import { Tone } from '@/app/context/AppContext';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
+import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
 
 export const TabletTriggers = ({
   isOpen,
@@ -15,6 +16,7 @@ export const TabletTriggers = ({
   setIsOpen: (value: boolean) => void;
 }) => {
   const { url } = useSkyUrl();
+  const { trackCTAClick } = useMarketingAnalytics();
 
   return (
     <div className="pointer-events-auto z-10 flex items-center justify-end space-x-2">
@@ -23,6 +25,7 @@ export const TabletTriggers = ({
         className={`${
           tone === 'light' ? 'text-white hover:text-white' : 'text-black hover:text-black'
         } hidden md:block`}
+        onClick={() => trackCTAClick('launch_app_header', url)}
       >
         <ButtonArrow
           style={{ color: isOpen ? 'white' : undefined }}

@@ -10,6 +10,7 @@ import { Socials } from './Socials';
 import { useRef } from 'react';
 import { useHeaderInView } from '../hooks/useHeaderInView';
 import { useSkyUrl } from '../hooks/useSkyUrl';
+import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
 
 type LinkItem = { title: string; url: string };
 type LinkSection = [string, LinkItem[]];
@@ -65,6 +66,7 @@ export function Footer() {
   const { url } = useSkyUrl();
   const targetRef = useRef(null);
   useHeaderInView(targetRef, 'dark');
+  const { trackCTAClick } = useMarketingAnalytics();
 
   const footerLinks = getFooterLinks();
 
@@ -100,7 +102,7 @@ export function Footer() {
             </Heading>
           </div>
           <div>
-            <ExternalLink href={url} noStyle>
+            <ExternalLink href={url} noStyle onClick={() => trackCTAClick('launch_app_footer', url)}>
               <ButtonArrow variant="nocturnal-2">Launch app</ButtonArrow>
             </ExternalLink>
           </div>

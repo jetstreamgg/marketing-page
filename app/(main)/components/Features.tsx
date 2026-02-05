@@ -20,6 +20,7 @@ import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
 import { useRandomL2Name } from '@/app/hooks/useRandomL2Name';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 const FeatureCardStats = ({
   APY,
@@ -119,6 +120,18 @@ const FeatureCardLg = ({
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
   const [cardWidth, setCardWidth] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { trackCTAClick } = useMarketingAnalytics();
+
+  // Map featurePageId to CTA type
+  const featureIdToCTAType: Record<string, CTAType> = {
+    upgrade: 'feature_upgrade',
+    trade: 'feature_trade',
+    rewards: 'feature_rewards',
+    savings: 'feature_savings',
+    stake: 'feature_stake',
+    expert: 'feature_expert',
+    skylink: 'feature_skylink'
+  };
 
   useEffect(() => {
     const containerElement = cardRef.current;
@@ -230,7 +243,19 @@ const FeatureCardLg = ({
           onClick={() => setState(state === 'open' ? 'close' : 'open')}
           isOpen={state === 'open'}
         />
-        <ExternalLink href={href} noStyle>
+        <ExternalLink
+          href={href}
+          noStyle
+          onClick={() => {
+            const ctaType = featureIdToCTAType[featurePageId];
+            if (ctaType) {
+              const widgetParam = href.includes('widget=')
+                ? href.split('widget=')[1]?.split('&')[0]
+                : undefined;
+              trackCTAClick(ctaType, href, widgetParam);
+            }
+          }}
+        >
           <ButtonArrow variant={buttonVariant}>{buttonText}</ButtonArrow>
         </ExternalLink>
       </div>

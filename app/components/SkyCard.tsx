@@ -1,6 +1,6 @@
 import { TokenCard } from './TokenCard';
 import { Text } from './Typography';
-import { ButtonArrow, ButtonPlus } from './ui/button';
+import { ButtonArrow } from './ui/button';
 import { Link } from './ui/link';
 import CoinSky from '@/public/coin_sky.png';
 import { BP, useBreakpointIndex } from '../hooks/useBreakpointIndex';
@@ -10,11 +10,13 @@ import { TokenModal } from './TokenModal';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { useSkyUrl } from '../hooks/useSkyUrl';
 import { ExternalLink } from './ExternalLink';
+import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
 
 export const SkyCard = ({ data }: { data: FetchedData }) => {
   const { bpi } = useBreakpointIndex();
   const [open, setOpen] = useState(false);
   const { url } = useSkyUrl('/?widget=upgrade&source_token=MKR');
+  const { trackCTAClick } = useMarketingAnalytics();
 
   return (
     <>
@@ -37,7 +39,12 @@ export const SkyCard = ({ data }: { data: FetchedData }) => {
             <ButtonArrow variant="celestial-3" size="sm" onClick={() => setOpen(true)}>
               Learn More
             </ButtonArrow>
-            <Link href={url} icon="arrowNoBg" target="_blank">
+            <Link
+              href={url}
+              icon="arrowNoBg"
+              target="_blank"
+              onClick={() => trackCTAClick('token_upgrade_sky', url, 'upgrade')}
+            >
               {bpi <= BP.md ? 'Upgrade' : 'Upgrade MKR to SKY'}
             </Link>
           </>
@@ -73,7 +80,7 @@ export const SkyCard = ({ data }: { data: FetchedData }) => {
         // TODO: Add link to risks page
         href="#"
         footer={
-          <ExternalLink href={url} noStyle>
+          <ExternalLink href={url} noStyle onClick={() => trackCTAClick('token_upgrade_sky', url, 'upgrade')}>
             <ButtonArrow variant="celestial-3" size="sm">
               Upgrade MKR to SKY
             </ButtonArrow>

@@ -7,6 +7,7 @@ import { ReactNode, useState } from 'react';
 import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { ExternalLink } from '@/app/components/ExternalLink';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 type Stat = {
   id: 'tvl' | 'rate' | 'price';
@@ -47,6 +48,17 @@ export function LiFeatureCard({ children }: { children: ReactNode }) {
   );
 }
 
+// Map feature card IDs to analytics CTA types
+const featureIdToCTAType: Record<string, CTAType> = {
+  upgrade: 'feature_upgrade',
+  trade: 'feature_trade',
+  rewards: 'feature_rewards',
+  savings: 'feature_savings',
+  stake: 'feature_stake',
+  expert: 'feature_expert',
+  skylink: 'feature_skylink'
+};
+
 export function FeaturesPageCard({
   isComingSoon = false,
   isAlpha = false,
@@ -60,6 +72,7 @@ export function FeaturesPageCard({
 }) {
   const { baseUrl } = useSkyUrl();
   const [selectedTab, setSelectedTab] = useState(tabs[0].label || tabs[0].title);
+  const { trackCTAClick } = useMarketingAnalytics();
 
   return (
     <Tabs value={selectedTab} onValueChange={setSelectedTab} className="h-full w-full" id={id}>
@@ -157,10 +170,10 @@ export function FeaturesPageCard({
                                                 id === 'savings'
                                                   ? 'ssr'
                                                   : id === 'stake'
-                                                  ? 'srr'
-                                                  : id === 'expert'
-                                                  ? 'stusds'
-                                                  : 'str'
+                                                    ? 'srr'
+                                                    : id === 'expert'
+                                                      ? 'stusds'
+                                                      : 'str'
                                               }
                                             />
                                           )}
@@ -191,7 +204,18 @@ export function FeaturesPageCard({
                         {/* CTA Button */}
                         {buttonCta && url && (
                           <div>
-                            <ExternalLink href={`${baseUrl}/${url}`}>
+                            <ExternalLink
+                              href={`${baseUrl}/${url}`}
+                              onClick={() => {
+                                const ctaType = featureIdToCTAType[id];
+                                if (ctaType) {
+                                  const widgetParam = url.includes('widget=')
+                                    ? url.split('widget=')[1]?.split('&')[0]
+                                    : undefined;
+                                  trackCTAClick(ctaType, `${baseUrl}/${url}`, widgetParam);
+                                }
+                              }}
+                            >
                               <ButtonArrow variant={buttonVariant}>{buttonCta}</ButtonArrow>
                             </ExternalLink>
                           </div>

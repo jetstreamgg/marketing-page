@@ -1,6 +1,7 @@
 import { cn } from '../lib/utils';
 import { useAppContext } from '../context/AppContext';
 import { ALLOWED_DOMAINS, RESTRICTED_DOMAINS } from '../constants';
+import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
 
 interface ExternalLinkProps {
   href: string;
@@ -9,6 +10,7 @@ interface ExternalLinkProps {
   className?: string;
   noStyle?: boolean;
   skipConfirm?: boolean;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function ExternalLink({
@@ -17,11 +19,25 @@ export function ExternalLink({
   target = '_blank',
   className,
   noStyle = false,
-  skipConfirm
+  skipConfirm,
+  onClick
 }: ExternalLinkProps) {
   const { setExternalLinkModalOpened, setExternalLinkModalUrl } = useAppContext();
+  const { trackExternalLinkClick } = useMarketingAnalytics();
+
+  // Check if this link goes to the app (CTA) vs external site
+  const appUrl = process.env.NEXT_PUBLIC_WEBAPP_URL || 'https://app.sky.money';
+  const isAppLink = href.startsWith(appUrl);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    // Track external link clicks, but skip app links (CTAs handle their own tracking)
+    if (!isAppLink) {
+      trackExternalLinkClick(href);
+    }
+
+    // Call optional onClick handler (e.g., for CTA-specific tracking)
+    onClick?.(e);
+
     if (
       !skipConfirm &&
       (RESTRICTED_DOMAINS.some(domain => href.includes(domain)) ||
