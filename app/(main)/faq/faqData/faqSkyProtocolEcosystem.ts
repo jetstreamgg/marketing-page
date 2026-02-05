@@ -31,7 +31,7 @@ The Sky Protocol is made up of software code deployed to the Ethereum blockchain
 
 Smart contracts work a lot like vending machines. A vending machine automatically provides a product once you feed it a coin and choose the product you want. The machine does not call someone at the vending machine company to get permission or further instructions. Similarly, a smart contract automatically provides a specific output (O) when prompted by a specific input (I). For example, a smart contract deployed to serve an ecosystem can send asset to contractors (O) on the first of every month (I), without any help or interference from a payroll manager, bank or other financial institution.
 
-The Sky Protocol features several tokens—USDS, DAI, sUSDS, SKY and MKR—plus the Sky Savings Rate, Sky Token Rewards, the Staking Engine, Expert modules, and more.`,
+The Sky Protocol features several tokens—USDS, DAI, sUSDS, stUSDS, SKY and MKR—plus the Sky Savings Rate, Sky Token Rewards, the Staking Engine, Expert modules, and more.`,
     categories: ['Sky Protocol & Ecosystem']
   },
   {
@@ -141,7 +141,7 @@ The Sky Protocol is made up of software code deployed to the Ethereum blockchain
 
 Smart contracts work a lot like vending machines. A vending machine automatically provides a product once you feed it a coin and choose the product you want. The machine does not call someone at the vending machine company to get permission or further instructions. Similarly, a smart contract automatically provides a specific output (O) when prompted by a specific input (I). For example, a smart contract deployed to serve an ecosystem can send assets to contractors (O) on the first of every month (I), without any help or interference from a payroll manager, bank or other financial institution.
 
-The Sky Protocol features several tokens—USDS, DAI, sUSDS, SKY and MKR—plus the Sky Savings Rate, Sky Token Rewards, the Staking Engine, Expert modules, and more.`,
+The Sky Protocol features several tokens—USDS, DAI, sUSDS, stUSDS, SKY and MKR—plus the Sky Savings Rate, Sky Token Rewards, the Staking Engine, Expert modules, and more.`,
     categories: ['Sky Protocol & Ecosystem']
   },
   {
