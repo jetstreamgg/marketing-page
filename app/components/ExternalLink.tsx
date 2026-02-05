@@ -1,7 +1,7 @@
 import { cn } from '../lib/utils';
 import { useAppContext } from '../context/AppContext';
 import { ALLOWED_DOMAINS, RESTRICTED_DOMAINS } from '../constants';
-import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, ExternalLinkCategory } from '../hooks/useMarketingAnalytics';
 
 interface ExternalLinkProps {
   href: string;
@@ -11,6 +11,8 @@ interface ExternalLinkProps {
   noStyle?: boolean;
   skipConfirm?: boolean;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  /** Optional category for analytics. Auto-detected from URL if not provided. */
+  linkCategory?: ExternalLinkCategory;
 }
 
 export function ExternalLink({
@@ -20,7 +22,8 @@ export function ExternalLink({
   className,
   noStyle = false,
   skipConfirm,
-  onClick
+  onClick,
+  linkCategory
 }: ExternalLinkProps) {
   const { setExternalLinkModalOpened, setExternalLinkModalUrl } = useAppContext();
   const { trackExternalLinkClick } = useMarketingAnalytics();
@@ -32,7 +35,7 @@ export function ExternalLink({
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     // Track external link clicks, but skip app links (CTAs handle their own tracking)
     if (!isAppLink) {
-      trackExternalLinkClick(href);
+      trackExternalLinkClick(href, linkCategory);
     }
 
     // Call optional onClick handler (e.g., for CTA-specific tracking)

@@ -77,6 +77,60 @@ export const featureIdToCTAType: Record<string, CTAType> = {
   skylink: CTAType.FeatureSkylink
 };
 
+/**
+ * Categories for external link tracking.
+ * Helps segment external links by type for analysis.
+ */
+export type ExternalLinkCategory =
+  | 'social' // Twitter, Discord, Telegram, etc.
+  | 'docs' // Developer documentation
+  | 'governance' // vote.sky.money, forum
+  | 'ecosystem' // Other Sky ecosystem links (spark.fi, info.sky.money)
+  | 'media' // Brand assets, media kit
+  | 'other'; // Default/uncategorized
+
+/**
+ * Auto-detects the category of an external link based on URL patterns.
+ * Returns undefined if no pattern matches (caller should provide explicit category or default to 'other').
+ */
+export function inferLinkCategory(url: string): ExternalLinkCategory | undefined {
+  const lowerUrl = url.toLowerCase();
+
+  // Social platforms
+  if (
+    lowerUrl.includes('twitter.com') ||
+    lowerUrl.includes('x.com') ||
+    lowerUrl.includes('discord') ||
+    lowerUrl.includes('telegram') ||
+    lowerUrl.includes('youtube') ||
+    lowerUrl.includes('github.com')
+  ) {
+    return 'social';
+  }
+
+  // Governance
+  if (lowerUrl.includes('vote.sky.money') || lowerUrl.includes('forum.sky.money')) {
+    return 'governance';
+  }
+
+  // Documentation
+  if (lowerUrl.includes('developers.sky.money') || lowerUrl.includes('/docs')) {
+    return 'docs';
+  }
+
+  // Media/Brand assets
+  if (lowerUrl.includes('notion.so') || lowerUrl.includes('notion.site') || lowerUrl.includes('brand')) {
+    return 'media';
+  }
+
+  // Ecosystem projects (Sky ecosystem only)
+  if (lowerUrl.includes('spark.fi') || lowerUrl.includes('info.sky.money')) {
+    return 'ecosystem';
+  }
+
+  return undefined;
+}
+
 type Viewport = 'mobile' | 'tablet' | 'desktop';
 
 function getViewport(): Viewport {
@@ -105,9 +159,11 @@ export function useMarketingAnalytics() {
   );
 
   const trackExternalLinkClick = useCallback(
-    (linkUrl: string) => {
+    (linkUrl: string, category?: ExternalLinkCategory) => {
+      const resolvedCategory = category || inferLinkCategory(linkUrl) || 'other';
       posthog?.capture('marketing_external_link_click', {
         link_url: linkUrl,
+        link_category: resolvedCategory,
         source_page: pathname,
         viewport: getViewport()
       });
