@@ -7,7 +7,7 @@ import { ReactNode, useState } from 'react';
 import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { ExternalLink } from '@/app/components/ExternalLink';
-import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, featureIdToCTAType } from '@/app/hooks/useMarketingAnalytics';
 
 type Stat = {
   id: 'tvl' | 'rate' | 'price';
@@ -47,17 +47,6 @@ export function LiFeatureCard({ children }: { children: ReactNode }) {
     </li>
   );
 }
-
-// Map feature card IDs to analytics CTA types
-const featureIdToCTAType: Record<string, CTAType> = {
-  upgrade: CTAType.FeatureUpgrade,
-  trade: CTAType.FeatureTrade,
-  rewards: CTAType.FeatureRewards,
-  savings: CTAType.FeatureSavings,
-  stake: CTAType.FeatureStake,
-  expert: CTAType.FeatureExpert,
-  skylink: CTAType.FeatureSkylink
-};
 
 export function FeaturesPageCard({
   isComingSoon = false,

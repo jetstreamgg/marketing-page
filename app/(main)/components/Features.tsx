@@ -20,7 +20,7 @@ import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
 import { useRandomL2Name } from '@/app/hooks/useRandomL2Name';
-import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, featureIdToCTAType } from '@/app/hooks/useMarketingAnalytics';
 
 const FeatureCardStats = ({
   APY,
@@ -121,17 +121,6 @@ const FeatureCardLg = ({
   const [cardWidth, setCardWidth] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const { trackCTAClick } = useMarketingAnalytics();
-
-  // Map featurePageId to CTA type
-  const featureIdToCTAType: Record<string, CTAType> = {
-    upgrade: CTAType.FeatureUpgrade,
-    trade: CTAType.FeatureTrade,
-    rewards: CTAType.FeatureRewards,
-    savings: CTAType.FeatureSavings,
-    stake: CTAType.FeatureStake,
-    expert: CTAType.FeatureExpert,
-    skylink: CTAType.FeatureSkylink
-  };
 
   useEffect(() => {
     const containerElement = cardRef.current;

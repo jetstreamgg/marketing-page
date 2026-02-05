@@ -63,6 +63,20 @@ export enum CTAType {
   FeatureSkylink = 'feature_skylink'
 }
 
+/**
+ * Maps feature page IDs to their corresponding CTA types.
+ * Used by FeatureCard, FeaturesPageCard, and Features components.
+ */
+export const featureIdToCTAType: Record<string, CTAType> = {
+  upgrade: CTAType.FeatureUpgrade,
+  trade: CTAType.FeatureTrade,
+  rewards: CTAType.FeatureRewards,
+  savings: CTAType.FeatureSavings,
+  stake: CTAType.FeatureStake,
+  expert: CTAType.FeatureExpert,
+  skylink: CTAType.FeatureSkylink
+};
+
 type Viewport = 'mobile' | 'tablet' | 'desktop';
 
 function getViewport(): Viewport {

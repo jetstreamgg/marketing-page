@@ -11,7 +11,7 @@ import { BP, useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { InternalLink } from './InternalLink';
 import { ArrowRight } from '@/app/components/icons/ArrowRight';
 import { ExternalLink } from './ExternalLink';
-import { useMarketingAnalytics, CTAType } from '../hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, featureIdToCTAType } from '../hooks/useMarketingAnalytics';
 
 export const FeatureCard = ({
   title,
@@ -55,17 +55,6 @@ export const FeatureCard = ({
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
   const { state, setState, setIsHover } = useAutoClose({ delay: 60000 });
   const { trackCTAClick } = useMarketingAnalytics();
-
-  // Map featurePageId to CTA type
-  const featureIdToCTAType: Record<string, CTAType> = {
-    upgrade: CTAType.FeatureUpgrade,
-    trade: CTAType.FeatureTrade,
-    rewards: CTAType.FeatureRewards,
-    savings: CTAType.FeatureSavings,
-    stake: CTAType.FeatureStake,
-    expert: CTAType.FeatureExpert,
-    skylink: CTAType.FeatureSkylink
-  };
 
   const defaultSizes: { [key: number]: number[]; default: number[] } = {
     [BP.sm]: [200, 200],
