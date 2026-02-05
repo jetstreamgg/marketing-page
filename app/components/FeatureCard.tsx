@@ -58,13 +58,13 @@ export const FeatureCard = ({
 
   // Map featurePageId to CTA type
   const featureIdToCTAType: Record<string, CTAType> = {
-    upgrade: 'feature_upgrade',
-    trade: 'feature_trade',
-    rewards: 'feature_rewards',
-    savings: 'feature_savings',
-    stake: 'feature_stake',
-    expert: 'feature_expert',
-    skylink: 'feature_skylink'
+    upgrade: CTAType.FeatureUpgrade,
+    trade: CTAType.FeatureTrade,
+    rewards: CTAType.FeatureRewards,
+    savings: CTAType.FeatureSavings,
+    stake: CTAType.FeatureStake,
+    expert: CTAType.FeatureExpert,
+    skylink: CTAType.FeatureSkylink
   };
 
   const defaultSizes: { [key: number]: number[]; default: number[] } = {

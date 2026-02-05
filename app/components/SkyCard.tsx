@@ -10,7 +10,7 @@ import { TokenModal } from './TokenModal';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { useSkyUrl } from '../hooks/useSkyUrl';
 import { ExternalLink } from './ExternalLink';
-import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '../hooks/useMarketingAnalytics';
 
 export const SkyCard = ({ data }: { data: FetchedData }) => {
   const { bpi } = useBreakpointIndex();
@@ -43,7 +43,7 @@ export const SkyCard = ({ data }: { data: FetchedData }) => {
               href={url}
               icon="arrowNoBg"
               target="_blank"
-              onClick={() => trackCTAClick('token_upgrade_sky', url, 'upgrade')}
+              onClick={() => trackCTAClick(CTAType.TokenUpgradeSky, url, 'upgrade')}
             >
               {bpi <= BP.md ? 'Upgrade' : 'Upgrade MKR to SKY'}
             </Link>
@@ -80,7 +80,11 @@ export const SkyCard = ({ data }: { data: FetchedData }) => {
         // TODO: Add link to risks page
         href="#"
         footer={
-          <ExternalLink href={url} noStyle onClick={() => trackCTAClick('token_upgrade_sky', url, 'upgrade')}>
+          <ExternalLink
+            href={url}
+            noStyle
+            onClick={() => trackCTAClick(CTAType.TokenUpgradeSky, url, 'upgrade')}
+          >
             <ButtonArrow variant="celestial-3" size="sm">
               Upgrade MKR to SKY
             </ButtonArrow>

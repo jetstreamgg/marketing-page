@@ -9,7 +9,7 @@ import DaiToUsds from '@/public/dai_to_usds.png';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { useSkyUrl } from '../hooks/useSkyUrl';
 import { ExternalLink } from './ExternalLink';
-import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '../hooks/useMarketingAnalytics';
 
 export const UsdsCard = ({ data }: { data: FetchedData }) => {
   const [open, setOpen] = useState(false);
@@ -41,7 +41,7 @@ export const UsdsCard = ({ data }: { data: FetchedData }) => {
               href={url}
               icon="arrowNoBg"
               target="_blank"
-              onClick={() => trackCTAClick('token_upgrade_usds', url, 'upgrade')}
+              onClick={() => trackCTAClick(CTAType.TokenUpgradeUsds, url, 'upgrade')}
             >
               Get USDS
             </Link>
@@ -96,7 +96,7 @@ export const UsdsCard = ({ data }: { data: FetchedData }) => {
           <ExternalLink
             href={url}
             noStyle
-            onClick={() => trackCTAClick('token_upgrade_usds', url, 'upgrade')}
+            onClick={() => trackCTAClick(CTAType.TokenUpgradeUsds, url, 'upgrade')}
           >
             <ButtonArrow variant="sunset-1" size="sm">
               Get USDS

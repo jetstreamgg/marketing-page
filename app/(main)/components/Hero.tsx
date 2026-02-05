@@ -18,7 +18,7 @@ import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { storageKey, SUNRISE_VIDEO_DELAY } from '@/app/constants';
 import { useAppContext } from '@/app/context/AppContext';
 import Image from 'next/image';
-import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 export function Hero({ data }: { data: FetchedData }) {
   const divRef = useRef(null);
@@ -123,7 +123,7 @@ export function Hero({ data }: { data: FetchedData }) {
               </Div>
             </Heading>
             <Div variants={headingAnimationThree} initial={'initial'} animate={'animate'}>
-              <ExternalLink href={url} noStyle onClick={() => trackCTAClick('launch_app_hero', url)}>
+              <ExternalLink href={url} noStyle onClick={() => trackCTAClick(CTAType.LaunchAppHero, url)}>
                 <AccentButton className="relative z-10 mt-6 tablet:mt-8 desktop-xl:mt-12">
                   <StarVariantOne className="absolute right-0 top-0 -translate-y-1/2 translate-x-1 rotate-45" />
                   Launch App

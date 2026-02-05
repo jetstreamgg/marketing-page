@@ -4,21 +4,64 @@ import { usePostHog } from 'posthog-js/react';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 
-export type CTAType =
-  | 'launch_app_header'
-  | 'launch_app_hero'
-  | 'launch_app_footer'
-  | 'launch_app_faq'
-  | 'launch_app_features'
-  | 'token_upgrade_sky'
-  | 'token_upgrade_usds'
-  | 'feature_upgrade'
-  | 'feature_trade'
-  | 'feature_rewards'
-  | 'feature_savings'
-  | 'feature_stake'
-  | 'feature_expert'
-  | 'feature_skylink';
+/**
+ * CTA Types for Marketing Analytics
+ *
+ * These identify the specific call-to-action that was clicked, enabling analysis of:
+ * - Which CTAs drive the most conversions
+ * - CTA placement effectiveness (header vs hero vs footer)
+ * - Feature interest (which widgets users want to access)
+ *
+ * NAMING CONVENTION:
+ * - LaunchApp*  : Generic "Launch App" buttons (no specific widget)
+ * - Token*      : Token-specific upgrade CTAs (MKR→SKY, DAI→USDS)
+ * - Feature*    : Feature card CTAs that deeplink to specific widgets
+ *
+ * USAGE:
+ *   trackCTAClick(CTAType.LaunchAppHero, url)
+ */
+export enum CTAType {
+  // ============================================
+  // LAUNCH APP CTAs (go to app.sky.money)
+  // ============================================
+  /** Header navigation "Launch App" button (desktop & tablet) */
+  LaunchAppHeader = 'launch_app_header',
+  /** Hero section "Launch App" button on homepage */
+  LaunchAppHero = 'launch_app_hero',
+  /** Footer "Launch app" button */
+  LaunchAppFooter = 'launch_app_footer',
+  /** FAQ page bottom CTA "Launch app" */
+  LaunchAppFaq = 'launch_app_faq',
+  /** Features page bottom CTA "Access Sky Token Rewards" */
+  LaunchAppFeatures = 'launch_app_features',
+
+  // ============================================
+  // TOKEN UPGRADE CTAs (homepage token cards)
+  // ============================================
+  /** SKY token card: "Upgrade MKR to SKY" → ?widget=upgrade&source_token=MKR */
+  TokenUpgradeSky = 'token_upgrade_sky',
+  /** USDS token card: "Get USDS" → ?widget=upgrade&source_token=DAI */
+  TokenUpgradeUsds = 'token_upgrade_usds',
+
+  // ============================================
+  // FEATURE CTAs (feature cards with widget deeplinks)
+  // Used on homepage (Features section) and /features page
+  // ============================================
+  /** "Upgrade" → ?widget=upgrade */
+  FeatureUpgrade = 'feature_upgrade',
+  /** "Start Trading" → ?widget=trade */
+  FeatureTrade = 'feature_trade',
+  /** "Access Sky Token Rewards" → ?widget=rewards */
+  FeatureRewards = 'feature_rewards',
+  /** "Start Saving" → ?widget=savings */
+  FeatureSavings = 'feature_savings',
+  /** "Stake your SKY" / "Access Staking Rewards" → ?widget=stake */
+  FeatureStake = 'feature_stake',
+  /** "Get stUSDS" → ?widget=expert */
+  FeatureExpert = 'feature_expert',
+  /** "Access SkyLink" → ?widget=skylink (or ?network=...) */
+  FeatureSkylink = 'feature_skylink'
+}
 
 type Viewport = 'mobile' | 'tablet' | 'desktop';
 

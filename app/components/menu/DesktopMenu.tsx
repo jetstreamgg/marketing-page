@@ -9,7 +9,7 @@ import { menuBackground } from './constants';
 import { DesktopNavItem } from './DesktopNavItem';
 import { Tone } from '@/app/context/AppContext';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
-import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 export const DesktopMenu = ({ tone }: { tone: Tone }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -75,7 +75,7 @@ export const DesktopMenu = ({ tone }: { tone: Tone }) => {
             isMenuOpen={isMenuOpen}
             setSelectedSection={setSelectedSection}
             iconRight={<SquareArrowRight className="h-5 w-5 rounded" />}
-            onClick={() => trackCTAClick('launch_app_header', url)}
+            onClick={() => trackCTAClick(CTAType.LaunchAppHeader, url)}
           />
         </div>
         <div />

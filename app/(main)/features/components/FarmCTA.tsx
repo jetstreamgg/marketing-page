@@ -3,7 +3,7 @@ import { ExternalLink } from '@/app/components/ExternalLink';
 import { Heading } from '@/app/components/Typography';
 import { ButtonArrow } from '@/app/components/ui/button';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
-import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 export default function FarmCTA() {
   const { url } = useSkyUrl('/?widget=rewards');
@@ -23,7 +23,7 @@ export default function FarmCTA() {
         />
       </>
       <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-10">
-        <ExternalLink href={url} noStyle onClick={() => trackCTAClick('launch_app_features', url)}>
+        <ExternalLink href={url} noStyle onClick={() => trackCTAClick(CTAType.LaunchAppFeatures, url)}>
           <ButtonArrow variant="twilight-1">Access Sky Token Rewards</ButtonArrow>
         </ExternalLink>
       </div>

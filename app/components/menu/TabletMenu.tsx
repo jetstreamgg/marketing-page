@@ -10,7 +10,7 @@ import { menuBackground } from './constants';
 import { ButtonArrow } from '@/app/components/ui/button';
 import { Tone } from '@/app/context/AppContext';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
-import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 const height = 56;
 
@@ -99,7 +99,7 @@ export const TabletMenu = ({
                 <ExternalLink
                   href={url}
                   className="-mr-2 mt-8 flex justify-center hover:text-white md:hidden"
-                  onClick={() => trackCTAClick('launch_app_header', url)}
+                  onClick={() => trackCTAClick(CTAType.LaunchAppHeader, url)}
                 >
                   <ButtonArrow
                     variant="glass-dark"

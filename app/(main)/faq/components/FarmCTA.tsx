@@ -4,7 +4,7 @@ import { Heading } from '@/app/components/Typography';
 import { ButtonArrow } from '@/app/components/ui/button';
 import { BP, useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
-import { useMarketingAnalytics } from '@/app/hooks/useMarketingAnalytics';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 export default function FarmCTA() {
   const { bpi } = useBreakpointIndex();
@@ -45,7 +45,7 @@ export default function FarmCTA() {
         </>
       )}
       <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-10">
-        <ExternalLink href={url} noStyle onClick={() => trackCTAClick('launch_app_faq', url)}>
+        <ExternalLink href={url} noStyle onClick={() => trackCTAClick(CTAType.LaunchAppFaq, url)}>
           <ButtonArrow variant="twilight-1">Launch app</ButtonArrow>
         </ExternalLink>
       </div>
