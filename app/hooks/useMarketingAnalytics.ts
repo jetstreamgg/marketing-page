@@ -90,41 +90,63 @@ export type ExternalLinkCategory =
   | 'other'; // Default/uncategorized
 
 /**
- * Auto-detects the category of an external link based on URL patterns.
+ * Checks if a hostname matches a domain or is a subdomain of it.
+ * e.g. hostMatchesDomain('www.twitter.com', 'twitter.com') → true
+ *      hostMatchesDomain('evil-twitter.com', 'twitter.com') → false
+ */
+function hostMatchesDomain(hostname: string, domain: string): boolean {
+  return hostname === domain || hostname.endsWith(`.${domain}`);
+}
+
+const SOCIAL_DOMAINS = [
+  'twitter.com',
+  'x.com',
+  'discord.com',
+  'discord.gg',
+  't.me',
+  'telegram.org',
+  'youtube.com',
+  'github.com'
+];
+
+/**
+ * Auto-detects the category of an external link based on URL hostname.
+ * Uses proper URL parsing to avoid substring matching vulnerabilities.
  * Returns undefined if no pattern matches (caller should provide explicit category or default to 'other').
  */
 export function inferLinkCategory(url: string): ExternalLinkCategory | undefined {
-  const lowerUrl = url.toLowerCase();
+  let hostname: string;
+  let pathname: string;
+  try {
+    const parsed = new URL(url);
+    hostname = parsed.hostname.toLowerCase();
+    pathname = parsed.pathname.toLowerCase();
+  } catch {
+    return undefined;
+  }
 
   // Social platforms
-  if (
-    lowerUrl.includes('twitter.com') ||
-    lowerUrl.includes('x.com') ||
-    lowerUrl.includes('discord') ||
-    lowerUrl.includes('telegram') ||
-    lowerUrl.includes('youtube') ||
-    lowerUrl.includes('github.com')
-  ) {
+  if (SOCIAL_DOMAINS.some(domain => hostMatchesDomain(hostname, domain))) {
     return 'social';
   }
 
   // Governance
-  if (lowerUrl.includes('vote.sky.money') || lowerUrl.includes('forum.sky.money')) {
+  if (hostname === 'vote.sky.money' || hostname === 'forum.sky.money') {
     return 'governance';
   }
 
   // Documentation
-  if (lowerUrl.includes('developers.sky.money') || lowerUrl.includes('/docs')) {
+  if (hostname === 'developers.sky.money' || pathname.startsWith('/docs')) {
     return 'docs';
   }
 
   // Media/Brand assets
-  if (lowerUrl.includes('notion.so') || lowerUrl.includes('notion.site') || lowerUrl.includes('brand')) {
+  if (hostMatchesDomain(hostname, 'notion.so') || hostMatchesDomain(hostname, 'notion.site')) {
     return 'media';
   }
 
   // Ecosystem projects (Sky ecosystem only)
-  if (lowerUrl.includes('spark.fi') || lowerUrl.includes('info.sky.money')) {
+  if (hostMatchesDomain(hostname, 'spark.fi') || hostname === 'info.sky.money') {
     return 'ecosystem';
   }
 

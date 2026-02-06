@@ -30,7 +30,13 @@ export function ExternalLink({
 
   // Check if this link goes to the app (CTA) vs external site
   const appUrl = process.env.NEXT_PUBLIC_WEBAPP_URL || 'https://app.sky.money';
-  const isAppLink = href.startsWith(appUrl);
+  const isAppLink = (() => {
+    try {
+      return new URL(href).hostname === new URL(appUrl).hostname;
+    } catch {
+      return false;
+    }
+  })();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     // Track external link clicks, but skip app links (CTAs handle their own tracking)
