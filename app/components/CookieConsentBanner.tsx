@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePostHog } from 'posthog-js/react';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCookieConsent } from '../context/CookieConsentContext';
 import { ExternalLink } from './ExternalLink';
 import { Text } from './Typography';
@@ -11,9 +11,16 @@ import { getFooterLinks } from '../lib/utils';
 export function CookieConsentBanner() {
   const { consent, bannerVisible, setConsent } = useCookieConsent();
   const posthog = usePostHog();
+  const [delayComplete, setDelayComplete] = useState(false);
 
   const privacyLink = useMemo(() => {
     return getFooterLinks().find(l => /privacy/i.test(l.name));
+  }, []);
+
+  useEffect(() => {
+    const delay = 3_500;
+    const timer = setTimeout(() => setDelayComplete(true), delay);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAccept = useCallback(() => {
@@ -34,7 +41,7 @@ export function CookieConsentBanner() {
 
   return (
     <AnimatePresence>
-      {bannerVisible && (
+      {bannerVisible && (consent !== 'pending' || delayComplete) && (
         <motion.div
           role="region"
           aria-label="Cookie consent"
