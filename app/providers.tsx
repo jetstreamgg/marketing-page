@@ -2,15 +2,24 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProvider } from './context/AppContext';
+import { CookieConsentProvider } from './context/CookieConsentContext';
 import { PostHogProvider } from './providers/PostHogProvider';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { Cookie3Script } from './components/Cookie3Script';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
   return (
-    <PostHogProvider>
-      <QueryClientProvider client={queryClient}>
-        <AppProvider>{children}</AppProvider>
-      </QueryClientProvider>
-    </PostHogProvider>
+    <CookieConsentProvider>
+      <PostHogProvider>
+        <QueryClientProvider client={queryClient}>
+          <AppProvider>
+            {children}
+            <CookieConsentBanner />
+            <Cookie3Script />
+          </AppProvider>
+        </QueryClientProvider>
+      </PostHogProvider>
+    </CookieConsentProvider>
   );
 }

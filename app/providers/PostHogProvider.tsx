@@ -36,6 +36,7 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
+import { CONSENT_STORAGE_KEY } from '../constants';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -63,6 +64,12 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
     // - 'memory': Session-only, no cookies/storage (more private, GDPR-friendly)
     // Using localStorage for cross-session attribution. Switch to 'memory' for cookieless.
     persistence: 'localStorage',
+
+    // COOKIE CONSENT: cookieless anonymous tracking when opted out.
+    // With 'on_reject', opt_out_capturing() uses cookieless tracking
+    // (privacy-preserving server-side hash, nothing stored on device)
+    // instead of dropping events entirely.
+    cookieless_mode: 'on_reject',
 
     // AUTOCAPTURE DISABLED
     // When true, PostHog auto-captures all clicks, inputs, etc.
@@ -92,6 +99,15 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
       posthogClient.register({
         app_name: 'marketing'
       });
+
+      // Restore consent state for returning users at init time (before React hydrates).
+      // This ensures PostHog is in the correct mode immediately.
+      const storedConsent = localStorage.getItem(CONSENT_STORAGE_KEY);
+      if (storedConsent === 'accepted') {
+        posthogClient.opt_in_capturing();
+      } else if (storedConsent === 'rejected') {
+        posthogClient.opt_out_capturing();
+      }
 
       // Debug mode logs all events to browser console in development
       // Helpful for verifying events fire correctly

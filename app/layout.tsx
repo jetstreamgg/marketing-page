@@ -6,7 +6,6 @@ import { PageAnimatePresence } from '@/app/components/PageAnimatePresence';
 import { circleStdClassName } from '@/app/lib/fonts';
 import { Header } from '@/app/components/Header';
 import { ExternalLinkModal } from '@/app/components/ExternalLinkModal';
-import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
@@ -39,16 +38,6 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children?: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <Script
-          src="https://cdn.markfi.xyz/scripts/analytics/0.11.21/cookie3.analytics.min.js"
-          integrity="sha384-wtYmYhbRlAqGwxc5Vb9GZVyp/Op3blmJICmXjRiJu2/TlPze5dHsmg2gglbH8viT"
-          crossOrigin="anonymous"
-          async
-          strategy="lazyOnload"
-          site-id={process.env.NEXT_PUBLIC_COOKIE3_SITE_ID || ''}
-        />
-      </head>
       <body className={`flex min-h-screen flex-col overflow-x-hidden ${circleStdClassName}`}>
         <Providers>
           <ExternalLinkModal />

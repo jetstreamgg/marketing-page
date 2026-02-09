@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import { useHeaderInView } from '../hooks/useHeaderInView';
 import { useSkyUrl } from '../hooks/useSkyUrl';
 import { useMarketingAnalytics, CTAType } from '../hooks/useMarketingAnalytics';
+import { useCookieConsent } from '../context/CookieConsentContext';
 
 type LinkItem = { title: string; url: string };
 type LinkSection = [string, LinkItem[]];
@@ -67,6 +68,7 @@ export function Footer() {
   const targetRef = useRef(null);
   useHeaderInView(targetRef, 'dark');
   const { trackCTAClick } = useMarketingAnalytics();
+  const { showBanner } = useCookieConsent();
 
   const footerLinks = getFooterLinks();
 
@@ -175,6 +177,11 @@ export function Footer() {
               </Text>
             </ExternalLink>
           ))}
+          <button onClick={showBanner} className={externalClass}>
+            <Text variant="ui-small" className="text-white">
+              Cookie Settings
+            </Text>
+          </button>
         </div>
       </div>
     </div>
