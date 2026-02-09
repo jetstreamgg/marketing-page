@@ -12,6 +12,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 export const metadata: Metadata = {
   title: 'sky.money',
   description: 'Your future in DeFi starts now',
+  verification: {
+    google: '9phny0HaUVAhv5p4e17WNoda7kaCLUKF6lq-HiFaopc'
+  },
   openGraph: {
     title: 'sky.money',
     description: 'Your future in DeFi starts now',
