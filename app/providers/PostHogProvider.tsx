@@ -42,8 +42,26 @@ const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 
-// Initialize PostHog (runs once on client)
-if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
+// Check consent before init to determine initialization strategy.
+// Read localStorage synchronously before posthog.init() to avoid the timing issue
+// where the first $pageview fires before the loaded callback can restore consent.
+const storedConsent = typeof window !== 'undefined' ? localStorage.getItem(CONSENT_STORAGE_KEY) : null;
+const hasAccepted = storedConsent === 'accepted';
+const hasRejected = storedConsent === 'rejected';
+
+// CONSENT-BASED INITIALIZATION
+// - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
+// - Pending users: Cookieless anonymous tracking via server-side hash.
+// - Accepted users: Full persistent tracking from the first $pageview.
+//
+// Why skip init for rejected users instead of using opt_out_capturing()?
+// With cookieless_mode: 'on_reject', opt_out_capturing() switches to cookieless
+// tracking — it doesn't stop events. To truly send nothing, we don't init PostHog.
+//
+// When a pending user clicks "Reject All" in the banner, PostHog is already initialized
+// for that session. We call opt_out_capturing() which gives cookieless for the remainder
+// of the session. On the next page load, hasRejected is true and PostHog won't init.
+if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejected) {
   posthog.init(POSTHOG_KEY, {
     api_host: POSTHOG_HOST,
 
@@ -59,58 +77,47 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY) {
     // Also includes scroll depth metrics (max_scroll, last_scroll) automatically.
     capture_pageleave: true,
 
-    // PERSISTENCE: localStorage vs memory
-    // - 'localStorage': Persists user ID across sessions (better attribution)
-    // - 'memory': Session-only, no cookies/storage (more private, GDPR-friendly)
-    // Using localStorage for cross-session attribution. Switch to 'memory' for cookieless.
+    // PERSISTENCE: localStorage for cross-session attribution.
     persistence: 'localStorage',
 
-    // COOKIE CONSENT: cookieless anonymous tracking when opted out.
-    // With 'on_reject', opt_out_capturing() uses cookieless tracking
-    // (privacy-preserving server-side hash, nothing stored on device)
-    // instead of dropping events entirely.
+    // COOKIE CONSENT
+    // 'on_reject' enables cookieless anonymous tracking (server-side hash) for
+    // pending users who haven't made a consent decision yet.
+    // Requires "Cookieless server hash mode" enabled in PostHog project settings.
     cookieless_mode: 'on_reject',
 
-    // AUTOCAPTURE DISABLED
-    // When true, PostHog auto-captures all clicks, inputs, etc.
-    // We disable for privacy (manual events only) and smaller payload.
-    // All tracking is explicit via useMarketingAnalytics hook.
+    // DEFAULT CAPTURING STATE
+    // Pending users start opted-out → cookieless tracking begins immediately.
+    // Accepted returning users start opted-in → first $pageview uses persistent ID.
+    opt_out_capturing_by_default: !hasAccepted,
+
+    // AUTOCAPTURE DISABLED — manual events only via useMarketingAnalytics hook.
     autocapture: false,
 
-    // SESSION REPLAY DISABLED
-    // Records user sessions for UX debugging. Requires explicit consent.
-    // Enable later with consent banner if needed.
+    // SESSION REPLAY DISABLED — requires explicit consent.
     disable_session_recording: true,
 
     // PRIVACY SETTINGS
     respect_dnt: true, // Honor browser's Do Not Track setting
-    ip: false, // Don't capture IP addresses
-    property_denylist: ['$ip'], // Extra protection: filter $ip from all events
+    ip: false, // Don't capture IP addresses server-side
+    property_denylist: ['$ip'], // Extra protection: strip $ip from all events
 
     // CROSS-DOMAIN ATTRIBUTION
     // Shares cookies across *.sky.money subdomains (sky.money <-> app.sky.money)
-    // Required for tracking user journey: marketing site -> app conversion
     cross_subdomain_cookie: true,
 
     loaded: posthogClient => {
-      // Register super property to distinguish marketing site events from app events.
-      // This is attached to every event (including automatic ones like $pageview).
-      // Allows filtering by app_name in PostHog dashboards across all environments.
       posthogClient.register({
         app_name: 'marketing'
       });
 
-      // Restore consent state for returning users at init time (before React hydrates).
-      // This ensures PostHog is in the correct mode immediately.
-      const storedConsent = localStorage.getItem(CONSENT_STORAGE_KEY);
-      if (storedConsent === 'accepted') {
+      // Restore consent for returning accepted users.
+      // Rejected users never reach here (PostHog not initialized).
+      // Pending users are already in cookieless mode via opt_out_capturing_by_default.
+      if (hasAccepted) {
         posthogClient.opt_in_capturing();
-      } else if (storedConsent === 'rejected') {
-        posthogClient.opt_out_capturing();
       }
 
-      // Debug mode logs all events to browser console in development
-      // Helpful for verifying events fire correctly
       if (process.env.NODE_ENV === 'development') {
         posthogClient.debug();
       }

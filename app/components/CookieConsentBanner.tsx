@@ -29,15 +29,14 @@ export function CookieConsentBanner() {
   }, [setConsent, posthog]);
 
   const handleReject = useCallback(() => {
-    // If switching from accepted to rejected, clear stored PostHog data
-    if (consent === 'accepted') {
-      posthog?.opt_out_capturing();
-      posthog?.reset();
-    } else {
-      posthog?.opt_out_capturing();
-    }
+    // Stop PostHog capturing and clear any stored data.
+    // With cookieless_mode: 'on_reject', opt_out_capturing() switches to cookieless
+    // for the remainder of this session. On next page load, PostHog won't initialize
+    // at all for rejected users (checked before posthog.init in PostHogProvider).
+    posthog?.opt_out_capturing();
+    posthog?.reset();
     setConsent('rejected');
-  }, [setConsent, posthog, consent]);
+  }, [setConsent, posthog]);
 
   return (
     <AnimatePresence>
