@@ -25,14 +25,16 @@ export function CookieConsentBanner() {
 
   const handleAccept = useCallback(() => {
     setConsent('accepted');
+    // Disable cookieless mode and switch to full persistent tracking.
+    posthog?.set_config({ cookieless_mode: undefined });
     posthog?.opt_in_capturing();
   }, [setConsent, posthog]);
 
   const handleReject = useCallback(() => {
-    // Stop PostHog capturing and clear any stored data.
-    // With cookieless_mode: 'on_reject', opt_out_capturing() switches to cookieless
-    // for the remainder of this session. On next page load, PostHog won't initialize
-    // at all for rejected users (checked before posthog.init in PostHogProvider).
+    // Disable cookieless mode and stop all capturing for this session.
+    // On next page load, PostHog won't initialize at all for rejected users
+    // (checked before posthog.init in PostHogProvider).
+    posthog?.set_config({ cookieless_mode: undefined });
     posthog?.opt_out_capturing();
     posthog?.reset();
     setConsent('rejected');

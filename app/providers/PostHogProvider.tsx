@@ -51,16 +51,14 @@ const hasRejected = storedConsent === 'rejected';
 
 // CONSENT-BASED INITIALIZATION
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
-// - Pending users: Cookieless anonymous tracking via server-side hash.
+// - Pending users: Cookieless anonymous tracking via server-side hash (cookieless_mode: 'always').
 // - Accepted users: Full persistent tracking from the first $pageview.
 //
-// Why skip init for rejected users instead of using opt_out_capturing()?
-// With cookieless_mode: 'on_reject', opt_out_capturing() switches to cookieless
-// tracking — it doesn't stop events. To truly send nothing, we don't init PostHog.
-//
-// When a pending user clicks "Reject All" in the banner, PostHog is already initialized
-// for that session. We call opt_out_capturing() which gives cookieless for the remainder
-// of the session. On the next page load, hasRejected is true and PostHog won't init.
+// Why cookieless_mode: 'always' for pending users (not 'on_reject')?
+// The 'on_reject' mode only activates when isExplicitlyOptedOut() is true, which requires
+// an explicit opt_out_capturing() call — opt_out_capturing_by_default doesn't trigger it.
+// Using 'always' guarantees cookieless tracking from the first event for pending users.
+// The CookieConsentBanner switches the mode via set_config() when the user makes a choice.
 if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejected) {
   posthog.init(POSTHOG_KEY, {
     api_host: POSTHOG_HOST,
@@ -77,19 +75,20 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejec
     // Also includes scroll depth metrics (max_scroll, last_scroll) automatically.
     capture_pageleave: true,
 
-    // PERSISTENCE: localStorage for cross-session attribution.
-    persistence: 'localStorage',
+    // PERSISTENCE: localStorage+cookie for cross-session and cross-subdomain attribution.
+    // Most data stored in localStorage (keeps headers small), but identity properties
+    // (distinct_id, device_id, session_id) are also persisted in cookies so that
+    // cross_subdomain_cookie: true can share them across *.sky.money subdomains.
+    persistence: 'localStorage+cookie',
 
-    // COOKIE CONSENT
-    // 'on_reject' enables cookieless anonymous tracking (server-side hash) for
-    // pending users who haven't made a consent decision yet.
+    // COOKIELESS MODE
+    // Pending users: 'always' → server-side hashed identity, no cookies/localStorage for tracking.
+    //   distinct_id is '$posthog_cookieless' (replaced server-side with daily hash).
+    //   Each day produces a new hash, so cross-day tracking is impossible.
+    // Accepted users: undefined → full persistent tracking with stable UUID distinct_id.
+    // Rejected users: never reach here (PostHog not initialized).
     // Requires "Cookieless server hash mode" enabled in PostHog project settings.
-    cookieless_mode: 'on_reject',
-
-    // DEFAULT CAPTURING STATE
-    // Pending users start opted-out → cookieless tracking begins immediately.
-    // Accepted returning users start opted-in → first $pageview uses persistent ID.
-    opt_out_capturing_by_default: !hasAccepted,
+    cookieless_mode: hasAccepted ? undefined : 'always',
 
     // AUTOCAPTURE DISABLED — manual events only via useMarketingAnalytics hook.
     autocapture: false,
@@ -113,7 +112,7 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejec
 
       // Restore consent for returning accepted users.
       // Rejected users never reach here (PostHog not initialized).
-      // Pending users are already in cookieless mode via opt_out_capturing_by_default.
+      // Pending users are already in cookieless mode via cookieless_mode: 'always'.
       if (hasAccepted) {
         posthogClient.opt_in_capturing();
       }
