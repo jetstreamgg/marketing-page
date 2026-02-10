@@ -137,6 +137,33 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
 initializePostHogIfNeeded();
 
 /**
+ * Apply a consent change at runtime.
+ * Handles the cookieless → full tracking transition (and vice versa)
+ * using the global posthog singleton directly.
+ */
+export function applyPostHogConsent(enabled: boolean) {
+  if (enabled) {
+    // Ensure PostHog is initialized (handles rejected → accepted transition)
+    initializePostHogIfNeeded(true);
+
+    // Disable cookieless mode and switch to full persistent tracking.
+    // reset() clears the cookieless $posthog_cookieless distinct_id
+    // so opt_in_capturing() generates a fresh persistent UUID.
+    posthog.set_config({ cookieless_mode: undefined });
+    posthog.reset();
+    posthog.opt_in_capturing();
+    posthog.register({ app_name: 'marketing' });
+  } else {
+    if (!hasInitializedPostHog) return;
+    posthog.set_config({ cookieless_mode: undefined });
+    // reset() MUST come before opt_out — reset clears all stored data including
+    // opt flags. opt_out_capturing() must be last so the opt-out flag persists.
+    posthog.reset();
+    posthog.opt_out_capturing();
+  }
+}
+
+/**
  * PostHogProvider - Wraps app with PostHog context
  *
  * Provides:

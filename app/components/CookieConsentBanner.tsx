@@ -1,11 +1,10 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { usePostHog } from 'posthog-js/react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { type ServiceConsent, type ServiceId } from '../constants';
 import { useCookieConsent } from '../context/CookieConsentContext';
-import { initializePostHogIfNeeded } from '../providers/PostHogProvider';
+import { applyPostHogConsent } from '../providers/PostHogProvider';
 import { ExternalLink } from './ExternalLink';
 import { Text } from './Typography';
 import { getFooterLinks } from '../lib/utils';
@@ -23,7 +22,6 @@ function allServices(value: boolean): ServiceConsent {
 
 export function CookieConsentBanner() {
   const { consent, bannerVisible, bannerView, setBannerView, setConsent } = useCookieConsent();
-  const posthog = usePostHog();
   const [delayComplete, setDelayComplete] = useState(false);
 
   // Local toggle state for the manage view
@@ -58,18 +56,16 @@ export function CookieConsentBanner() {
 
   const applyConsent = useCallback(
     (newConsent: ServiceConsent) => {
-      if (newConsent.posthog) {
-        initializePostHogIfNeeded(true);
-        posthog?.set_config({ cookieless_mode: undefined });
-        posthog?.opt_in_capturing();
-      } else {
-        posthog?.set_config({ cookieless_mode: undefined });
-        posthog?.opt_out_capturing();
-        posthog?.reset();
-      }
+      applyPostHogConsent(newConsent.posthog);
       setConsent(newConsent);
+
+      // Third-party scripts (Cookie3) can't be unloaded from memory once executed.
+      // If any were enabled and are now disabled, reload to ensure they stop.
+      if (consent?.cookie3 && !newConsent.cookie3) {
+        window.location.reload();
+      }
     },
-    [setConsent, posthog]
+    [setConsent, consent]
   );
 
   const handleAcceptAll = useCallback(() => applyConsent(allServices(true)), [applyConsent]);
