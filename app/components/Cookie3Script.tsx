@@ -6,7 +6,7 @@ import { useCookieConsent } from '../context/CookieConsentContext';
 export function Cookie3Script() {
   const { consent } = useCookieConsent();
 
-  if (consent !== 'accepted') return null;
+  if (!consent?.cookie3) return null;
 
   return (
     <Script

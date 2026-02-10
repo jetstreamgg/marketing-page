@@ -36,18 +36,13 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
-import { CONSENT_STORAGE_KEY } from '../constants';
+import { getStoredConsent } from '../lib/consentStorage';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 
 let hasInitializedPostHog = false;
-
-function getStoredConsent() {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem(CONSENT_STORAGE_KEY);
-}
 
 // CONSENT-BASED INITIALIZATION
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
@@ -64,9 +59,9 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
     return;
   }
 
-  const storedConsent = getStoredConsent();
-  const hasAccepted = forceAccepted || storedConsent === 'accepted';
-  const hasRejected = storedConsent === 'rejected';
+  const consent = getStoredConsent();
+  const hasAccepted = forceAccepted || consent?.posthog === true;
+  const hasRejected = consent?.posthog === false;
 
   if (hasRejected && !forceAccepted) {
     return;

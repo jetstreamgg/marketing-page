@@ -1,46 +1,45 @@
 'use client';
 
 import React, { createContext, useCallback, useContext, useState, type ReactNode } from 'react';
-import { CONSENT_STORAGE_KEY } from '../constants';
+import type { ServiceConsent } from '../constants';
+import { getStoredConsent, saveConsent } from '../lib/consentStorage';
 
-export type ConsentStatus = 'pending' | 'accepted' | 'rejected';
+export type BannerView = 'default' | 'manage';
 
 interface CookieConsentContextProps {
-  readonly consent: ConsentStatus;
+  readonly consent: ServiceConsent | null;
   readonly bannerVisible: boolean;
-  readonly setConsent: (status: ConsentStatus) => void;
+  readonly bannerView: BannerView;
+  readonly setBannerView: (view: BannerView) => void;
+  readonly setConsent: (consent: ServiceConsent) => void;
   readonly showBanner: () => void;
   readonly hideBanner: () => void;
 }
 
 const CookieConsentContext = createContext<CookieConsentContextProps | undefined>(undefined);
 
-function getStoredConsent(): ConsentStatus {
-  if (typeof window === 'undefined') return 'pending';
-  const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
-  if (stored === 'accepted' || stored === 'rejected') return stored;
-  return 'pending';
-}
-
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
-  const [consent, setConsentState] = useState<ConsentStatus>(getStoredConsent);
-  const [bannerVisible, setBannerVisible] = useState(() => getStoredConsent() === 'pending');
+  const [consent, setConsentState] = useState<ServiceConsent | null>(getStoredConsent);
+  const [bannerVisible, setBannerVisible] = useState(() => getStoredConsent() === null);
+  const [bannerView, setBannerView] = useState<BannerView>('default');
 
-  const setConsent = useCallback((status: ConsentStatus) => {
-    setConsentState(status);
-    if (status === 'pending') {
-      localStorage.removeItem(CONSENT_STORAGE_KEY);
-    } else {
-      localStorage.setItem(CONSENT_STORAGE_KEY, status);
-    }
+  const setConsent = useCallback((newConsent: ServiceConsent) => {
+    setConsentState(newConsent);
+    saveConsent(newConsent);
     setBannerVisible(false);
   }, []);
 
-  const showBanner = useCallback(() => setBannerVisible(true), []);
+  const showBanner = useCallback(() => {
+    setBannerView('default');
+    setBannerVisible(true);
+  }, []);
+
   const hideBanner = useCallback(() => setBannerVisible(false), []);
 
   return (
-    <CookieConsentContext.Provider value={{ consent, bannerVisible, setConsent, showBanner, hideBanner }}>
+    <CookieConsentContext.Provider
+      value={{ consent, bannerVisible, bannerView, setBannerView, setConsent, showBanner, hideBanner }}
+    >
       {children}
     </CookieConsentContext.Provider>
   );
