@@ -13,6 +13,8 @@ export const getSunriseDelay = () => {
   return SUNRISE_DELAY;
 };
 
+export const CONSENT_STORAGE_KEY = 'cookie_consent';
+
 export const ALLOWED_DOMAINS = ['sky.money', 'app.sky.money', 'docs.sky.money'];
 // Subdomains that require explicit user acknowledgment before navigation
 export const RESTRICTED_DOMAINS = ['developers.sky.money'];

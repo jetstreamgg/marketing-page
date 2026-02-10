@@ -20,6 +20,7 @@ import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
 import { useRandomL2Name } from '@/app/hooks/useRandomL2Name';
+import { useMarketingAnalytics, featureIdToCTAType } from '@/app/hooks/useMarketingAnalytics';
 
 const FeatureCardStats = ({
   APY,
@@ -119,6 +120,7 @@ const FeatureCardLg = ({
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
   const [cardWidth, setCardWidth] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { trackCTAClick } = useMarketingAnalytics();
 
   useEffect(() => {
     const containerElement = cardRef.current;
@@ -230,7 +232,19 @@ const FeatureCardLg = ({
           onClick={() => setState(state === 'open' ? 'close' : 'open')}
           isOpen={state === 'open'}
         />
-        <ExternalLink href={href} noStyle>
+        <ExternalLink
+          href={href}
+          noStyle
+          onClick={() => {
+            const ctaType = featureIdToCTAType[featurePageId];
+            if (ctaType) {
+              const widgetParam = href.includes('widget=')
+                ? href.split('widget=')[1]?.split('&')[0]
+                : undefined;
+              trackCTAClick(ctaType, href, widgetParam);
+            }
+          }}
+        >
           <ButtonArrow variant={buttonVariant}>{buttonText}</ButtonArrow>
         </ExternalLink>
       </div>
