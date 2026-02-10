@@ -36,18 +36,13 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
-import { CONSENT_STORAGE_KEY } from '../constants';
+import { getStoredConsent } from '../lib/consentStorage';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 
 let hasInitializedPostHog = false;
-
-function getStoredConsent() {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem(CONSENT_STORAGE_KEY);
-}
 
 // CONSENT-BASED INITIALIZATION
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
@@ -64,9 +59,9 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
     return;
   }
 
-  const storedConsent = getStoredConsent();
-  const hasAccepted = forceAccepted || storedConsent === 'accepted';
-  const hasRejected = storedConsent === 'rejected';
+  const consent = getStoredConsent();
+  const hasAccepted = forceAccepted || consent?.posthog === true;
+  const hasRejected = consent?.posthog === false;
 
   if (hasRejected && !forceAccepted) {
     return;
@@ -140,6 +135,33 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
 
 // Initialize immediately unless this visitor has explicitly rejected.
 initializePostHogIfNeeded();
+
+/**
+ * Apply a consent change at runtime.
+ * Handles the cookieless → full tracking transition (and vice versa)
+ * using the global posthog singleton directly.
+ */
+export function applyPostHogConsent(enabled: boolean) {
+  if (enabled) {
+    // Ensure PostHog is initialized (handles rejected → accepted transition)
+    initializePostHogIfNeeded(true);
+
+    // Disable cookieless mode and switch to full persistent tracking.
+    // reset() clears the cookieless $posthog_cookieless distinct_id
+    // so opt_in_capturing() generates a fresh persistent UUID.
+    posthog.set_config({ cookieless_mode: undefined });
+    posthog.reset();
+    posthog.opt_in_capturing();
+    posthog.register({ app_name: 'marketing' });
+  } else {
+    if (!hasInitializedPostHog) return;
+    posthog.set_config({ cookieless_mode: undefined });
+    // reset() MUST come before opt_out — reset clears all stored data including
+    // opt flags. opt_out_capturing() must be last so the opt-out flag persists.
+    posthog.reset();
+    posthog.opt_out_capturing();
+  }
+}
 
 /**
  * PostHogProvider - Wraps app with PostHog context
