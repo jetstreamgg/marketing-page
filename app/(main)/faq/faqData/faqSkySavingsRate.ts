@@ -17,7 +17,7 @@ The conversion rate between USDS and sUSDS is determined programmatically by sma
   {
     question: 'What is sUSDS?',
     answer:
-      'sUSDS is the native savings token of the Sky Savings Rate module, reflecting  how the protocol represents a user’s USDS position in that  module and  the accumulation mechanics of that module over time. When you supply USDS to the Sky Savings Rate module of the Sky Protocol, you access the Sky Savings Rate and receive sUSDS tokens. These sUSDS tokens serve as a digital record of your USDS interaction with the Sky Savings Rate module and any value accrued to your position. Therefore, when you choose to redeem your sUSDS for USDS—which you can do anytime—the total USDS you will receive will equal the amount you originally supplied, plus any additional USDS accumulated.',
+      'sUSDS is the native savings token of the Sky Savings Rate module, reflecting how the protocol represents a user’s USDS position in that module and the accumulation mechanics of that module over time. When you supply USDS to the Sky Savings Rate module of the Sky Protocol, you access the Sky Savings Rate and receive sUSDS tokens. These sUSDS tokens serve as a digital record of your USDS interaction with the Sky Savings Rate module and any value accrued to your position. Therefore, when you choose to redeem your sUSDS for USDS—which you can do anytime—the total USDS you will receive will equal the amount you originally supplied, plus any additional USDS accumulated.',
     categories: ['Sky Savings Rate']
   },
   {
