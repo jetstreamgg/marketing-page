@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useVpnAnalytics } from '../../hooks/useVpnAnalytics';
 import { Heading, Text } from '../Typography';
 import { SkyLoading } from '../SkyLoading';
 import Image from 'next/image';
@@ -8,6 +10,7 @@ type UnauthorizedPageProps = {
     isConnectedToVpn?: boolean;
     vpnIsLoading?: boolean;
     vpnError?: Error;
+    countryCode?: string;
   };
 };
 
@@ -26,6 +29,21 @@ const ErrorInfo = ({ title }: { title: string }) => {
 
 export const UnauthorizedPage = ({ vpnData }: UnauthorizedPageProps) => {
   const authUrl = process.env.NEXT_PUBLIC_AUTH_URL;
+  const { trackVpnBlockedPageView } = useVpnAnalytics();
+
+  useEffect(() => {
+    const blockReason = vpnData?.isConnectedToVpn
+      ? 'vpn_detected'
+      : vpnData?.vpnError
+        ? 'network_error'
+        : 'restricted_region';
+
+    trackVpnBlockedPageView({
+      blockReason,
+      countryCode: vpnData?.countryCode ?? null
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className="relative flex h-[100dvh] w-screen flex-col items-center justify-center gap-3 p-10 text-center text-white">
       <Image

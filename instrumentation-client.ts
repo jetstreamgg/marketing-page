@@ -1,6 +1,14 @@
 // This file configures the initialization of Sentry on the client.
 // The config here will be used whenever a user loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
+//
+// WHY POSTHOG IS NOT HERE:
+// Next.js 15.3+ supports initializing PostHog in this file for simple setups.
+// However, we use a Provider pattern (app/providers/PostHogProvider.tsx) instead because:
+// 1. App Router client-side navigation requires manual page view tracking
+// 2. We need usePostHog() hook for React component integration
+// 3. UTM parameter capture requires Next.js useSearchParams() hook
+// See PostHogProvider.tsx for detailed explanation.
 
 import * as Sentry from '@sentry/nextjs';
 

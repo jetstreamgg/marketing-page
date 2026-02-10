@@ -10,7 +10,7 @@ import {
   headingAnimationThree,
   HomePageTransition
 } from '@/app/components/PageTransition';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
 import { FetchedData } from '../fetchData';
 import { ExternalLink } from '@/app/components/ExternalLink';
@@ -18,6 +18,7 @@ import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { storageKey, SUNRISE_VIDEO_DELAY } from '@/app/constants';
 import { useAppContext } from '@/app/context/AppContext';
 import Image from 'next/image';
+import { useMarketingAnalytics, CTAType } from '@/app/hooks/useMarketingAnalytics';
 
 export function Hero({ data }: { data: FetchedData }) {
   const divRef = useRef(null);
@@ -25,6 +26,7 @@ export function Hero({ data }: { data: FetchedData }) {
   useHeaderInView(divRef, 'dark');
   useHeaderInView(bottomDivRef, 'dark');
   const { url } = useSkyUrl();
+  const { trackCTAClick } = useMarketingAnalytics();
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isFirstPlay, setIsFirstPlay, isSlowNetwork, isJsLoaded } = useAppContext();
 
@@ -121,7 +123,7 @@ export function Hero({ data }: { data: FetchedData }) {
               </Div>
             </Heading>
             <Div variants={headingAnimationThree} initial={'initial'} animate={'animate'}>
-              <ExternalLink href={url} noStyle>
+              <ExternalLink href={url} noStyle onClick={() => trackCTAClick(CTAType.LaunchAppHero, url)}>
                 <AccentButton className="relative z-10 mt-6 tablet:mt-8 desktop-xl:mt-12">
                   <StarVariantOne className="absolute right-0 top-0 -translate-y-1/2 translate-x-1 rotate-45" />
                   Launch App

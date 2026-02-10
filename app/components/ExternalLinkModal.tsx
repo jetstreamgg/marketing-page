@@ -3,11 +3,12 @@
 import { useAppContext } from '../context/AppContext';
 import { Dialog, DialogContent } from '@/app/components/ui/dialog';
 import { Heading, Text } from '@/app/components/Typography';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ButtonArrow, ButtonClose } from './ui/button';
 import { Warning } from './icons';
 import { ExternalLink } from './ExternalLink';
 import { getTermsLink } from '../lib/utils';
+import { useMarketingAnalytics } from '../hooks/useMarketingAnalytics';
 
 export const ExternalLinkModal: React.FC = () => {
   const {
@@ -16,6 +17,14 @@ export const ExternalLinkModal: React.FC = () => {
     setExternalLinkModalOpened,
     setExternalLinkModalUrl
   } = useAppContext();
+  const { trackExternalLinkModalShown, trackExternalLinkConfirmed } = useMarketingAnalytics();
+
+  // Track when modal is shown
+  useEffect(() => {
+    if (externalLinkModalOpened && externalLinkModalUrl) {
+      trackExternalLinkModalShown(externalLinkModalUrl);
+    }
+  }, [externalLinkModalOpened, externalLinkModalUrl, trackExternalLinkModalShown]);
 
   const handleCancel = useCallback(
     (change: boolean) => {
@@ -26,9 +35,10 @@ export const ExternalLinkModal: React.FC = () => {
   );
 
   const handleConfirm = useCallback(() => {
+    trackExternalLinkConfirmed(externalLinkModalUrl);
     setExternalLinkModalOpened(false);
     window.open(externalLinkModalUrl, '_blank');
-  }, [externalLinkModalUrl, setExternalLinkModalOpened]);
+  }, [externalLinkModalUrl, setExternalLinkModalOpened, trackExternalLinkConfirmed]);
 
   const TERMS_LINK = getTermsLink();
 
