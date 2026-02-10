@@ -12,7 +12,8 @@ export const DesktopNavItem = ({
   isExternal,
   setSelectedSection,
   iconRight,
-  tone
+  tone,
+  onClick
 }: {
   iconRight?: React.ReactNode;
   text: string;
@@ -21,6 +22,7 @@ export const DesktopNavItem = ({
   isMenuOpen: boolean;
   isExternal?: boolean;
   setSelectedSection: (section: string) => void;
+  onClick?: () => void;
 }) => {
   const [isItemHovered, setIsItemHovered] = useState(false);
   const LinkComponent = isExternal ? ExternalLink : InternalLink;
@@ -39,6 +41,7 @@ export const DesktopNavItem = ({
       <LinkComponent
         href={link}
         className={`${isOverDarkBg ? 'text-white hover:text-white' : 'text-black hover:text-black'}`}
+        onClick={onClick}
       >
         <div className="flex h-10 items-center space-x-2">
           <Text variant="ui-small" className="inline-block whitespace-nowrap">

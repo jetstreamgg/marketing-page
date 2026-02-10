@@ -11,6 +11,7 @@ import { BP, useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { InternalLink } from './InternalLink';
 import { ArrowRight } from '@/app/components/icons/ArrowRight';
 import { ExternalLink } from './ExternalLink';
+import { useMarketingAnalytics, featureIdToCTAType } from '../hooks/useMarketingAnalytics';
 
 export const FeatureCard = ({
   title,
@@ -53,6 +54,8 @@ export const FeatureCard = ({
 }) => {
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
   const { state, setState, setIsHover } = useAutoClose({ delay: 60000 });
+  const { trackCTAClick } = useMarketingAnalytics();
+
   const defaultSizes: { [key: number]: number[]; default: number[] } = {
     [BP.sm]: [200, 200],
     [BP.md]: [264, 264],
@@ -134,7 +137,18 @@ export const FeatureCard = ({
           onClick={() => setState(state === 'open' ? 'close' : 'open')}
         />
         {buttonText && (
-          <ExternalLink href={href}>
+          <ExternalLink
+            href={href}
+            onClick={() => {
+              const ctaType = featureIdToCTAType[featurePageId];
+              if (ctaType) {
+                const widgetParam = href.includes('widget=')
+                  ? href.split('widget=')[1]?.split('&')[0]
+                  : undefined;
+                trackCTAClick(ctaType, href, widgetParam);
+              }
+            }}
+          >
             <ButtonArrow variant={buttonVariant}>{buttonText}</ButtonArrow>
           </ExternalLink>
         )}

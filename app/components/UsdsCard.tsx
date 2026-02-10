@@ -1,6 +1,6 @@
 import { TokenCard } from './TokenCard';
 import { Text } from './Typography';
-import { ButtonArrow, ButtonPlus } from './ui/button';
+import { ButtonArrow } from './ui/button';
 import { Link } from './ui/link';
 import CoinUsds from '@/public/coin_usds.png';
 import { useState } from 'react';
@@ -9,10 +9,12 @@ import DaiToUsds from '@/public/dai_to_usds.png';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { useSkyUrl } from '../hooks/useSkyUrl';
 import { ExternalLink } from './ExternalLink';
+import { useMarketingAnalytics, CTAType } from '../hooks/useMarketingAnalytics';
 
 export const UsdsCard = ({ data }: { data: FetchedData }) => {
   const [open, setOpen] = useState(false);
   const { url } = useSkyUrl('/?widget=upgrade&source_token=DAI');
+  const { trackCTAClick } = useMarketingAnalytics();
 
   return (
     <>
@@ -35,7 +37,12 @@ export const UsdsCard = ({ data }: { data: FetchedData }) => {
             <ButtonArrow variant="sunset-2" size="sm" onClick={() => setOpen(true)}>
               Learn More
             </ButtonArrow>
-            <Link href={url} icon="arrowNoBg" target="_blank">
+            <Link
+              href={url}
+              icon="arrowNoBg"
+              target="_blank"
+              onClick={() => trackCTAClick(CTAType.TokenUpgradeUsds, url, 'upgrade')}
+            >
               Get USDS
             </Link>
           </>
@@ -86,7 +93,11 @@ export const UsdsCard = ({ data }: { data: FetchedData }) => {
         }
         href="#"
         footer={
-          <ExternalLink href={url} noStyle>
+          <ExternalLink
+            href={url}
+            noStyle
+            onClick={() => trackCTAClick(CTAType.TokenUpgradeUsds, url, 'upgrade')}
+          >
             <ButtonArrow variant="sunset-1" size="sm">
               Get USDS
             </ButtonArrow>
