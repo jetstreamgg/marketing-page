@@ -42,12 +42,12 @@ const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 
-// Check consent before init to determine initialization strategy.
-// Read localStorage synchronously before posthog.init() to avoid the timing issue
-// where the first $pageview fires before the loaded callback can restore consent.
-const storedConsent = typeof window !== 'undefined' ? localStorage.getItem(CONSENT_STORAGE_KEY) : null;
-const hasAccepted = storedConsent === 'accepted';
-const hasRejected = storedConsent === 'rejected';
+let hasInitializedPostHog = false;
+
+function getStoredConsent() {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(CONSENT_STORAGE_KEY);
+}
 
 // CONSENT-BASED INITIALIZATION
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
@@ -59,7 +59,19 @@ const hasRejected = storedConsent === 'rejected';
 // an explicit opt_out_capturing() call — opt_out_capturing_by_default doesn't trigger it.
 // Using 'always' guarantees cookieless tracking from the first event for pending users.
 // The CookieConsentBanner switches the mode via set_config() when the user makes a choice.
-if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejected) {
+export function initializePostHogIfNeeded(forceAccepted = false) {
+  if (typeof window === 'undefined' || !POSTHOG_ENABLED || !POSTHOG_KEY || hasInitializedPostHog) {
+    return;
+  }
+
+  const storedConsent = getStoredConsent();
+  const hasAccepted = forceAccepted || storedConsent === 'accepted';
+  const hasRejected = storedConsent === 'rejected';
+
+  if (hasRejected && !forceAccepted) {
+    return;
+  }
+
   posthog.init(POSTHOG_KEY, {
     api_host: POSTHOG_HOST,
 
@@ -122,7 +134,12 @@ if (typeof window !== 'undefined' && POSTHOG_ENABLED && POSTHOG_KEY && !hasRejec
       }
     }
   });
+
+  hasInitializedPostHog = true;
 }
+
+// Initialize immediately unless this visitor has explicitly rejected.
+initializePostHogIfNeeded();
 
 /**
  * PostHogProvider - Wraps app with PostHog context

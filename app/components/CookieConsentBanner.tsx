@@ -7,6 +7,7 @@ import { useCookieConsent } from '../context/CookieConsentContext';
 import { ExternalLink } from './ExternalLink';
 import { Text } from './Typography';
 import { getFooterLinks } from '../lib/utils';
+import { initializePostHogIfNeeded } from '../providers/PostHogProvider';
 
 export function CookieConsentBanner() {
   const { consent, bannerVisible, setConsent } = useCookieConsent();
@@ -24,6 +25,9 @@ export function CookieConsentBanner() {
   }, []);
 
   const handleAccept = useCallback(() => {
+    // Re-enable analytics immediately for users who switch from rejected -> accepted
+    // without requiring a page reload.
+    initializePostHogIfNeeded(true);
     setConsent('accepted');
     // Disable cookieless mode and switch to full persistent tracking.
     posthog?.set_config({ cookieless_mode: undefined });
