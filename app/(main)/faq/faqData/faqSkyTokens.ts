@@ -62,22 +62,19 @@ USDS is also available on networks other than Ethereum Mainnet, including Solana
   {
     question: 'How can I use USDS?',
     answer:
-      'Like other decentralized stablecoins, USDS is freely transferable and can be used in connection with any software protocol or platform that supports it. Unlike other stablecoins, you can use USDS to participate in the Sky Savings Rate to accumulate additional USDS over time, and to access Sky Token Rewards, without giving up control of your digital assets.',
+      'USDS is freely transferable and is used across onchain markets and supported applications. It can also be supplied into the Sky Savings Rate module to accumulate additional USDS, and to the Sky Token Rewards module to receive rewards determined by protocol mechanisms and Sky Ecosystem Governance. Using USDS in these ways supports a broader ecosystem strategy focused on scaling USDS usage through deep liquidity and expanded sources of protocol revenue that support these modules.',
     categories: ['Sky Tokens']
   },
   {
     question: 'How do USDS and DAI maintain stability and benefit the ecosystem?',
-    answer: `Overcollateralization and other mechanisms help USDS maintain stability while also supporting system stability and risk management.
+    answer: `USDS and DAI are designed to stay close to the value of the U.S. dollar, but they are not guaranteed to always equal exactly $1. Their stability comes from a combination of (1) system design choices such as collateralization; and (2) protocol mechanisms that help manage market supply and demand.
 
-Overcollateralization means that the total value of the collateral that backs a specific stablecoin must always be higher than the aggregate value of all of those stablecoins in circulation.
+A key stability tool is the Peg Stability Module (PSM). PSMs allow predictable-rate, non-custodial conversions between certain stablecoins and USDS or DAI. By creating a clear path for conversion at a known rate, PSMs can support liquidity and make it easier for market participants to push prices back toward the target range when they drift.
+Sky Protocol also uses liquidity and buffer mechanisms to support resilience. For example, when the Surplus Buffer reaches governance-set thresholds, protocol surplus can be used by automated mechanisms that add liquidity and strengthen system buffers.
 
-Other mechanisms of the decentralized Sky Protocol that are used to keep USDS stable are Peg Stability Modules (PSMs) and the Smart Burn Engine (SBE):
+These stability features benefit the broader Sky Ecosystem by making USDS and DAI more usable across many contexts. When a stable, widely usable asset exists, it can help support onchain activity such as trading, payments, integrations with other protocols, and participation in Sky Protocol modules.
 
-• **Peg Stability Modules (PSMs).** Peg Stability Modules (PSMs) are smart contracts that allow users to convert certain stablecoins directly with the Sky Protocol for USDS or DAI at a fixed rate and with relatively low fees; however, blockchain (gas) fees may apply. Unlike decentralized exchange (DEX) transactions, PSM operations do not involve trading between users. Instead, they are direct, non-custodial conversions (generate and burn) executed with the decentralized smart contracts of the Sky Protocol.
-
-• **The Smart Burn Engine (SBE).** The Smart Burn Engine is a smart contract that programmatically acquires SKY on the DeFi markets and deposits it into Sky Protocol-owned USDS/SKY liquidity pools using Sky Protocol surplus once the Surplus Buffer has hit a certain threshold set by Sky Ecosystem Governance. Depositing SKY into these pools improves token liquidity and also increases the capital buffers of the Sky Protocol. Note that the SBE no longer holds DAI and MKR. and it no longer buys MKR.
-
-Importantly, the [Sky Ecosystem Dashboard](https://info.sky.money/) allows anyone to examine the health of the decentralized Sky Protocol in real time.
+Importantly, the [Sky Ecosystem Dashboard](https://info.sky.money/), designed by [Block Analitica](https://blockanalitica.com/), allows anyone to examine the health of the decentralized Sky Protocol in real time. Users can view the total value locked (TVL) in the Protocol, TVL in the Sky Savings Rate module, TVL in the Sky Token Rewards module, the total collateral backing the system, estimated annual profits, and much more. For more on the Dashboard, see this [Substack post](https://blockanalitica.substack.com/p/the-sky-risk-and-analytics-dashboard) by Block Analitica.
 
 For details on the risks associated with soft-pegged stablecoins, review the [User Risk Documentation](https://docs.sky.money/user-risks).`,
     categories: ['Sky Tokens']

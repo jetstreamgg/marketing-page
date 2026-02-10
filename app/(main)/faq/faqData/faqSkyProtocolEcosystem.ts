@@ -93,15 +93,15 @@ For a deeper dive into the facets and checks and balances of governance, please 
   },
   {
     question: 'Explain Peg Stability Modules, how they work, and their advantages?',
-    answer: `Peg Stability Modules (PSMs) are smart contracts that allow users to convert certain stablecoins directly with the Sky Protocol for USDS or DAI at a fixed rate and with relatively low fees. They are designed to maintain the stability of USDS and DAI. Unlike decentralized exchange (DEX) transactions, PSM operations do not involve trading between users. Instead, they are direct, non-custodial conversions (generate and burn) executed with the decentralized smart contracts of the Sky Protocol.
-
-Through PSMs, USDS or DAI is obtained via predictable-rate conversion (typically a 1:1 ratio with certain stablecoins, or, in the case of sUSDS, for an amount reflecting its current price) rather than through borrowing. For example, given the existence of a USDC-backed PSM, a user could supply 100 USDC stablecoins to generate 100 USDS or 100 DAI (minus fees), without taking on any debt. Given that PSM operations are facilitated on the Sky Protocol directly and not on a DEX, price slippage (i.e., the difference between the expected price of a token and the actual price when traded) is not a concern. Zero Sky Protocol fees and no slippage are among the functional advantages of using a PSM, which adds liquidity to the assets backing the PSM. That liquidity helps to keep the value of USDS and DAI stable.
-
-A PSM can only hold an asset that is pegged to the same asset as DAI or USDS because it offers 1-to-1 conversions. A PSM with a non-stable asset would become undercollateralized as soon as the market price of that non-stable asset decreased.
-
-The amount of conversions a PSM can offer is limited by its debt ceiling and the total current amount of collateral tokens supplied to it.
+    answer: `Peg Stability Modules (PSMs) are smart contracts that let users convert supported stablecoins directly with the Sky Protocol into USDS or DAI at a predictable rate. Because conversions happen directly with the protocol (not by trading against other users), PSMs are designed to support reliable liquidity and help USDS and DAI maintain stability. A practical advantage is that PSM conversions can avoid the slippage common in market-based swaps, which can make stablecoin entry and exit more predictable. PSMs are governed by parameters that limit how much can be converted at a time, based on available collateral and risk controls set through decentralized governance.
 
 For more information, review the [Sky Atlas](https://sky-atlas.io/).`,
+    categories: ['Sky Protocol & Ecosystem']
+  },
+  {
+    question: 'What is the SP-Beam, and how does it work?',
+    answer:
+      'SP-BEAM is a Sky Protocol module that enables bounded updates to specific protocol parameters. Sky Ecosystem Governance can authorize a parameter (for example, the Sky Savings Rate) to be adjustable within a defined minimum, maximum, and step size, and SP-BEAM then enforces those limits on any updates. This helps keep parameter changes deterministic and governed through community-driven processes.',
     categories: ['Sky Protocol & Ecosystem']
   },
   {

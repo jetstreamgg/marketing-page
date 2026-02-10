@@ -2,6 +2,45 @@ import type { FAQItem } from './types';
 
 export const skyAgentFrameworkAndStars: FAQItem[] = [
   {
+    question: 'What is the Sky Agent Framework?',
+    answer: `The Sky Agent Framework balances risk and growth by enabling builders and institutions to create stablecoin projects powered by Sky. The Agent Framework unlocks Sky Protocol core features; the operational and governance tools needed to create and support Sky Agents and Institutional Primes and most important, Sky's economic scale, including the scale of USDS stablecoin liquidity.  Through the Agent Framework, Sky can generate profits much more efficiently and free from politics and shared resource constraints, as it does not require massive overhead and does not need to directly manage complex operations. 
+
+### **Star Agents**
+Star Agents, informally called Stars, are autonomous and independent decentralized projects within Sky Ecosystem, designed to enable focused, fast-moving innovation and development. They primarily build products that help grow USDS adoption or use in DeFi transactions, while also allocating USDS collateral into their own product and the broader DeFi and tokenized asset economy. 
+
+Stars are created by their founders, who define the strategy and operating processes of the Star while also specifying the business logic and innovation goals for the Star. Sky Ecosystem acts as a decentralized platform that provides the governance tools and infrastructure for Star growth and operation.  
+
+Each Star has access to Sky Primitives, the modular building blocks behind all Star interactions with Sky and the [Sky Atlas](https://sky-atlas.io/), and is free to have its own governance processes and community, treasury, and governance token. The operations of each Star are governed through its Star Artifact—a document that contains all rules, processes, parameters, and information relevant to the Star. The system is similar to the overall governance framework of Sky, which is based on the Sky Atlas (also an Artifact, but much larger). All Star Artifacts live inside the Sky Atlas as subcomponents.
+
+Stars are very special types of Agents. There will only ever be a maximum of seven Stars, and each will be able to have their tokens freely traded for at least 2-3 years, and possibly longer. The exclusive ability to have a freely traded crypto token will provide the seven Stars with an edge in distribution and community building.
+
+### **Institutional Primes**
+Institutional Primes are Agents that might work alongside Stars to further clarify and enhance the unique features of Stars. All proposals are discussed in the [Sky Forum](https://forum.sky.money/). Outcomes are determined by the Sky Ecosystem Governance community through the governance process as described in the [Sky Atlas](https://sky-atlas.io/).
+
+Institutional Primes would be similar to Stars, but with a key difference that accommodates regulated financial companies that prefer complete clarity on their counterparties and cap table participants. An Institutional Prime will be able to restrict who can hold their tokens to an Institutional Network (i.e., a scalable, modular and decentralized KYC system native to Sky).
+
+Driving the introduction of this new concept is the belief that the next leg of growth for Sky will be driven by institutional adoption.`,
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'What is the Sky Agent Network?',
+    answer:
+      'The Sky Agent Network is the ecosystem-wide set of independent Agents that use shared Sky infrastructure to perform specialized roles. Agents can build user-facing products, manage operational workflows, or deploy capital using approved mechanisms, all while remaining autonomous and independently operated. This network is designed to support Sky Ecosystem growth by distributing specialization across multiple teams and strategies, rather than relying on a single centralized operator.',
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'How does the Sky Agent Network relate to USDS utility in the ecosystem?',
+    answer:
+      'USDS utility increases as more independent Sky Agents build products and mechanisms that use USDS as the core stablecoin. In practice, this network can expand the ways USDS is used (e.g., through new applications, integrations, and capital deployment strategies) while still relying on shared protocol primitives, such as stablecoin conversion infrastructure and governance-controlled parameters. This ecosystem structure is intended to strengthen USDS usefulness by pairing broad liquidity access with multiple independent sources of protocol revenue that can support rewards mechanisms, such as the Sky Savings Rate.',
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'How does the Sky Agent Framework provide the keys to scaling Sky Ecosystem?',
+    answer:
+      'The Sky Agent Framework is designed to help the ecosystem scale by enabling independent teams to build specialized projects powered by Sky, while still using shared core infrastructure. It provides standardized access to key Sky Protocol features, plus governance and operational tooling that supports the creation and ongoing operation of Agents. This structure is intended to expand what the ecosystem can do without requiring a single centralized organization to run every strategy or operational process. By leveraging shared USDS liquidity and modular “building blocks,” Agents can pursue focused innovation while Sky governance retains system-level oversight through defined, transparent processes.',
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
     question: 'What are Sky Star Agents?',
     answer: `Sky Star Agents, informally called Stars, are autonomous and independent decentralized projects within Sky Ecosystem, designed to enable focused, fast-moving innovation and development. They are created by their founders, who define the strategy and operating processes of the Star while also specifying the business logic and innovation goals for the Star. Sky Ecosystem acts as a decentralized platform that provides the governance tools and infrastructure for Star growth and operation.
 
