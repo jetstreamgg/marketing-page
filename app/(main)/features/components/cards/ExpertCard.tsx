@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FeaturesPageCard, TextFeatureCard } from '../FeaturesPageCard';
-import ProductsStUSDS from '@/public/features_stUSDS_desktop.png';
-import ProductsStUSDSMobile from '@/public/features_stUSDS_mobile.png';
+import ProductsExpert from '@/public/features_expert.png';
+import ProductsExpertMobile from '@/public/features_expert_mobile.png';
 import { useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
 import { FetchedData } from '@/app/(main)/fetchData';
 import { PopoverInfo } from '@/app/components/PopoverInfo';
@@ -15,29 +15,21 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
       id="expert"
       tabs={[
         {
-          title: 'Access stUSDS tokens with USDS',
+          title: 'Access Expert Rewards with USDS',
           content: (
             <>
               <TextFeatureCard>
-                stUSDS is a risk token designed for eligible Sky Protocol expert users. It funds and supports
-                liquidity for SKY stakers, encouraging more participation in SKY governance by active token
-                holders, delegators and voters, leading to a more secure ecosystem.
+                Expert modules unlock advanced functionality tailored to experienced users.
               </TextFeatureCard>
               <TextFeatureCard>
-                When you supply USDS to the stUSDS module of the protocol, you fund SKY-backed borrowing to
-                access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
-                tokens serve as a digital record of your USDS interaction with the stUSDS module and any value
-                accrued to your position. For details, see{' '}
-                <Link className="hover:underline hover:underline-offset-4" href="/faq">
-                  &quot;What is stUSDS?&quot;
-                </Link>{' '}
-                In the FAQs.
+                They include products like stUSDS and the Morpho vault, which use USDS to support liquidity,
+                enable advanced yield strategies, and expand participation across the Sky ecosystem.
               </TextFeatureCard>
             </>
           ),
           stats: [
-            { id: 'rate', label: 'stUSDS Rate', value: data.stusdsApy },
-            { id: 'tvl', label: 'stUSDS TVL', value: data.stusdsTvl }
+            { id: 'rate', label: 'Expert Rates up to:', value: data.stusdsApy },
+            { id: 'tvl', label: 'Expert TVL', value: data.stusdsTvl }
           ],
           buttonCta: 'Access stUSDS Rewards',
           url: `?widget=expert`,
@@ -49,7 +41,7 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
                 <Image
                   alt="Stusds module"
                   placeholder="blur"
-                  src={bpi === 0 ? ProductsStUSDSMobile : ProductsStUSDS}
+                  src={bpi === 0 ? ProductsExpertMobile : ProductsExpert}
                   className="absolute top-1/2 h-auto w-full -translate-y-1/2 rounded-[20px] tablet:left-0 tablet:top-full tablet:translate-x-8 tablet:translate-y-[calc(-100%+92px)] tablet:rounded-r-none tablet:rounded-bl-none desktop:static desktop:top-auto desktop:translate-x-10 desktop:translate-y-10 desktop:rounded-tl-[40px]"
                   quality={100}
                 />
