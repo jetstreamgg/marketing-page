@@ -27,12 +27,20 @@ export function CookieConsentBanner() {
   // Local toggle state for the manage view
   const [toggles, setToggles] = useState<ServiceConsent>(() => consent ?? allServices(true));
 
-  // Track previous bannerVisible to sync toggles when banner reopens (no useEffect needed)
+  // Sync toggles when banner reopens OR consent changes while banner is open
+  // (e.g. user changed consent on another subdomain and switched back to this tab)
   const prevVisibleRef = useRef(bannerVisible);
-  if (bannerVisible && !prevVisibleRef.current) {
-    // Banner just became visible — sync toggles from current consent
+  const prevConsentRef = useRef(consent);
+
+  const bannerJustOpened = bannerVisible && !prevVisibleRef.current;
+  const consentChangedWhileOpen =
+    bannerVisible &&
+    (consent?.posthog !== prevConsentRef.current?.posthog ||
+      consent?.cookie3 !== prevConsentRef.current?.cookie3 ||
+      consent?.google_analytics !== prevConsentRef.current?.google_analytics);
+
+  if (bannerJustOpened || consentChangedWhileOpen) {
     const synced = consent ?? allServices(true);
-    // Only update if different to avoid unnecessary re-renders
     if (
       synced.posthog !== toggles.posthog ||
       synced.cookie3 !== toggles.cookie3 ||
@@ -42,6 +50,7 @@ export function CookieConsentBanner() {
     }
   }
   prevVisibleRef.current = bannerVisible;
+  prevConsentRef.current = consent;
 
   const privacyLink = useMemo(() => {
     return getFooterLinks().find(l => /privacy/i.test(l.name));

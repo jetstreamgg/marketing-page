@@ -36,7 +36,7 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
-import { getStoredConsent, hasPostHogCrossDomainCookie } from '../lib/consentStorage';
+import { getStoredConsent, saveConsent } from '../lib/consentStorage';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -45,6 +45,8 @@ const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 let hasInitializedPostHog = false;
 
 // CONSENT-BASED INITIALIZATION
+// Consent is stored in the cross-subdomain sky_consent cookie (shared across *.sky.money).
+//
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
 // - Pending users: Cookieless anonymous tracking via server-side hash (cookieless_mode: 'always').
 // - Accepted users: Full persistent tracking from the first $pageview.
@@ -60,15 +62,8 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
   }
 
   const consent = getStoredConsent();
-  const inheritedCookie = hasPostHogCrossDomainCookie();
-  const hasAccepted = forceAccepted || consent?.posthog === true || inheritedCookie;
+  const hasAccepted = forceAccepted || consent?.posthog === true;
   const hasRejected = consent?.posthog === false;
-
-  if (inheritedCookie) {
-    console.log('[PostHog] Inherited cross-subdomain cookie from app.sky.money, skipping consent banner');
-  } else {
-    console.log('[PostHog] No cross-subdomain cookie found');
-  }
 
   if (hasRejected && !forceAccepted) {
     return;
@@ -147,6 +142,7 @@ initializePostHogIfNeeded();
  * Apply a consent change at runtime.
  * Handles the cookieless → full tracking transition (and vice versa)
  * using the global posthog singleton directly.
+ * Consent is written to the cross-subdomain sky_consent cookie via saveConsent().
  */
 export function applyPostHogConsent(enabled: boolean) {
   if (enabled) {
@@ -160,10 +156,6 @@ export function applyPostHogConsent(enabled: boolean) {
     posthog.reset();
     posthog.opt_in_capturing();
     posthog.register({ app_name: 'marketing' });
-    // Force persistence flush so the cross-subdomain cookie is written immediately.
-    // Without this, the cookie isn't written until the next capture() call or page reload,
-    // which breaks cross-subdomain detection if the user navigates to app.sky.money before that.
-    posthog.capture('marketing_consent_granted');
   } else {
     if (!hasInitializedPostHog) return;
     posthog.set_config({ cookieless_mode: undefined });
