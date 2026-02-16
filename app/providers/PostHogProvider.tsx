@@ -36,7 +36,7 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
-import { getStoredConsent } from '../lib/consentStorage';
+import { getStoredConsent, hasPostHogCrossDomainCookie } from '../lib/consentStorage';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -60,8 +60,15 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
   }
 
   const consent = getStoredConsent();
-  const hasAccepted = forceAccepted || consent?.posthog === true;
+  const inheritedCookie = hasPostHogCrossDomainCookie();
+  const hasAccepted = forceAccepted || consent?.posthog === true || inheritedCookie;
   const hasRejected = consent?.posthog === false;
+
+  if (inheritedCookie) {
+    console.log('[PostHog] Inherited cross-subdomain cookie from app.sky.money, skipping consent banner');
+  } else {
+    console.log('[PostHog] No cross-subdomain cookie found');
+  }
 
   if (hasRejected && !forceAccepted) {
     return;

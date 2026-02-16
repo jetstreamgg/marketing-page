@@ -2,7 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useState, type ReactNode } from 'react';
 import type { ServiceConsent } from '../constants';
-import { getStoredConsent, saveConsent } from '../lib/consentStorage';
+import { getStoredConsent, hasPostHogCrossDomainCookie, saveConsent } from '../lib/consentStorage';
 
 export type BannerView = 'default' | 'manage';
 
@@ -20,7 +20,12 @@ const CookieConsentContext = createContext<CookieConsentContextProps | undefined
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsentState] = useState<ServiceConsent | null>(getStoredConsent);
-  const [bannerVisible, setBannerVisible] = useState(() => getStoredConsent() === null);
+  const [bannerVisible, setBannerVisible] = useState(() => {
+    // Don't show banner if consent exists or if inherited cookie from app subdomain
+    if (getStoredConsent() !== null) return false;
+    if (hasPostHogCrossDomainCookie()) return false;
+    return true;
+  });
   const [bannerView, setBannerView] = useState<BannerView>('default');
 
   const setConsent = useCallback((newConsent: ServiceConsent) => {

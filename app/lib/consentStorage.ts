@@ -5,6 +5,15 @@ function allServices(value: boolean): ServiceConsent {
 }
 
 /**
+ * Check for a PostHog cross-domain cookie set on `.sky.money`.
+ * If found, the user already consented on another subdomain (e.g. app.sky.money).
+ */
+export function hasPostHogCrossDomainCookie(): boolean {
+  if (typeof document === 'undefined') return false;
+  return document.cookie.split(';').some(c => c.trim().startsWith('ph_') && c.includes('_posthog'));
+}
+
+/**
  * Read granular consent from localStorage.
  * Falls back to migrating the legacy v1 string key if v2 is absent.
  * Returns null when no consent has been recorded (pending state).
