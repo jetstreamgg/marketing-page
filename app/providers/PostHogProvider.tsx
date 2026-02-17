@@ -99,8 +99,7 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
     // Requires "Cookieless server hash mode" enabled in PostHog project settings.
     cookieless_mode: hasAccepted ? undefined : 'always',
 
-    // AUTOCAPTURE DISABLED — manual events only via useMarketingAnalytics hook.
-    autocapture: false,
+    autocapture: true,
 
     // SESSION REPLAY DISABLED — requires explicit consent.
     disable_session_recording: true,
