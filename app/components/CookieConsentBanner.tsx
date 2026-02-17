@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type ServiceConsent, type ServiceId } from '../constants';
 import { useCookieConsent } from '../context/CookieConsentContext';
 import { applyPostHogConsent } from '../providers/PostHogProvider';
@@ -27,12 +27,20 @@ export function CookieConsentBanner() {
   // Local toggle state for the manage view
   const [toggles, setToggles] = useState<ServiceConsent>(() => consent ?? allServices(true));
 
-  // Track previous bannerVisible to sync toggles when banner reopens (no useEffect needed)
+  // Sync toggles when banner reopens OR consent changes while banner is open
+  // (e.g. user changed consent on another subdomain and switched back to this tab)
   const prevVisibleRef = useRef(bannerVisible);
-  if (bannerVisible && !prevVisibleRef.current) {
-    // Banner just became visible — sync toggles from current consent
+  const prevConsentRef = useRef(consent);
+
+  const bannerJustOpened = bannerVisible && !prevVisibleRef.current;
+  const consentChangedWhileOpen =
+    bannerVisible &&
+    (consent?.posthog !== prevConsentRef.current?.posthog ||
+      consent?.cookie3 !== prevConsentRef.current?.cookie3 ||
+      consent?.google_analytics !== prevConsentRef.current?.google_analytics);
+
+  if (bannerJustOpened || consentChangedWhileOpen) {
     const synced = consent ?? allServices(true);
-    // Only update if different to avoid unnecessary re-renders
     if (
       synced.posthog !== toggles.posthog ||
       synced.cookie3 !== toggles.cookie3 ||
@@ -42,17 +50,16 @@ export function CookieConsentBanner() {
     }
   }
   prevVisibleRef.current = bannerVisible;
+  prevConsentRef.current = consent;
 
   const privacyLink = useMemo(() => {
     return getFooterLinks().find(l => /privacy/i.test(l.name));
   }, []);
 
-  // Start the 3.5s delay timer via ref to avoid useEffect for a simple timer
-  const timerStartedRef = useRef(false);
-  if (typeof window !== 'undefined' && !timerStartedRef.current) {
-    timerStartedRef.current = true;
-    setTimeout(() => setDelayComplete(true), 3_500);
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => setDelayComplete(true), 3_500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const applyConsent = useCallback(
     (newConsent: ServiceConsent) => {

@@ -36,7 +36,7 @@
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { type ReactNode } from 'react';
-import { getStoredConsent } from '../lib/consentStorage';
+import { getStoredConsent, saveConsent } from '../lib/consentStorage';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -45,6 +45,8 @@ const POSTHOG_ENABLED = process.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 let hasInitializedPostHog = false;
 
 // CONSENT-BASED INITIALIZATION
+// Consent is stored in the cross-subdomain sky_consent cookie (shared across *.sky.money).
+//
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
 // - Pending users: Cookieless anonymous tracking via server-side hash (cookieless_mode: 'always').
 // - Accepted users: Full persistent tracking from the first $pageview.
@@ -140,6 +142,7 @@ initializePostHogIfNeeded();
  * Apply a consent change at runtime.
  * Handles the cookieless → full tracking transition (and vice versa)
  * using the global posthog singleton directly.
+ * Consent is written to the cross-subdomain sky_consent cookie via saveConsent().
  */
 export function applyPostHogConsent(enabled: boolean) {
   if (enabled) {
