@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type ServiceConsent, type ServiceId } from '../constants';
 import { useCookieConsent } from '../context/CookieConsentContext';
 import { applyPostHogConsent } from '../providers/PostHogProvider';
@@ -56,12 +56,10 @@ export function CookieConsentBanner() {
     return getFooterLinks().find(l => /privacy/i.test(l.name));
   }, []);
 
-  // Start the 3.5s delay timer via ref to avoid useEffect for a simple timer
-  const timerStartedRef = useRef(false);
-  if (typeof window !== 'undefined' && !timerStartedRef.current) {
-    timerStartedRef.current = true;
-    setTimeout(() => setDelayComplete(true), 3_500);
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => setDelayComplete(true), 3_500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const applyConsent = useCallback(
     (newConsent: ServiceConsent) => {
