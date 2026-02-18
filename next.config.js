@@ -19,8 +19,8 @@ const cspHeader = `
       https://*.ingest.sentry.io
       https://*.markfi.xyz
       https://*.posthog.com;
-    style-src 'self' https://vercel.live 'unsafe-inline';
-    img-src 'self' data: blob: https://vercel.live https://vercel.com;
+    style-src 'self' https://vercel.live https://*.posthog.com 'unsafe-inline';
+    img-src 'self' data: blob: https://vercel.live https://vercel.com https://*.posthog.com;
     font-src 'self' https://vercel.live https://assets.vercel.com;
     object-src 'none';
     base-uri 'self';
