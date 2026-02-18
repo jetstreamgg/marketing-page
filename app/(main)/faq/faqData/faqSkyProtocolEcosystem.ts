@@ -164,7 +164,7 @@ The Sky Protocol features several tokens—USDS, DAI, sUSDS, stUSDS, SKY and MKR
   },
   {
     question: 'What is the Surplus Buffer?',
-    answer: `The Surplus Buffer is a reserve within the decentralized Sky Protocol where all the USDS revenue earned by the Protocol from fees collected by users are accrued. 
+    answer: `The Surplus Buffer is a reserve within the decentralized Sky Protocol where all the USDS revenue earned by the Protocol from fees collected by users are accrued.
 
 Once the Surplus Buffer reaches a threshold set by Sky Ecosystem Governance, the surplus can be used for protocol-aligned purposes, such as strengthening capital reserves or activating mechanisms like the Smart Burn Engine (SBE). The SBE may use part of the accumulated surplus to acquire SKY on the open market and deposit it into Sky Protocol-owned liquidity pools, which helps to deepen liquidity and support the overall resilience of Sky Ecosystem.
 
