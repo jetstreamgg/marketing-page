@@ -6,15 +6,17 @@ export const skyAgentFrameworkAndStars: FAQItem[] = [
     answer: `The Sky Agent Framework balances risk and growth by enabling builders and institutions to create stablecoin projects powered by Sky. The Agent Framework unlocks Sky Protocol core features; the operational and governance tools needed to create and support Sky Agents and Institutional Primes and most important, Sky's economic scale, including the scale of USDS stablecoin liquidity. Through the Agent Framework, Sky can generate profits much more efficiently and free from politics and shared resource constraints, as it does not require massive overhead and does not need to directly manage complex operations. 
 
 ### **Star Agents**
-Star Agents, informally called Stars, are autonomous and independent decentralized projects within Sky Ecosystem, designed to enable focused, fast-moving innovation and development. They primarily build products that help grow USDS adoption or use in DeFi transactions, while also allocating USDS collateral into their own product and the broader DeFi and tokenized asset economy. 
 
-Stars are created by their founders, who define the strategy and operating processes of the Star while also specifying the business logic and innovation goals for the Star. Sky Ecosystem acts as a decentralized platform that provides the governance tools and infrastructure for Star growth and operation.  
+Star Agents, informally called Stars, are autonomous and independent decentralized projects within Sky Ecosystem, designed to enable focused, fast-moving innovation and development. They primarily build products that help grow USDS adoption or use in DeFi transactions, while also allocating USDS collateral into their own product and the broader DeFi and tokenized asset economy.
+
+Stars are created by their founders, who define the strategy and operating processes of the Star while also specifying the business logic and innovation goals for the Star. Sky Ecosystem acts as a decentralized platform that provides the governance tools and infrastructure for Star growth and operation.
 
 Each Star has access to Sky Primitives, the modular building blocks behind all Star interactions with Sky and the [Sky Atlas](https://sky-atlas.io/), and is free to have its own governance processes and community, treasury, and governance token. The operations of each Star are governed through its Star Artifact—a document that contains all rules, processes, parameters, and information relevant to the Star. The system is similar to the overall governance framework of Sky, which is based on the Sky Atlas (also an Artifact, but much larger). All Star Artifacts live inside the Sky Atlas as subcomponents.
 
 Stars are very special types of Agents. There will only ever be a maximum of seven Stars, and each will be able to have their tokens freely traded for at least 2-3 years, and possibly longer. The exclusive ability to have a freely traded crypto token will provide the seven Stars with an edge in distribution and community building.
 
 ### **Institutional Primes**
+
 Institutional Primes are Agents that might work alongside Stars to further clarify and enhance the unique features of Stars. All proposals are discussed in the [Sky Forum](https://forum.sky.money/). Outcomes are determined by the Sky Ecosystem Governance community through the governance process as described in the [Sky Atlas](https://sky-atlas.io/).
 
 Institutional Primes would be similar to Stars, but with a key difference that accommodates regulated financial companies that prefer complete clarity on their counterparties and cap table participants. An Institutional Prime will be able to restrict who can hold their tokens to an Institutional Network (i.e., a scalable, modular and decentralized KYC system native to Sky).
@@ -110,7 +112,33 @@ Some Star Agent Artifacts are high-level, focusing on vision, principles and com
   },
   {
     question: 'What is Grove?',
-    answer: `Grove is a credit infrastructure DeFi project designed to serve as the liquidity engine of decentralized finance. Incubated by [Steakhouse Financial](https://www.steakhouse.financial/) as a Star Agent within the decentralized Sky Ecosystem, Grove enables protocols, crypto-native organizations, and individual users to access institutional-grade yield. 
+    answer: `Grove is a credit infrastructure DeFi project designed to serve as the liquidity engine of decentralized finance. Incubated by [Steakhouse Financial](https://www.steakhouse.financial/) as a Star Agent within the decentralized Sky Ecosystem, Grove enables protocols, crypto-native organizations, and individual users to access institutional-grade yield.
+
+Grove's founding team has facilitated over $5 billion of on-chain capital allocations, brings deep expertise from both traditional and decentralized finance, and is committed to building secure, scalable capital infrastructure for the next era of finance. To learn more, visit [Grove.finance](https://www.grove.finance/) and [Grove on X](https://x.com/grovedotfinance). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'What is Keel?',
+    answer:
+      'Keel is an onchain capital allocator that enables growth and scale for DeFi and tokenized asset markets on Solana. At its core, the Keel Capital Engine, powered by Sky, dynamically leverages, allocates, and rebalances stablecoin capital, creating more liquid and mature DeFi markets and accelerating the growth and adoption of tokenized assets. To learn more, visit [Keel.fi](https://keel.fi/). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.',
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'What is Obex?',
+    answer: `Obex is an Institutional Prime and incubator. It provides teams with support and capital to launch innovative, yield-seeking stablecoin projects on the Sky Protocol. As an incubator, it aims to identify exceptional founders and fund institutional-grade stablecoin projects that generate diversified yield opportunities for the Protocol. Each project developed as part of the Obex incubator will be launched as an independent and decentralized project within the broader Sky Ecosystem. Obex is backed by Framework Ventures, LayerZero, and Sky.
+
+For more information, visit [Obex](https://obex.xyz/) online. Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'Where can I learn more about Spark?',
+    answer:
+      'For a deep dive into Spark.fi, see [Spark Documentation](https://docs.spark.fi/user-guides/spark-liquidity-layer). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.',
+    categories: ['Sky Agent Framework and Stars']
+  },
+  {
+    question: 'What is Grove?',
+    answer: `Grove is an institutional-grade credit infrastructure DeFi project designed to serve as the liquidity engine of decentralized finance. Incubated by [Steakhouse Financial](https://www.steakhouse.financial/) as a Star Agent within the decentralized Sky Ecosystem, Grove enables protocols, crypto-native organizations, and individual users to access institutional-grade yield. 
 
 Grove's founding team has facilitated over $5 billion of on-chain capital allocations, brings deep expertise from both traditional and decentralized finance, and is committed to building secure, scalable capital infrastructure for the next era of finance. To learn more, visit [Grove.finance](https://www.grove.finance/) and [Grove on X](https://x.com/grovedotfinance). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.`,
     categories: ['Sky Agent Framework and Stars']
