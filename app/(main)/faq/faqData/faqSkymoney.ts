@@ -10,32 +10,30 @@ Eligible Sky.money web app users can:
 • **Trade.** Sky Protocol tokens are available to trade on crypto exchanges that list them. Depending on location or other criteria, eligible users of the Sky.money web app can access the non-custodial Sky Protocol to trade Sky tokens on Ethereum Mainnet and select L2s via an API integration with the third-party decentralized exchange (DEX) [CoW Swap](https://swap.cow.fi/#/1/swap/WETH). Please see the [Terms of Use](https://docs.sky.money/legal-terms) for more information on third-party services.
 
 • **Upgrade.** Upgrading enables you to take advantage of the many Sky Ecosystem features.
-
   • Upgrade DAI to USDS 1:1, and revert USDS back to DAI 1:1. Upgrading and reverting are optional, instant, and free; however, you will likely pay gas fees for using the Ethereum blockchain network. That fee is not controlled, imposed or received by Sky.money or the Sky Protocol.
 
   • Upgrade MKR to the SKY token at a rate of 1:24,000 (1 MKR = 24,000 SKY). While MKR will continue to exist, reverting from SKY to MKR via the Sky Protocol is not possible. SKY is the technical and functional evolution of MKR and the sole governance token of the Sky Protocol. SKY inherited the governance functionalities previously held by MKR. For upgrade details and step-by-step upgrade instructions, please visit the [MKR to SKY Upgrade Hub](https://upgrademkrtosky.sky.money).
 
 • **Save.** Supply USDS to the Sky Savings Rate module of the Sky Protocol to access the Sky Savings Rate and accumulate additional USDS over time. No minimum supply amount is required; withdraw at any time.
-
   • When you supply USDS to the Sky Savings Rate module, you receive sUSDS tokens. These sUSDS tokens serve as a digital record of your USDS interaction with the module and any value accrued to your position.
 
   • The Sky Protocol dynamically adds USDS tokens to the pool every few seconds, in accordance with the Sky Savings Rate. As those tokens auto-accumulate in the pool over time, the value of the sUSDS you hold may gradually increase. So, when you choose to redeem your sUSDS for USDS—which you can do at any time—the total USDS you receive will equal the amount originally supplied, plus any rewards accessed.
 
-• **Access Sky Token Rewards.** Supply USDS to the Sky Token Rewards module of the Sky Protocol to access rewards over time. No minimum USDS supply amount is required; withdraw at any time.
+  • You can also supply DAI to the Sky Savings Rate module, which handles the upgrade of DAI to USDS and the deposit in a single transaction.
 
+• **Access Sky Token Rewards.** Supply USDS to the Sky Token Rewards module of the Sky Protocol to access rewards over time. No minimum USDS supply amount is required; withdraw at any time.
   • The amount of Sky Token Rewards you receive is calculated based on your share of the entire pool of USDS tokens supplied to the Sky Token Rewards module by all participants, not on the amount of tokens you supply. This share, and consequently the rate of Sky Token Reward, can fluctuate as the total pool size changes over time. Sky.money does not control the issuance, determination, or distribution of these rewards.
 
   • The USDS stablecoin, as well as the rewards received, are supplied to a smart contract that represents the USDS pool of assets. This means that no intermediary takes custody over your assets.
 
 • **Access Staking Rewards.** Supply SKY tokens to the Staking Engine of the Sky Protocol to create a position, enabling SKY holder access to Staking Rewards, and more:
-
   • **Access Rewards.** Supply SKY tokens to access Staking Rewards. Staking Reward parameters are determined by Sky Ecosystem Governance through the process of decentralized onchain voting.
 
   • **Borrow.** Borrow USDS against your supplied SKY. You can decide to pay back all of your debt, withdraw your staked SKY, and claim some or all of your rewards at any time. Your SKY and claimed rewards are then released from the Staking Engine smart contract back to your connected wallet. The USDS Borrow Rate and debt ceiling are determined by Sky Ecosystem Governance through the process of decentralized onchain voting. Your total debt increases each block according to the Borrow Rate.
 
   • **Delegate.** Transfer the voting power of your supplied SKY tokens to a recognized delegate or a contract that you own. Your chosen delegate can then participate in the Sky Ecosystem Governance voting process on your behalf. You can choose one delegate per position, meaning if you want to entrust your SKY to two different delegates using the Staking Engine, you will need to create two separate positions. You may manage you position(s) at any time.
 
-• **Connect with SkyLink.** SkyLink is Sky Ecosystem’s multichain solution, connecting USDS, SKY and other Sky Ecosystem tokens from the Ethereum Mainnet to other chains and L2 protocols.  
+• **Connect with SkyLink.** SkyLink is Sky Ecosystem’s multichain solution, connecting USDS, SKY and other Sky Ecosystem tokens from the Ethereum Mainnet to other chains and L2 protocols.
 
 With Sky.money, you always remain in control of your supplied assets.`,
     categories: ['Sky.money']

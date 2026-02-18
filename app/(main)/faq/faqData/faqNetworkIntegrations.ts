@@ -36,7 +36,7 @@ Using the Sky.money web app, you can interact with the Peg Stability Module (PSM
 
 On some supported L2s, you can also access the Sky Savings Rate.
 
-SkyLink is Sky Ecosystem’s multichain solution connecting USDS, SKY and other Sky Ecosystem tokens from the Ethereum Mainnet to other chains and L2 protocols. 
+SkyLink is Sky Ecosystem’s multichain solution connecting USDS, SKY and other Sky Ecosystem tokens from the Ethereum Mainnet to other chains and L2 protocols.
 
 Available tokens may evolve over time as new trading pairs are added. Please see the [Terms of Use](https://docs.sky.money/legal-terms) for Sky.money web app access eligibility.`,
     categories: ['Network Integrations']
