@@ -25,9 +25,17 @@ export const RewardsCard = ({ data }: { data: FetchedData }) => {
               </TextFeatureCard>
               <TextFeatureCard>
                 When you supply USDS to the Sky Token Rewards module of the decentralised Sky Protocol, you
-                get Sky Token Rewards over time in the form of SKY governance tokens and Sky Star tokens.
+                get Sky Token Rewards over time in the form of Sky Star tokens.
               </TextFeatureCard>
-              <TextFeatureCard>With Sky.money, you always remain in control of your funds.</TextFeatureCard>
+              <TextFeatureCard>
+                Visit{' '}
+                <ExternalLink href="https://spark.fi/" className="text-black/80 underline">
+                  Spark.fi
+                </ExternalLink>{' '}
+                to see what your SPK rewards can do.
+                <br />
+                With Sky.money, you always remain in control of your funds.
+              </TextFeatureCard>
             </>
           ),
           stats: [
@@ -46,43 +54,6 @@ export const RewardsCard = ({ data }: { data: FetchedData }) => {
                   placeholder="blur"
                   src={bpi === 0 ? FeaturesRewardsMobile : FeaturesRewards}
                   className="absolute left-1/2 h-full w-auto -translate-x-1/2 rounded-[20px] tablet:left-0 tablet:top-full tablet:h-auto tablet:w-full tablet:translate-x-8 tablet:translate-y-[calc(-100%+32px)] tablet:rounded-r-none tablet:rounded-bl-none desktop:static desktop:top-auto desktop:translate-x-10 desktop:translate-y-12 desktop:rounded-tl-[30px]"
-                  quality={100}
-                />
-              </div>
-            </div>
-          ) : null
-        },
-        {
-          label: 'Use Sky Token Rewards',
-          title: 'Use Sky Token Rewards to govern',
-          content: (
-            <>
-              <TextFeatureCard>Sky Token Rewards are powerful yet designed for ease of use.</TextFeatureCard>
-              <TextFeatureCard>
-                Use your SKY rewards to participate directly in Sky ecosystem governance through a system of
-                decentralised onchain voting, or to transfer the voting power of your SKY tokens to a
-                recognized delegate or a contract that you own.
-              </TextFeatureCard>
-              <TextFeatureCard>
-                Visit{' '}
-                <ExternalLink href="https://spark.fi/" className="text-black/80 underline">
-                  Spark.fi
-                </ExternalLink>{' '}
-                to see what your SPK rewards can do.
-              </TextFeatureCard>
-            </>
-          ),
-          buttonCta: 'Access Sky Token Rewards',
-          url: `?widget=rewards`,
-          buttonVariant: 'sunset-2',
-          illustration: !bpiLoading ? (
-            <div className="flex h-full w-full items-center justify-center py-6">
-              <div className="relative h-full w-full">
-                <Image
-                  alt="Use Sky Token Rewards"
-                  src={UseRewards}
-                  fill
-                  className="object-contain"
                   quality={100}
                 />
               </div>
