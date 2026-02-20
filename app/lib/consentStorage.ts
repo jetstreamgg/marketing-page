@@ -146,6 +146,24 @@ export function saveConsent(consent: ServiceConsent): void {
 }
 
 /**
+ * Check whether the consent cookie contains all expected service keys.
+ * Returns false if a new service has been added since the user last consented,
+ * which signals that the consent banner should be re-shown.
+ */
+export function isConsentComplete(): boolean {
+  if (typeof document === 'undefined') return true;
+  const raw = readCookieRaw();
+  if (!raw) return false;
+  try {
+    const data = JSON.parse(decodeURIComponent(raw));
+    if (typeof data !== 'object' || data === null) return false;
+    return 'posthog' in data && 'cookie3' in data && 'google_analytics' in data;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Clear all consent (delete the cookie).
  */
 export function clearConsent(): void {
