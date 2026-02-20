@@ -2,7 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { ServiceConsent } from '../constants';
-import { getStoredConsent, saveConsent } from '../lib/consentStorage';
+import { getStoredConsent, isConsentComplete, saveConsent } from '../lib/consentStorage';
 
 export type BannerView = 'default' | 'manage';
 
@@ -20,7 +20,10 @@ const CookieConsentContext = createContext<CookieConsentContextProps | undefined
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsentState] = useState<ServiceConsent | null>(getStoredConsent);
-  const [bannerVisible, setBannerVisible] = useState(() => getStoredConsent() === null);
+  // Show banner if user has never consented OR if a new service was added since their last consent
+  const [bannerVisible, setBannerVisible] = useState(
+    () => getStoredConsent() === null || !isConsentComplete()
+  );
   const [bannerView, setBannerView] = useState<BannerView>('default');
 
   // Re-read cookie when tab becomes visible (cross-subdomain sync).
