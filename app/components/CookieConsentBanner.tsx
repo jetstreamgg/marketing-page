@@ -13,7 +13,8 @@ type ServiceConfig = { id: ServiceId; label: string; description: string };
 
 const SERVICES: ServiceConfig[] = [
   { id: 'posthog', label: 'PostHog', description: 'Usage analytics' },
-  { id: 'cookie3', label: 'Cookie3', description: 'Web3 marketing analytics' }
+  { id: 'cookie3', label: 'Cookie3', description: 'Web3 marketing analytics' },
+  { id: 'google_analytics', label: 'Google Analytics', description: 'Website analytics' }
 ];
 
 function allServices(value: boolean): ServiceConsent {
@@ -66,9 +67,12 @@ export function CookieConsentBanner() {
       applyPostHogConsent(newConsent.posthog);
       setConsent(newConsent);
 
-      // Third-party scripts (Cookie3) can't be unloaded from memory once executed.
+      // Third-party scripts can't be unloaded from memory once executed.
       // If any were enabled and are now disabled, reload to ensure they stop.
-      if (consent?.cookie3 && !newConsent.cookie3) {
+      if (
+        (consent?.cookie3 && !newConsent.cookie3) ||
+        (consent?.google_analytics && !newConsent.google_analytics)
+      ) {
         window.location.reload();
       }
     },
