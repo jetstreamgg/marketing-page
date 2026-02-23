@@ -1,4 +1,4 @@
-import { Save, Upgrade, Rewards, Trade, Activation, SkyLink, Expert } from '@/app/components/icons';
+import { Save, Upgrade, Rewards, Trade, Activation, SkyLink, Expert, Vaults } from '@/app/components/icons';
 import { UpgradeCard } from './components/cards/UpgradeCard';
 import { TradeCard } from './components/cards/TradeCard';
 import { RewardsCard } from './components/cards/RewardsCard';
@@ -6,6 +6,7 @@ import { SaveCard } from './components/cards/SaveCard';
 import { SkyLinkCard } from './components/cards/SkyLinkCard';
 import { ExpertCard } from './components/cards/ExpertCard';
 import { StakeCard } from './components/cards/StakeCard';
+import { VaultsCard } from './components/cards/VaultsCard';
 
 type Feature = {
   icon: React.ElementType;
@@ -34,6 +35,12 @@ export const existingFeatures: Feature[] = [
     title: 'Rewards',
     card: RewardsCard,
     id: 'rewards'
+  },
+  {
+    icon: Vaults,
+    title: 'Vaults',
+    card: VaultsCard,
+    id: 'vaults'
   },
   {
     icon: Save,

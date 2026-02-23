@@ -152,17 +152,19 @@ export function FeaturesPageCard({
                                         <Text variant="p3" className="pr-2">
                                           {label}
                                         </Text>
-                                        {['rewards', 'savings', 'stake', 'expert'].includes(id) &&
+                                        {['rewards', 'savings', 'stake', 'expert', 'vaults'].includes(id) &&
                                           statId === 'rate' && (
                                             <PopoverInfo
                                               type={
-                                                id === 'savings'
-                                                  ? 'ssr'
-                                                  : id === 'stake'
-                                                    ? 'srr'
-                                                    : id === 'expert'
-                                                      ? 'stusds'
-                                                      : 'str'
+                                                id === 'vaults'
+                                                  ? 'vaults'
+                                                  : id === 'savings'
+                                                    ? 'ssr'
+                                                    : id === 'stake'
+                                                      ? 'srr'
+                                                      : id === 'expert'
+                                                        ? 'stusds'
+                                                        : 'str'
                                               }
                                             />
                                           )}

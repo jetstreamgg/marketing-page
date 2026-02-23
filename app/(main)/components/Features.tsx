@@ -21,6 +21,7 @@ import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
 import { useRandomL2Name } from '@/app/hooks/useRandomL2Name';
 import { useMarketingAnalytics, featureIdToCTAType } from '@/app/hooks/useMarketingAnalytics';
+import { Morpho } from '@/app/components/icons';
 
 const FeatureCardStats = ({
   APY,
@@ -38,7 +39,7 @@ const FeatureCardStats = ({
   shortenedAPYDescription?: string;
   TVLDescription: string;
   className?: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'vaults';
   cardWidth: number;
   isMobile?: boolean;
 }) => {
@@ -92,11 +93,13 @@ const FeatureCardLg = ({
   TVLDescription,
   href,
   reverse = true,
-  isAlpha = false
+  isAlpha = false,
+  headingElement
 }: {
   descriptionElement: React.ReactNode;
   title: string;
   emphasis: string;
+  headingElement?: React.ReactNode;
   postTitle: string;
   postTextElement: React.ReactNode;
   className: string;
@@ -109,7 +112,7 @@ const FeatureCardLg = ({
   featurePageId: string;
   APY: string;
   TVL: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'vaults';
   APYDescription: string;
   TVLDescription: string;
   href: string;
@@ -176,7 +179,9 @@ const FeatureCardLg = ({
       >
         <div className="p-5 tablet:pb-0 tablet:pr-0 tablet:pt-6 desktop:pl-7 desktop:pt-11 desktop-xl:pl-10 desktop-xl:pt-10">
           <div className="mb-3 mr-8 flex flex-row flex-wrap-reverse justify-between">
-            <EmphasisHeading reverse={reverse} text={title} emphasisText={emphasis} tag="h5" />
+            {headingElement || (
+              <EmphasisHeading reverse={reverse} text={title} emphasisText={emphasis} tag="h5" />
+            )}
             {isAlpha && (
               <div style={{ width: 'fit-content' }}>
                 <Text
@@ -192,18 +197,20 @@ const FeatureCardLg = ({
             <div className="flex h-full w-full flex-col justify-between pb-7 tablet:w-1/2 desktop:w-[60%] desktop-xl:w-[50%]">
               <div className="z-10 space-y-3 tablet:mr-7">{descriptionElement}</div>
             </div>
-            <div className="z-0 flex w-full justify-center tablet:absolute tablet:bottom-0 tablet:right-0 tablet:block tablet:w-fit desktop:w-[35%] 2xl:w-fit">
-              <Image
-                src={bpi === BP.sm ? mobileImgSrc : imgSrc}
-                width={
-                  bpiLoading ? 0 : bpi > BP.xl ? imgWidths[2] : bpi > BP.md ? imgWidths[1] : imgWidths[0]
-                }
-                height={
-                  bpiLoading ? 0 : bpi > BP.xl ? imgHeights[2] : bpi > BP.md ? imgHeights[1] : imgHeights[0]
-                }
-                alt=""
-              />
-            </div>
+            {imgSrc && mobileImgSrc && (
+              <div className="z-0 flex w-full justify-center tablet:absolute tablet:bottom-0 tablet:right-0 tablet:block tablet:w-fit desktop:w-[35%] 2xl:w-fit">
+                <Image
+                  src={bpi === BP.sm ? mobileImgSrc : imgSrc}
+                  width={
+                    bpiLoading ? 0 : bpi > BP.xl ? imgWidths[2] : bpi > BP.md ? imgWidths[1] : imgWidths[0]
+                  }
+                  height={
+                    bpiLoading ? 0 : bpi > BP.xl ? imgHeights[2] : bpi > BP.md ? imgHeights[1] : imgHeights[0]
+                  }
+                  alt=""
+                />
+              </div>
+            )}
             <FeatureCardStats
               APY={APY}
               TVL={TVL}
@@ -500,6 +507,49 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           type="str"
           APYDescription="Sky Token Rewards Rates up to:"
           TVLDescription="Sky Token Rewards TVL"
+        />
+        <FeatureCardLg
+          href={`${baseUrl}/?widget=vaults`}
+          descriptionElement={
+            <Text variant="p3">
+              Put your stablecoins (USDS, USDC and USDT) to work through Sky-curated Morpho vaults.
+              <br />
+              <br />
+              Choose from a range of vaults with different market exposure, risk levels, and yields.
+              <br />
+              <br />
+              When you deposit, your stablecoins are allocated to carefully selected lending markets — where
+              borrowers post native Sky protocol tokens or established crypto assets as collateral.
+            </Text>
+          }
+          postTitle="Vaults"
+          postTextElement={
+            <Text variant="p2">
+              Put your stablecoins (USDS, USDC and USDT) to work through Sky-curated Morpho vaults. Choose
+              from a range of vaults with different market exposure, risk levels, and yields. When you
+              deposit, your stablecoins are allocated to carefully selected lending markets — where borrowers
+              post native Sky protocol tokens or established crypto assets as collateral.
+            </Text>
+          }
+          imgSrc=""
+          mobileImgSrc=""
+          buttonVariant="flare-1"
+          buttonText="Access Vaults"
+          emphasis="Vaults"
+          title=""
+          headingElement={
+            <Heading tag="h5">
+              <span className="text-highlightLightBG">Vaults</span>{' '}
+              <Morpho className="mb-1 inline-block rounded-[3px]" width="32" height="32" />
+            </Heading>
+          }
+          className="col-span-1 tablet:col-span-2 desktop:col-span-1"
+          featurePageId="vaults"
+          APY=""
+          TVL=""
+          APYDescription=""
+          TVLDescription=""
+          type="vaults"
         />
         <FeatureCardLg
           href={`${baseUrl}/?widget=stake`}

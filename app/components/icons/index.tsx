@@ -31,3 +31,5 @@ export { Search } from './Search';
 export { Info } from './Info';
 export { Warning } from './Warning';
 export { Expert } from './Expert';
+export { Vaults } from './Vaults';
+export { Morpho } from './Morpho';

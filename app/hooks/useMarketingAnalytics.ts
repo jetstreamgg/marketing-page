@@ -53,6 +53,8 @@ export enum CTAType {
   FeatureTrade = 'feature_trade',
   /** "Access Sky Token Rewards" → ?widget=rewards */
   FeatureRewards = 'feature_rewards',
+  /** "Access Vaults" → ?widget=vaults */
+  FeatureVaults = 'feature_vaults',
   /** "Start Saving" → ?widget=savings */
   FeatureSavings = 'feature_savings',
   /** "Stake your SKY" / "Access Staking Rewards" → ?widget=stake */
@@ -71,6 +73,7 @@ export const featureIdToCTAType: Record<string, CTAType> = {
   upgrade: CTAType.FeatureUpgrade,
   trade: CTAType.FeatureTrade,
   rewards: CTAType.FeatureRewards,
+  vaults: CTAType.FeatureVaults,
   savings: CTAType.FeatureSavings,
   stake: CTAType.FeatureStake,
   expert: CTAType.FeatureExpert,
