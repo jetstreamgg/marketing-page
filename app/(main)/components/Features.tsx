@@ -471,7 +471,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           postTextElement={
             <Text variant="p2">
               Supply USDS to the Sky Token Rewards (STRs) module of the Sky Protocol to get Sky Token Rewards
-              in the form of SKY governance tokens and Sky Star tokens.
+              in the form of Sky Star tokens.
               <br />
               <br />
               The Sky Token Rewards Rate is different for each type of token rewarded, and always fluctuates,
