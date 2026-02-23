@@ -545,10 +545,10 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           }
           className="col-span-1 tablet:col-span-2 desktop:col-span-1"
           featurePageId="vaults"
-          APY=""
-          TVL=""
-          APYDescription=""
-          TVLDescription=""
+          APY={data.vaultRate}
+          TVL={data.vaultTvl}
+          APYDescription="Vault Rates up to:"
+          TVLDescription="Sky Curated Vaults TVL"
           type="vaults"
         />
         <FeatureCardLg

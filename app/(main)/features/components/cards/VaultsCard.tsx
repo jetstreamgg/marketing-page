@@ -1,6 +1,7 @@
+import { FetchedData } from '@/app/(main)/fetchData';
 import { FeaturesPageCard, TextFeatureCard } from '../FeaturesPageCard';
 
-export const VaultsCard = () => {
+export const VaultsCard = ({ data }: { data: FetchedData }) => {
   return (
     <FeaturesPageCard
       id="vaults"
@@ -23,8 +24,8 @@ export const VaultsCard = () => {
             </>
           ),
           stats: [
-            { id: 'rate', label: 'Vault Rate', value: '', prefix: 'Rates up to: ' },
-            { id: 'tvl', label: 'Sky Curated Vaults TVL', value: '' }
+            { id: 'rate', label: 'Vault Rate', value: data.vaultRate, prefix: 'Rates up to: ' },
+            { id: 'tvl', label: 'Sky Curated Vaults TVL', value: data.vaultTvl }
           ],
           buttonCta: 'Access Vaults',
           url: '?widget=vaults',
