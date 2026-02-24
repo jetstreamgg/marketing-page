@@ -527,7 +527,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           }
           imgSrc="/products_vaults.png"
           mobileImgSrc="/products_vaults_mobile.png"
-          buttonVariant="flare-1"
+          buttonVariant="vesper-1"
           buttonText="Access Vaults"
           emphasis="Vaults"
           title=""
