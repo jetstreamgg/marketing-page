@@ -2,8 +2,6 @@ import Image from 'next/image';
 import ProductsUpgrade from '@/public/features-upgrade.png';
 import ProductsTrade from '@/public/products_trade.png';
 import ProductsTradeMobile from '@/public/products_trade_mobile.png';
-import ProductsSkyBridge from '@/public/features-skylink.png';
-import ProductsSkyBridgeMobile from '@/public/features-skylink-mobile.png';
 import SealedActivationImg from '@/public/features-sealed-activation.png';
 import ActivationImg from '@/public/features-activation.png';
 import FeaturesRewards from '@/public/features_rewards.png';
@@ -56,13 +54,6 @@ export const PrefetchFeaturesAssets = () => {
         loading="eager"
       />
 
-      <Image
-        alt="SkyBridge illustration"
-        src={bpi === 0 ? ProductsSkyBridgeMobile : ProductsSkyBridge}
-        className="absolute top-1/2 w-full -translate-y-1/2 px-3 tablet:bottom-0 tablet:right-0 tablet:top-auto tablet:w-[160%] tablet:max-w-[160%] tablet:translate-x-8 tablet:translate-y-8 tablet:rounded-tl-[20px] tablet:px-0 desktop:translate-x-10 desktop:translate-y-10"
-        quality={100}
-        loading="eager"
-      />
       <Image
         alt="Sealed Activation illustration"
         src={SealedActivationImg}

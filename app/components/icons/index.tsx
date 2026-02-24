@@ -26,7 +26,6 @@ export { Save } from './Save';
 export { Upgrade } from './Upgrade';
 export { Activation } from './Activation';
 export { SealedActivation } from './SealedActivation';
-export { SkyLink } from './SkyLink';
 export { Search } from './Search';
 export { Info } from './Info';
 export { Warning } from './Warning';

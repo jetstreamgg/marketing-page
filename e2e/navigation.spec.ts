@@ -90,14 +90,13 @@ test.describe('Footer internal links', () => {
   }
 
   const footerHashLinks = [
-    { title: 'Upgrade', expectedHref: '/features#upgrade' },
-    { title: 'Trade', expectedHref: '/features#trade' },
     { title: 'Sky Token Rewards', expectedHref: '/features#rewards' },
     { title: 'Sky Savings Rate', expectedHref: '/features#savings' },
     { title: 'Staking Engine', expectedHref: '/features#stake' },
     { title: 'Vaults', expectedHref: '/features#vaults' },
     { title: 'Expert', expectedHref: '/features#expert' },
-    { title: 'SkyLink', expectedHref: '/features#skylink' }
+    { title: 'Upgrade', expectedHref: '/features#upgrade' },
+    { title: 'Trade', expectedHref: '/features#trade' }
   ];
 
   for (const { title, expectedHref } of footerHashLinks) {
@@ -152,7 +151,7 @@ test.describe('Launch App links', () => {
 });
 
 test.describe('Feature hash anchors', () => {
-  const sections = ['upgrade', 'trade', 'rewards', 'savings', 'stake', 'vaults', 'expert', 'skylink'];
+  const sections = ['rewards', 'savings', 'stake', 'vaults', 'expert', 'upgrade', 'trade'];
 
   for (const section of sections) {
     test(`/features#${section} loads features page`, async ({ page }) => {
