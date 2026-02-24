@@ -525,8 +525,8 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
               post native Sky protocol tokens or established crypto assets as collateral.
             </Text>
           }
-          imgSrc=""
-          mobileImgSrc=""
+          imgSrc="/products_vaults.png"
+          mobileImgSrc="/products_vaults_mobile.png"
           buttonVariant="flare-1"
           buttonText="Access Vaults"
           emphasis="Vaults"
