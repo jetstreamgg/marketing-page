@@ -7,25 +7,38 @@ export const Vaults = ({
 }: IconProps & { variant?: IconVariantEnum }) => (
   <VariantIcon
     {...props}
-    width="40"
-    height="40"
-    viewBox="0 0 40 40"
+    width="39"
+    height="39"
+    viewBox="0 0 39 39"
     fill="none"
     variant={variant}
     monoIcon={
       <g id="type=mono">
-        <rect x="4" y="6" width="32" height="28" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-        <line x1="4" y1="14" x2="36" y2="14" stroke="currentColor" strokeWidth="2" />
-        <circle cx="20" cy="24" r="5" stroke="currentColor" strokeWidth="2" fill="none" />
-        <circle cx="20" cy="24" r="1.5" fill="currentColor" />
+        <path
+          d="M31.5713 0C35.674 0 39 3.32602 39 7.42871V31.5713C39 35.674 35.674 39 31.5713 39H7.42871C3.32602 39 0 35.674 0 31.5713V7.42871C0 3.32602 3.32602 0 7.42871 0H31.5713ZM19.585 7.42871C12.8716 7.42871 7.42889 12.8706 7.42871 19.584C7.42871 26.2975 12.8715 31.7402 19.585 31.7402C26.2982 31.74 31.7402 26.2973 31.7402 19.584C31.7401 12.8708 26.2981 7.42893 19.585 7.42871ZM19.585 11.4805C24.0602 11.4807 27.6883 15.1086 27.6885 19.584C27.6885 24.0594 24.0604 27.6883 19.585 27.6885C15.8089 27.6885 12.636 25.1055 11.7363 21.6104H17.5586C18.6775 21.6103 19.585 20.7029 19.585 19.584C19.5848 18.4652 18.6774 17.5586 17.5586 17.5586H11.7363C12.6359 14.0633 15.8089 11.4805 19.585 11.4805Z"
+          fill="currentColor"
+        />
       </g>
     }
     colorIcon={
-      <g id="type=mono">
-        <rect x="4" y="6" width="32" height="28" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-        <line x1="4" y1="14" x2="36" y2="14" stroke="currentColor" strokeWidth="2" />
-        <circle cx="20" cy="24" r="5" stroke="currentColor" strokeWidth="2" fill="none" />
-        <circle cx="20" cy="24" r="1.5" fill="currentColor" />
+      <g id="type=color">
+        <path
+          d="M31.5713 0C35.674 0 39 3.32602 39 7.42871V31.5713C39 35.674 35.674 39 31.5713 39H7.42871C3.32602 39 0 35.674 0 31.5713V7.42871C0 3.32602 3.32602 0 7.42871 0H31.5713ZM19.585 7.42871C12.8716 7.42871 7.42889 12.8706 7.42871 19.584C7.42871 26.2975 12.8715 31.7402 19.585 31.7402C26.2982 31.74 31.7402 26.2973 31.7402 19.584C31.7401 12.8708 26.2981 7.42893 19.585 7.42871ZM19.585 11.4805C24.0602 11.4807 27.6883 15.1086 27.6885 19.584C27.6885 24.0594 24.0604 27.6883 19.585 27.6885C15.8089 27.6885 12.636 25.1055 11.7363 21.6104H17.5586C18.6775 21.6103 19.585 20.7029 19.585 19.584C19.5848 18.4652 18.6774 17.5586 17.5586 17.5586H11.7363C12.6359 14.0633 15.8089 11.4805 19.585 11.4805Z"
+          fill="url(#vaults_gradient)"
+        />
+        <defs>
+          <linearGradient
+            id="vaults_gradient"
+            x1="39.0002"
+            y1="39"
+            x2="39.0002"
+            y2="0"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#00DDFB" />
+            <stop offset="1" stopColor="#0075FF" />
+          </linearGradient>
+        </defs>
       </g>
     }
   />
