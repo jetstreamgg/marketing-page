@@ -45,7 +45,8 @@ test.describe('404 handling', () => {
     '/trade',
     '/rewards',
     '/savings',
-    '/stake'
+    '/stake',
+    '/vaults'
   ];
 
   for (const route of staleRoutes) {
@@ -94,6 +95,7 @@ test.describe('Footer internal links', () => {
     { title: 'Sky Token Rewards', expectedHref: '/features#rewards' },
     { title: 'Sky Savings Rate', expectedHref: '/features#savings' },
     { title: 'Staking Engine', expectedHref: '/features#stake' },
+    { title: 'Vaults', expectedHref: '/features#vaults' },
     { title: 'Expert', expectedHref: '/features#expert' },
     { title: 'SkyLink', expectedHref: '/features#skylink' }
   ];
@@ -150,7 +152,7 @@ test.describe('Launch App links', () => {
 });
 
 test.describe('Feature hash anchors', () => {
-  const sections = ['upgrade', 'trade', 'rewards', 'savings', 'stake', 'expert', 'skylink'];
+  const sections = ['upgrade', 'trade', 'rewards', 'savings', 'stake', 'vaults', 'expert', 'skylink'];
 
   for (const section of sections) {
     test(`/features#${section} loads features page`, async ({ page }) => {

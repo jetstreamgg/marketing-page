@@ -33,6 +33,10 @@ export const menuSections: Record<
       href: 'features#stake'
     },
     {
+      title: 'Vaults',
+      href: 'features#vaults'
+    },
+    {
       title: 'Expert',
       href: 'features#expert'
     },
