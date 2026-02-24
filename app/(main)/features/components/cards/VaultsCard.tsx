@@ -24,7 +24,7 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
             </>
           ),
           stats: [
-            { id: 'rate', label: 'Vault Rate', value: data.vaultRate, prefix: 'Rates up to: ' },
+            { id: 'rate', label: 'Vault Rate', value: data.vaultRate, prefix: 'Up to: ' },
             { id: 'tvl', label: 'Sky Curated Vaults TVL', value: data.vaultTvl }
           ],
           buttonCta: 'Access Vaults',
