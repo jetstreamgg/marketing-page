@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FetchedData } from '@/app/(main)/fetchData';
-import { FeaturesPageCard, TextFeatureCard } from '../FeaturesPageCard';
+import { FeaturesPageCard, TextFeatureCard, LiFeatureCard } from '../FeaturesPageCard';
 import FeaturesVaultsDesktop from '@/public/features_vaults_desktop.png';
 import ProductsVaultsMobile from '@/public/products_vaults_mobile.png';
 import { useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
@@ -23,23 +23,23 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
           content: (
             <>
               <TextFeatureCard>
-                Put your stablecoins to work through Sky curated Morpho vaults.
+                Put your stablecoins to work through Sky curated Morpho vaults. Choose between:
               </TextFeatureCard>
-              <TextFeatureCard>Choose between:</TextFeatureCard>
-              <TextFeatureCard>
-                <strong>Savings Vault</strong> — Allocates deposits exclusively into a single sUSDS/USDS
-                lending market.
-              </TextFeatureCard>
-              <TextFeatureCard>
-                <strong>USDS Flagship Vault</strong> — Allocates 80% of deposits into sUSDS earning the Sky
-                Savings Rate, with the remaining 20% directed to markets with volatile collateral exposure
-                such as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
-              </TextFeatureCard>
-              <TextFeatureCard>
-                <strong>USDS, USDC, and USDT Risk Capital Vaults</strong> — Allocate deposits into stUSDS/USDS
-                lending markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token,
-                as collateral.
-              </TextFeatureCard>
+              <ul className="list-disc pl-7">
+                <LiFeatureCard>
+                  Savings Vault — Allocates deposits exclusively into a single sUSDS/USDS lending market.
+                </LiFeatureCard>
+                <LiFeatureCard>
+                  USDS Flagship Vault — Allocates 80% of deposits into sUSDS earning the Sky Savings Rate,
+                  with the remaining 20% directed to markets with volatile collateral exposure such as
+                  stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
+                </LiFeatureCard>
+                <LiFeatureCard>
+                  USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS/USDS lending
+                  markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as
+                  collateral.
+                </LiFeatureCard>
+              </ul>
               <TextFeatureCard>
                 Deposits are allocated into lending markets where borrowers post native Sky protocol tokens or
                 established crypto assets as collateral.
