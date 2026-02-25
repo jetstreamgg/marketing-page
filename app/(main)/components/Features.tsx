@@ -559,7 +559,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           headingElement={
             <Heading tag="h5">
               <span className="text-highlightLightBG">Vaults</span>{' '}
-              <Morpho className="mb-1 inline-block rounded-[3px]" width="32" height="32" />
+              <Morpho className="mb-1 ml-1 inline-block rounded-[3px]" width="32" height="32" />
             </Heading>
           }
           className="col-span-1 tablet:col-span-2 desktop:col-span-1"

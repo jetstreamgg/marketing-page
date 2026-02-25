@@ -4,6 +4,7 @@ import { FeaturesPageCard, TextFeatureCard } from '../FeaturesPageCard';
 import FeaturesVaultsDesktop from '@/public/features_vaults_desktop.png';
 import ProductsVaultsMobile from '@/public/products_vaults_mobile.png';
 import { useBreakpointIndex } from '@/app/hooks/useBreakpointIndex';
+import { Morpho } from '@/app/components/icons';
 
 export const VaultsCard = ({ data }: { data: FetchedData }) => {
   const { bpi, isLoading: isLoadingBreakpointIndex } = useBreakpointIndex();
@@ -14,7 +15,11 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
       tabs={[
         {
           label: 'Vaults',
-          title: 'Vaults',
+          title: (
+            <>
+              Vaults <Morpho className="mb-1 ml-1 inline-block rounded-[3px]" width="32" height="32" />
+            </>
+          ),
           content: (
             <>
               <TextFeatureCard>

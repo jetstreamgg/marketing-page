@@ -18,7 +18,7 @@ type Stat = {
 
 type CardTab = {
   label?: string;
-  title: string;
+  title: ReactNode;
   content: ReactNode;
   stats?: Stat[];
   buttonCta?: string;
@@ -79,7 +79,12 @@ export function FeaturesPageCard({
               </Text>
             </div>
           )}
-          <div className="mb-2 flex flex-col-reverse items-center justify-between tablet:mb-4 tablet:flex-row">
+          <div
+            className={cn(
+              'flex flex-col-reverse items-center justify-between tablet:flex-row',
+              tabs.length > 1 && 'mb-2 tablet:mb-4'
+            )}
+          >
             {tabs.length > 1 && (
               <TabsList className="flex w-fit flex-wrap justify-start gap-2 tablet:max-w-[80%]">
                 {tabs.map(({ title, label = title }) => (
