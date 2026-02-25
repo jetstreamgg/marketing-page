@@ -12,7 +12,7 @@ interface TransitionProps {
   width?: number | string;
   height?: number | string;
   state?: 'open' | 'close' | undefined;
-  colorVariant?: 'nightfall-1' | 'sunset-2';
+  colorVariant?: string;
   middleColorVariant?: string;
   position?: 'bottomLeft' | 'topRight';
   postTransitionBackgroundColor?: string;

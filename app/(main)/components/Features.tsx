@@ -94,7 +94,8 @@ const FeatureCardLg = ({
   reverse = true,
   isAlpha = false,
   headingElement,
-  postFullWidth = false
+  postFullWidth = false,
+  transitionColor: transitionColorProp
 }: {
   descriptionElement: React.ReactNode;
   title: string;
@@ -119,6 +120,7 @@ const FeatureCardLg = ({
   reverse?: boolean;
   isAlpha?: boolean;
   postFullWidth?: boolean;
+  transitionColor?: string;
 }) => {
   const { state, setState, setIsHover } = useAutoClose({ delay: 60000 });
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
@@ -156,6 +158,7 @@ const FeatureCardLg = ({
     >
       <Transition
         state={state}
+        colorVariant={transitionColorProp || buttonVariant}
         postTransitionView={
           <div
             className={cn(
