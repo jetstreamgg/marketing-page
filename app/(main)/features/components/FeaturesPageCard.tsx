@@ -17,7 +17,7 @@ type Stat = {
 };
 
 type CardTab = {
-  label?: string;
+  label: string;
   title: ReactNode;
   content: ReactNode;
   stats?: Stat[];
@@ -60,7 +60,7 @@ export function FeaturesPageCard({
   id: string;
 }) {
   const { baseUrl } = useSkyUrl();
-  const [selectedTab, setSelectedTab] = useState(tabs[0].label || tabs[0].title);
+  const [selectedTab, setSelectedTab] = useState(tabs[0].label);
   const { trackCTAClick } = useMarketingAnalytics();
 
   return (
@@ -87,7 +87,7 @@ export function FeaturesPageCard({
           >
             {tabs.length > 1 && (
               <TabsList className="flex w-fit flex-wrap justify-start gap-2 tablet:max-w-[80%]">
-                {tabs.map(({ title, label = title }) => (
+                {tabs.map(({ title, label }) => (
                   <TabsTrigger variant="secondary" key={label} value={label}>
                     {label}
                   </TabsTrigger>
@@ -106,7 +106,7 @@ export function FeaturesPageCard({
             {tabs.map(
               ({
                 title,
-                label = title,
+                label,
                 content,
                 stats,
                 buttonCta,
