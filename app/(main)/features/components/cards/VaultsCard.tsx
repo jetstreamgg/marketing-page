@@ -18,14 +18,26 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
           content: (
             <>
               <TextFeatureCard>
-                Put your stablecoins (USDS, USDC and USDT) to work through Sky-curated Morpho vaults.
+                Put your stablecoins to work through Sky curated Morpho vaults.
+              </TextFeatureCard>
+              <TextFeatureCard>Choose between:</TextFeatureCard>
+              <TextFeatureCard>
+                <strong>Savings Vault</strong> — Allocates deposits exclusively into a single sUSDS/USDS
+                lending market.
               </TextFeatureCard>
               <TextFeatureCard>
-                Choose from a range of vaults with different market exposure, risk levels, and yields.
+                <strong>USDS Flagship Vault</strong> — Allocates 80% of deposits into sUSDS earning the Sky
+                Savings Rate, with the remaining 20% directed to markets with volatile collateral exposure
+                such as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
               </TextFeatureCard>
               <TextFeatureCard>
-                When you deposit, your stablecoins are allocated to carefully selected lending markets — where
-                borrowers post native Sky protocol tokens or established crypto assets as collateral.
+                <strong>USDS, USDC, and USDT Risk Capital Vaults</strong> — Allocate deposits into stUSDS/USDS
+                lending markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token,
+                as collateral.
+              </TextFeatureCard>
+              <TextFeatureCard>
+                Deposits are allocated into lending markets where borrowers post native Sky protocol tokens or
+                established crypto assets as collateral.
               </TextFeatureCard>
             </>
           ),

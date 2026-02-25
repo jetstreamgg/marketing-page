@@ -93,7 +93,8 @@ const FeatureCardLg = ({
   href,
   reverse = true,
   isAlpha = false,
-  headingElement
+  headingElement,
+  postFullWidth = false
 }: {
   descriptionElement: React.ReactNode;
   title: string;
@@ -117,6 +118,7 @@ const FeatureCardLg = ({
   href: string;
   reverse?: boolean;
   isAlpha?: boolean;
+  postFullWidth?: boolean;
 }) => {
   const { state, setState, setIsHover } = useAutoClose({ delay: 60000 });
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
@@ -158,7 +160,7 @@ const FeatureCardLg = ({
           <div
             className={cn(
               className,
-              'flex h-full max-w-[520px] flex-col justify-between p-5 text-white tablet:pt-6 desktop:p-7 desktop:pt-11 desktop-xl:max-w-[600px] desktop-xl:p-10'
+              `flex h-full flex-col justify-between p-5 text-white tablet:pt-6 desktop:p-7 desktop:pt-11 desktop-xl:p-10 ${postFullWidth ? '' : 'max-w-[520px] desktop-xl:max-w-[600px]'}`
             )}
           >
             <div className="space-y-3">
@@ -506,24 +508,44 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           href={`${baseUrl}/?widget=vaults`}
           descriptionElement={
             <Text variant="p3">
-              Put your stablecoins (USDS, USDC and USDT) to work through Sky-curated Morpho vaults.
+              Put your stablecoins (USDS, USDC and USDT) to work through Sky curated Morpho vaults.
               <br />
               <br />
               Choose from a range of vaults with different market exposure, risk levels, and yields.
               <br />
               <br />
-              When you deposit, your stablecoins are allocated to carefully selected lending markets — where
+              When you deposit, your stablecoins are allocated to carefully selected lending markets, where
               borrowers post native Sky protocol tokens or established crypto assets as collateral.
             </Text>
           }
           postTitle="Vaults"
           postTextElement={
-            <Text variant="p2">
-              Put your stablecoins (USDS, USDC and USDT) to work through Sky-curated Morpho vaults. Choose
-              from a range of vaults with different market exposure, risk levels, and yields. When you
-              deposit, your stablecoins are allocated to carefully selected lending markets — where borrowers
-              post native Sky protocol tokens or established crypto assets as collateral.
-            </Text>
+            <>
+              <Text variant="p3" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                Put your stablecoins to work through Sky curated Morpho vaults.
+                <br />
+                <br />
+                Choose between:
+                <br />
+                <br />
+                <strong>Savings Vault</strong> — Allocates deposits exclusively into a single sUSDS/USDS
+                lending market.
+                <br />
+                <br />
+                <strong>USDS Flagship Vault</strong> — Allocates 80% of deposits into sUSDS earning the Sky
+                Savings Rate, with the remaining 20% directed to markets with volatile collateral exposure
+                such as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
+                <br />
+                <br />
+                <strong>USDS, USDC, and USDT Risk Capital Vaults</strong> — Allocate deposits into stUSDS/USDS
+                lending markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token,
+                as collateral.
+                <br />
+                <br />
+                Deposits are allocated into lending markets where borrowers post native Sky protocol tokens or
+                established crypto assets as collateral.
+              </Text>
+            </>
           }
           imgSrc="/products_vaults.png"
           mobileImgSrc="/products_vaults_mobile.png"
@@ -538,6 +560,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             </Heading>
           }
           className="col-span-1 tablet:col-span-2 desktop:col-span-1"
+          postFullWidth
           featurePageId="vaults"
           APY={data.vaultRate}
           TVL={data.vaultTvl}
@@ -621,7 +644,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           buttonText="Upgrade"
           emphasis="Upgrade"
           title="to USDS and SKY"
-          className="col-span-1 h-[500px] overflow-y-auto"
+          className="col-span-1"
           cardClassName="col-span-1"
           featurePageId="upgrade"
         />
