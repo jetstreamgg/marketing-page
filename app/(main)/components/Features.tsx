@@ -169,14 +169,16 @@ const FeatureCardLg = ({
             <div className="space-y-3">
               <Heading tag="h5">{postTitle}</Heading>
               <div className="text-white/80">{postTextElement}</div>
-              <div>
-                <InternalLink href={`/features#${featurePageId}`}>
-                  <div className="flex items-center gap-1">
-                    <Text variant="ui-medium">Learn more</Text>
-                    <ArrowRight className="h-[12px] w-[12px] pt-0.5" />
-                  </div>
-                </InternalLink>
-              </div>
+              {featurePageId !== 'vaults' && (
+                <div>
+                  <InternalLink href={`/features#${featurePageId}`}>
+                    <div className="flex items-center gap-1">
+                      <Text variant="ui-medium">Learn more</Text>
+                      <ArrowRight className="h-[12px] w-[12px] pt-0.5" />
+                    </div>
+                  </InternalLink>
+                </div>
+              )}
             </div>
           </div>
         }
@@ -388,7 +390,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
             APY={data.rewardsApy}
             TVL={data.rewardsTvl}
             type="str"
-            APYDescription="Sky Token Rewards Rates up to:"
+            APYDescription="Sky Token Rewards Rates up to"
             TVLDescription="Sky Token Rewards TVL"
           />
         </Card>
@@ -504,7 +506,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           APY={data.stakeApy}
           TVL={data.stakeTvl}
           type="srr"
-          APYDescription="Staking Rewards Rates up to:"
+          APYDescription="Staking Rewards Rates up to"
           TVLDescription="Staking Engine TVL"
         />
         <FeatureCardLg
@@ -567,7 +569,7 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           featurePageId="vaults"
           APY={data.vaultRate}
           TVL={data.vaultTvl}
-          APYDescription="Vault Rates up to:"
+          APYDescription="Vault Rates up to"
           TVLDescription="Sky Curated Vaults TVL"
           type="vaults"
         />
