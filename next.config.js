@@ -21,7 +21,8 @@ const cspHeader = `
       https://*.posthog.com
       https://*.google-analytics.com
       https://*.analytics.google.com
-      https://*.googletagmanager.com;
+      https://*.googletagmanager.com
+      https://api.morpho.org;
     style-src 'self' https://vercel.live https://*.posthog.com 'unsafe-inline';
     img-src 'self' data: blob: https://vercel.live https://vercel.com https://*.posthog.com https://www.googletagmanager.com;
     font-src 'self' https://vercel.live https://assets.vercel.com;

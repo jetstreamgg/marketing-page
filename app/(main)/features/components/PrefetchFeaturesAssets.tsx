@@ -2,8 +2,6 @@ import Image from 'next/image';
 import ProductsUpgrade from '@/public/features-upgrade.png';
 import ProductsTrade from '@/public/products_trade.png';
 import ProductsTradeMobile from '@/public/products_trade_mobile.png';
-import ProductsSkyBridge from '@/public/features-skylink.png';
-import ProductsSkyBridgeMobile from '@/public/features-skylink-mobile.png';
 import SealedActivationImg from '@/public/features-sealed-activation.png';
 import ActivationImg from '@/public/features-activation.png';
 import FeaturesRewards from '@/public/features_rewards.png';
@@ -27,6 +25,8 @@ import ProductsStake3Mobile from '@/public/products_stake_3_mobile.png';
 import ProductsStake4Mobile from '@/public/products_stake_4_mobile.png';
 import ProductsStake5Mobile from '@/public/products_stake_5_mobile.png';
 import ProductsStake6Mobile from '@/public/products_stake_6_mobile.png';
+import FeaturesVaultsDesktop from '@/public/features_vaults_desktop.png';
+import ProductsVaultsMobile from '@/public/products_vaults_mobile.png';
 
 export const PrefetchFeaturesAssets = () => {
   const { bpi } = useBreakpointIndex();
@@ -56,13 +56,6 @@ export const PrefetchFeaturesAssets = () => {
         loading="eager"
       />
 
-      <Image
-        alt="SkyBridge illustration"
-        src={bpi === 0 ? ProductsSkyBridgeMobile : ProductsSkyBridge}
-        className="absolute top-1/2 w-full -translate-y-1/2 px-3 tablet:bottom-0 tablet:right-0 tablet:top-auto tablet:w-[160%] tablet:max-w-[160%] tablet:translate-x-8 tablet:translate-y-8 tablet:rounded-tl-[20px] tablet:px-0 desktop:translate-x-10 desktop:translate-y-10"
-        quality={100}
-        loading="eager"
-      />
       <Image
         alt="Sealed Activation illustration"
         src={SealedActivationImg}
@@ -170,6 +163,14 @@ export const PrefetchFeaturesAssets = () => {
         alt="Products stake"
         placeholder="blur"
         src={bpi === 0 ? ProductsStake6Mobile : ProductsStake6}
+        className="absolute top-1/2 h-auto w-full -translate-y-1/2 rounded-[20px] tablet:left-0 tablet:top-full tablet:translate-x-8 tablet:translate-y-[calc(-100%+92px)] tablet:rounded-r-none tablet:rounded-bl-none desktop:static desktop:top-auto desktop:translate-x-10 desktop:translate-y-10 desktop:rounded-tl-[40px]"
+        quality={100}
+        loading="eager"
+      />
+      <Image
+        alt="Products vaults"
+        placeholder="blur"
+        src={bpi === 0 ? ProductsVaultsMobile : FeaturesVaultsDesktop}
         className="absolute top-1/2 h-auto w-full -translate-y-1/2 rounded-[20px] tablet:left-0 tablet:top-full tablet:translate-x-8 tablet:translate-y-[calc(-100%+92px)] tablet:rounded-r-none tablet:rounded-bl-none desktop:static desktop:top-auto desktop:translate-x-10 desktop:translate-y-10 desktop:rounded-tl-[40px]"
         quality={100}
         loading="eager"

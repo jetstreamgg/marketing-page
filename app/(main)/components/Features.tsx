@@ -19,8 +19,8 @@ import { ExternalLink } from '@/app/components/ExternalLink';
 import { PopoverInfo } from '@/app/components/PopoverInfo';
 import { useSkyUrl } from '@/app/hooks/useSkyUrl';
 import { useHeaderInView } from '@/app/hooks/useHeaderInView';
-import { useRandomL2Name } from '@/app/hooks/useRandomL2Name';
 import { useMarketingAnalytics, featureIdToCTAType } from '@/app/hooks/useMarketingAnalytics';
+import { Morpho } from '@/app/components/icons';
 
 const FeatureCardStats = ({
   APY,
@@ -38,7 +38,7 @@ const FeatureCardStats = ({
   shortenedAPYDescription?: string;
   TVLDescription: string;
   className?: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'vaults';
   cardWidth: number;
   isMobile?: boolean;
 }) => {
@@ -92,11 +92,15 @@ const FeatureCardLg = ({
   TVLDescription,
   href,
   reverse = true,
-  isAlpha = false
+  isAlpha = false,
+  headingElement,
+  postFullWidth = false,
+  transitionColor: transitionColorProp
 }: {
   descriptionElement: React.ReactNode;
   title: string;
   emphasis: string;
+  headingElement?: React.ReactNode;
   postTitle: string;
   postTextElement: React.ReactNode;
   className: string;
@@ -109,12 +113,14 @@ const FeatureCardLg = ({
   featurePageId: string;
   APY: string;
   TVL: string;
-  type?: 'ssr' | 'str' | 'srr' | 'stusds';
+  type?: 'ssr' | 'str' | 'srr' | 'stusds' | 'vaults';
   APYDescription: string;
   TVLDescription: string;
   href: string;
   reverse?: boolean;
   isAlpha?: boolean;
+  postFullWidth?: boolean;
+  transitionColor?: string;
 }) => {
   const { state, setState, setIsHover } = useAutoClose({ delay: 60000 });
   const { bpi, isLoading: bpiLoading } = useBreakpointIndex();
@@ -152,31 +158,36 @@ const FeatureCardLg = ({
     >
       <Transition
         state={state}
+        colorVariant={transitionColorProp || buttonVariant}
         postTransitionView={
           <div
             className={cn(
               className,
-              'flex h-full max-w-[520px] flex-col justify-between p-5 text-white tablet:pt-6 desktop:p-7 desktop:pt-11 desktop-xl:max-w-[600px] desktop-xl:p-10'
+              `flex h-full flex-col justify-between p-5 text-white tablet:pt-6 desktop:p-7 desktop:pt-11 desktop-xl:p-10 ${postFullWidth ? '' : 'max-w-[520px] desktop-xl:max-w-[600px]'}`
             )}
           >
             <div className="space-y-3">
               <Heading tag="h5">{postTitle}</Heading>
               <div className="text-white/80">{postTextElement}</div>
-              <div>
-                <InternalLink href={`/features#${featurePageId}`}>
-                  <div className="flex items-center gap-1">
-                    <Text variant="ui-medium">Learn more</Text>
-                    <ArrowRight className="h-[12px] w-[12px] pt-0.5" />
-                  </div>
-                </InternalLink>
-              </div>
+              {featurePageId !== 'vaults' && (
+                <div>
+                  <InternalLink href={`/features#${featurePageId}`}>
+                    <div className="flex items-center gap-1">
+                      <Text variant="ui-medium">Learn more</Text>
+                      <ArrowRight className="h-[12px] w-[12px] pt-0.5" />
+                    </div>
+                  </InternalLink>
+                </div>
+              )}
             </div>
           </div>
         }
       >
         <div className="p-5 tablet:pb-0 tablet:pr-0 tablet:pt-6 desktop:pl-7 desktop:pt-11 desktop-xl:pl-10 desktop-xl:pt-10">
           <div className="mb-3 mr-8 flex flex-row flex-wrap-reverse justify-between">
-            <EmphasisHeading reverse={reverse} text={title} emphasisText={emphasis} tag="h5" />
+            {headingElement || (
+              <EmphasisHeading reverse={reverse} text={title} emphasisText={emphasis} tag="h5" />
+            )}
             {isAlpha && (
               <div style={{ width: 'fit-content' }}>
                 <Text
@@ -192,18 +203,20 @@ const FeatureCardLg = ({
             <div className="flex h-full w-full flex-col justify-between pb-7 tablet:w-1/2 desktop:w-[60%] desktop-xl:w-[50%]">
               <div className="z-10 space-y-3 tablet:mr-7">{descriptionElement}</div>
             </div>
-            <div className="z-0 flex w-full justify-center tablet:absolute tablet:bottom-0 tablet:right-0 tablet:block tablet:w-fit desktop:w-[35%] 2xl:w-fit">
-              <Image
-                src={bpi === BP.sm ? mobileImgSrc : imgSrc}
-                width={
-                  bpiLoading ? 0 : bpi > BP.xl ? imgWidths[2] : bpi > BP.md ? imgWidths[1] : imgWidths[0]
-                }
-                height={
-                  bpiLoading ? 0 : bpi > BP.xl ? imgHeights[2] : bpi > BP.md ? imgHeights[1] : imgHeights[0]
-                }
-                alt=""
-              />
-            </div>
+            {imgSrc && mobileImgSrc && (
+              <div className="z-0 flex w-full justify-center tablet:absolute tablet:bottom-0 tablet:right-0 tablet:block tablet:w-fit desktop:w-[35%] 2xl:w-fit">
+                <Image
+                  src={bpi === BP.sm ? mobileImgSrc : imgSrc}
+                  width={
+                    bpiLoading ? 0 : bpi > BP.xl ? imgWidths[2] : bpi > BP.md ? imgWidths[1] : imgWidths[0]
+                  }
+                  height={
+                    bpiLoading ? 0 : bpi > BP.xl ? imgHeights[2] : bpi > BP.md ? imgHeights[1] : imgHeights[0]
+                  }
+                  alt=""
+                />
+              </div>
+            )}
             <FeatureCardStats
               APY={APY}
               TVL={TVL}
@@ -293,7 +306,6 @@ const FeaturesBackground = () => (
 );
 
 export function HomepageFeatures({ data }: { data: FetchedData }) {
-  const randomL2Name = useRandomL2Name();
   const targetRef = useRef(null);
   useHeaderInView(targetRef, 'light');
   const { baseUrl } = useSkyUrl();
@@ -330,83 +342,58 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           className="col-span-1 grid grid-cols-1 gap-5 rounded-3xl p-4 tablet:col-span-2 tablet:grid-cols-2"
         >
           <LeadCard className="col-span-1 tablet:col-span-1" />
-          <FeatureCard
-            href={`${baseUrl}/?widget=upgrade`}
+          <FeatureCardLg
+            href={`${baseUrl}/?widget=rewards`}
             descriptionElement={
               <Text variant="p3">
-                Unlock all the Sky Protocol has to offer by easily and instantly upgrading your DAI and MKR.
+                Use USDS to access Sky Token Rewards and support Sky ecosystem projects.
+                <br />
+                <br />
+                No minimum USDS supply amount required; withdraw anytime.
+                <br />
+                <br />
+                The Sky Token Rewards rate is variable, dependent upon several factors, including the issuance
+                rate of each Sky Token Reward.
+                <br />
+                <br />
+                With Sky, you always remain in full control of your funds.
               </Text>
             }
+            postTitle="Rewards"
             postTextElement={
               <Text variant="p2">
-                Upgrade your DAI to USDS to access the many features of the decentralised Sky Protocol,
-                including Sky Token Rewards and the Sky Savings Rate.
+                Supply USDS to the Sky Token Rewards (STRs) module of the Sky Protocol to get Sky Token
+                Rewards in the form of Sky Star tokens.
                 <br />
                 <br />
-                Upgrade MKR to SKY to maintain the ability to participate in governance (vote and delegate),
-                maintain access to Staking Rewards and avoid the Delayed Upgrade Penalty.
+                The Sky Token Rewards Rate is different for each type of token rewarded, and always
+                fluctuates, dependent upon several factors, including the issuance rate of each Sky Token
+                Reward, which is determined by Sky ecosystem governance.
+                <br />
+                <br />
+                With{' '}
+                <ExternalLink href="https://app.sky.money" className="text-sky-700 underline">
+                  Sky.money
+                </ExternalLink>
+                , it&apos;s easy to build a diversified Sky Token Rewards portfolio while always remaining in
+                control of your funds.
               </Text>
             }
-            imgSrc="/products_upgrade.png"
-            buttonVariant="sunset-3"
-            buttonText="Upgrade"
-            emphasis="Upgrade"
-            title="to USDS and SKY"
-            className="col-span-1 h-[500px] overflow-y-auto"
-            cardClassName="col-span-2 tablet:col-span-1"
-            featurePageId="upgrade"
+            imgSrc="/products_rewards.png"
+            mobileImgSrc="/products_rewards_mobile.png"
+            buttonVariant="aurora-3"
+            buttonText="Get STRs"
+            emphasis="Access Sky Token Rewards"
+            title="with USDS"
+            className="col-span-1"
+            featurePageId="rewards"
+            APY={data.rewardsApy}
+            TVL={data.rewardsTvl}
+            type="str"
+            APYDescription="Sky Token Rewards Rates up to"
+            TVLDescription="Sky Token Rewards TVL"
           />
         </Card>
-
-        {/* Section 2 */}
-        <FeatureCardLg
-          href={`${baseUrl}/?widget=trade`}
-          descriptionElement={
-            <Text variant="p3">
-              Trade popular tokens for USDS and SKY, quickly and simply, utilising smart contracts on the
-              blockchain instead of relying on centralised entities. Trades are powered by{' '}
-              <ExternalLink href="https://swap.cow.fi/" className="text-black">
-                CoW Swap
-              </ExternalLink>
-              .
-            </Text>
-          }
-          postTextElement={
-            <>
-              <Text variant="p2" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
-                Directly trade popular tokens for Sky ecosystem tokens at current market prices.
-                <br />
-              </Text>
-              <ul className="list-disc pl-7">
-                <li>
-                  <Text variant="p2">
-                    Trade USDC, USDT, ETH and SKY for USDS, and vice versa. Once you have USDS, you can use it
-                    to access Sky Token Rewards and to access the Sky Savings Rate to accumulate more USDS.
-                  </Text>
-                </li>
-                <li>
-                  <Text variant="p2">
-                    Trade USDC, USDT, ETH and USDS for SKY, and vice versa. Once you have SKY, you can use it
-                    to access Staking Rewards and participate in Sky Ecosystem Governance.
-                  </Text>
-                </li>
-              </ul>
-            </>
-          }
-          imgSrc="/products_trade.png"
-          mobileImgSrc="/products_trade_mobile.png"
-          buttonVariant="twilight-3"
-          buttonText="Start Trading"
-          emphasis="Trade"
-          title="crypto for USDS"
-          postTitle="Trade crypto for USDS"
-          className="col-span-1 h-[500px] overflow-y-auto tablet:col-span-2 tablet:h-[600px] desktop:col-span-1"
-          featurePageId="trade"
-          APY=""
-          TVL=""
-          APYDescription=""
-          TVLDescription=""
-        />
         <FeatureCardLg
           href={`${baseUrl}/?widget=savings`}
           descriptionElement={
@@ -449,57 +436,6 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           type="ssr"
           APYDescription="SSR Rate"
           TVLDescription="Sky Savings Rate TVL"
-        />
-        <FeatureCardLg
-          href={`${baseUrl}/?widget=rewards`}
-          descriptionElement={
-            <Text variant="p3">
-              Use USDS to access Sky Token Rewards and support Sky ecosystem projects.
-              <br />
-              <br />
-              No minimum USDS supply amount required; withdraw anytime.
-              <br />
-              <br />
-              The Sky Token Rewards rate is variable, dependent upon several factors, including the issuance
-              rate of each Sky Token Reward.
-              <br />
-              <br />
-              With Sky, you always remain in full control of your funds.
-            </Text>
-          }
-          postTitle="Rewards"
-          postTextElement={
-            <Text variant="p2">
-              Supply USDS to the Sky Token Rewards (STRs) module of the Sky Protocol to get Sky Token Rewards
-              in the form of Sky Star tokens.
-              <br />
-              <br />
-              The Sky Token Rewards Rate is different for each type of token rewarded, and always fluctuates,
-              dependent upon several factors, including the issuance rate of each Sky Token Reward, which is
-              determined by Sky ecosystem governance.
-              <br />
-              <br />
-              With{' '}
-              <ExternalLink href="https://app.sky.money" className="text-sky-700 underline">
-                Sky.money
-              </ExternalLink>
-              , it&apos;s easy to build a diversified Sky Token Rewards portfolio while always remaining in
-              control of your funds.
-            </Text>
-          }
-          imgSrc="/products_rewards.png"
-          mobileImgSrc="/products_rewards_mobile.png"
-          buttonVariant="aurora-3"
-          buttonText="Get STRs"
-          emphasis="Access Sky Token Rewards"
-          title="with USDS"
-          className="col-span-1 tablet:col-span-2 desktop:col-span-1"
-          featurePageId="rewards"
-          APY={data.rewardsApy}
-          TVL={data.rewardsTvl}
-          type="str"
-          APYDescription="Sky Token Rewards Rates up to:"
-          TVLDescription="Sky Token Rewards TVL"
         />
         <FeatureCardLg
           href={`${baseUrl}/?widget=stake`}
@@ -570,120 +506,206 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
           APY={data.stakeApy}
           TVL={data.stakeTvl}
           type="srr"
-          APYDescription="Staking Rewards Rates up to:"
+          APYDescription="Staking Rewards Rates up to"
           TVLDescription="Staking Engine TVL"
         />
-
-        {/* Section 4 */}
-        <Card
-          variant="glass"
-          className="col-span-1 grid grid-cols-1 gap-5 rounded-3xl border p-4 tablet:col-span-2 tablet:grid-cols-2"
-        >
-          <FeatureCardLg
-            href={`${baseUrl}/?widget=expert`}
-            descriptionElement={
+        <FeatureCardLg
+          href={`${baseUrl}/?widget=vaults`}
+          descriptionElement={
+            <Text variant="p3">
+              Put your stablecoins (USDS, USDC and USDT) to work through Sky curated Morpho vaults.
+              <br />
+              <br />
+              Choose from a range of vaults with different market exposure, risk levels, and yields.
+              <br />
+              <br />
+              When you deposit, your stablecoins are allocated to selected lending markets, where borrowers
+              post native Sky protocol tokens or established crypto assets as collateral.
+            </Text>
+          }
+          postTitle="Vaults"
+          postTextElement={
+            <>
+              <Text variant="p3" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                Put your stablecoins to work through Sky curated Morpho vaults. Choose between:
+              </Text>
+              <ul className="mb-4 list-disc space-y-2 pl-5 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                <li>
+                  <Text tag="span" variant="p3">
+                    USDT Savings Vaults — Allocates deposits exclusively into sUSDS collateralized lending
+                    market.
+                  </Text>
+                </li>
+                <li>
+                  <Text tag="span" variant="p3">
+                    USDS Flagship Vault — Allocates 80% of deposits into sUSDS earning the Sky Savings Rate,
+                    with the remaining 20% directed to markets with volatile bluechip collateral exposure such
+                    as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
+                  </Text>
+                </li>
+                <li>
+                  <Text tag="span" variant="p3">
+                    USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS/USDS lending
+                    markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as
+                    collateral.
+                  </Text>
+                </li>
+              </ul>
               <Text variant="p3">
-                Expert modules unlock high-level functionality tailored to experienced users. stUSDS, the
-                first Expert token of the Sky Protocol, is a risk token that funds and supports liquidity for
-                SKY stakers.
-                <br />
-                <br />
-                Use USDS to access the stUSDS Rate <PopoverInfo type="stusds" /> and encourage more
-                participation in SKY governance. No minimum supply amount is required.
+                Deposits are allocated into lending markets where borrowers post native Sky protocol tokens or
+                established crypto assets as collateral.
               </Text>
-            }
-            postTitle="stUSDS Rewards"
-            postTextElement={
-              <>
-                <Text variant="p3" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
-                  stUSDS is a risk token structured to absorb a greater share of system risk in exchange for
-                  the potential to capture a larger portion of protocol rewards.
-                  <br />
-                  <br />
-                  When you supply USDS to the stUSDS module of the Protocol, you fund SKY-backed borrowing to
-                  access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
-                  tokens serve as a digital record of your USDS interaction with the stUSDS module and any
-                  value accrued to your position.
-                  <br />
-                  <br />
-                  stUSDS funds and supports liquidity for SKY stakers, encouraging more participation in SKY
-                  governance, leading to a more secure ecosystem.
-                  <br />
-                  <br />
-                  The asset mix of stUSDS can be viewed on the{' '}
-                  <ExternalLink href="https://info.sky.money/stusds" className="text-sky-700 underline">
-                    Sky Ecosystem Dashboard
-                  </ExternalLink>
-                  .
-                </Text>
-              </>
-            }
-            imgSrc="/products_stUSDS.png"
-            mobileImgSrc="/products_stUSDS_mobile.png"
-            buttonVariant="azure-2"
-            buttonText="Get stUSDS"
-            emphasis="Access stUSDS tokens"
-            title="with USDS"
-            reverse={true}
-            className="col-span-1 tablet:col-span-2 desktop:col-span-1"
-            featurePageId="expert"
-            APY={data.stusdsApy}
-            TVL={data.stusdsTvl}
-            type="stusds"
-            APYDescription="stUSDS Rate"
-            TVLDescription="stUSDS TVL"
-          />
-          <FeatureCardLg
-            href={`${baseUrl}/?network=${randomL2Name}`}
-            descriptionElement={
-              <Text variant="p3">
-                SkyLink is the system that provides the rails for the{' '}
-                <ExternalLink href="https://app.sky.money/" className="text-text underline">
-                  Sky.money
-                </ExternalLink>{' '}
-                web app and Sky Ecosystem projects, such as{' '}
-                <ExternalLink href="https://spark.fi/" className="text-black/80 underline">
-                  Spark,
-                </ExternalLink>{' '}
-                to bridge assets between the Sky Protocol on Ethereum Mainnet and a growing number of
-                supported Layer 2 (L2) networks. SkyLink enables end users on L2s, such as Base, Arbitrum,
-                Optimism and Unichain to tap into Sky Protocol features via the Sky Ecosystem projects&apos;
-                rails. SkyLink seamlessly connects your Ethereum-based Sky Protocol tokens and features to
-                supported L2 networks.
+            </>
+          }
+          imgSrc="/products_vaults.png"
+          mobileImgSrc="/products_vaults_mobile.png"
+          buttonVariant="vesper-1"
+          buttonText="Access Vaults"
+          emphasis="Vaults"
+          title=""
+          headingElement={
+            <Heading tag="h5">
+              <span className="text-highlightLightBG">Vaults</span>{' '}
+              <Morpho className="mb-1 ml-1 inline-block rounded-[3px]" width="32" height="32" />
+            </Heading>
+          }
+          className="col-span-1 tablet:col-span-2 desktop:col-span-1"
+          postFullWidth
+          featurePageId="vaults"
+          APY={data.vaultRate}
+          TVL={data.vaultTvl}
+          APYDescription="Vault Rates up to"
+          TVLDescription="Sky Curated Vaults TVL"
+          type="vaults"
+        />
+        <FeatureCardLg
+          href={`${baseUrl}/?widget=expert`}
+          descriptionElement={
+            <Text variant="p3">
+              Expert modules unlock high-level functionality tailored to experienced users. stUSDS, the first
+              Expert token of the Sky Protocol, is a risk token that funds and supports liquidity for SKY
+              stakers.
+              <br />
+              <br />
+              Use USDS to access the stUSDS Rate <PopoverInfo type="stusds" /> and encourage more
+              participation in SKY governance. No minimum supply amount is required.
+            </Text>
+          }
+          postTitle="stUSDS Rewards"
+          postTextElement={
+            <>
+              <Text variant="p3" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                stUSDS is a risk token structured to absorb a greater share of system risk in exchange for the
+                potential to capture a larger portion of protocol rewards.
                 <br />
                 <br />
-                If you have shied away from the Ethereum blockchain due to the high price of gas, SkyLink
-                introduces reduced fees and faster transaction speeds.
+                When you supply USDS to the stUSDS module of the Protocol, you fund SKY-backed borrowing to
+                access the stUSDS Rate <PopoverInfo type="stusds" /> and receive stUSDS tokens. The stUSDS
+                tokens serve as a digital record of your USDS interaction with the stUSDS module and any value
+                accrued to your position.
+                <br />
+                <br />
+                stUSDS funds and supports liquidity for SKY stakers, encouraging more participation in SKY
+                governance, leading to a more secure ecosystem.
+                <br />
+                <br />
+                The asset mix of stUSDS can be viewed on the{' '}
+                <ExternalLink href="https://info.sky.money/stusds" className="text-sky-700 underline">
+                  Sky Ecosystem Dashboard
+                </ExternalLink>
+                .
               </Text>
-            }
-            postTextElement={
-              <Text variant="p2">
-                SkyLink enhances your ability to manage your digital assets efficiently by seamlessly
-                connecting your Ethereum L1-based Sky Protocol tokens and features, such as the Sky Savings
-                Rate, to supported L2 networks.
+            </>
+          }
+          imgSrc="/products_stUSDS.png"
+          mobileImgSrc="/products_stUSDS_mobile.png"
+          buttonVariant="azure-2"
+          buttonText="Get stUSDS"
+          emphasis="Access stUSDS tokens"
+          title="with USDS"
+          reverse={true}
+          className="col-span-1 tablet:col-span-2 desktop:col-span-1"
+          featurePageId="expert"
+          APY={data.stusdsApy}
+          TVL={data.stusdsTvl}
+          type="stusds"
+          APYDescription="stUSDS Rate"
+          TVLDescription="stUSDS TVL"
+        />
+        <FeatureCard
+          href={`${baseUrl}/?widget=upgrade`}
+          descriptionElement={
+            <Text variant="p3">
+              Unlock all the Sky Protocol has to offer by easily and instantly upgrading your DAI and MKR.
+            </Text>
+          }
+          postTextElement={
+            <Text variant="p2">
+              Upgrade your DAI to USDS to access the many features of the decentralised Sky Protocol,
+              including Sky Token Rewards and the Sky Savings Rate.
+              <br />
+              <br />
+              Upgrade MKR to SKY to maintain the ability to participate in governance (vote and delegate),
+              maintain access to Staking Rewards and avoid the Delayed Upgrade Penalty.
+            </Text>
+          }
+          imgSrc="/products_upgrade.png"
+          buttonVariant="sunset-3"
+          buttonText="Upgrade"
+          emphasis="Upgrade"
+          title="to USDS and SKY"
+          className="col-span-1"
+          cardClassName="col-span-1"
+          featurePageId="upgrade"
+        />
+        <FeatureCardLg
+          href={`${baseUrl}/?widget=trade`}
+          descriptionElement={
+            <Text variant="p3">
+              Trade popular tokens for USDS and SKY, quickly and simply, utilising smart contracts on the
+              blockchain instead of relying on centralised entities. Trades are powered by{' '}
+              <ExternalLink href="https://swap.cow.fi/" className="text-black">
+                CoW Swap
+              </ExternalLink>
+              .
+            </Text>
+          }
+          postTextElement={
+            <>
+              <Text variant="p2" className="mb-4 desktop:mb-[18px] desktop-xl:mb-[20px]">
+                Directly trade popular tokens for Sky ecosystem tokens at current market prices.
                 <br />
-                <br />
-                If you have shied away from the Ethereum blockchain due to the high price of gas, SkyLink
-                introduces reduced fees and faster transaction speeds.
               </Text>
-            }
-            imgSrc="/products_skybridge.png"
-            mobileImgSrc="/features-skylink-mobile.png"
-            imgWidths={[200, 600, 800]}
-            buttonVariant="azure-2"
-            buttonText="Access SkyLink"
-            title="Connect with"
-            emphasis="SkyLink"
-            reverse={false}
-            postTitle="SkyLink"
-            className="col-span-1 tablet:col-span-2 desktop:col-span-1"
-            featurePageId="skylink"
-            APY=""
-            TVL=""
-            APYDescription=""
-            TVLDescription=""
-          />
-        </Card>
+              <ul className="list-disc pl-7">
+                <li>
+                  <Text variant="p2">
+                    Trade USDC, USDT, ETH and SKY for USDS, and vice versa. Once you have USDS, you can use it
+                    to access Sky Token Rewards and to access the Sky Savings Rate to accumulate more USDS.
+                  </Text>
+                </li>
+                <li>
+                  <Text variant="p2">
+                    Trade USDC, USDT, ETH and USDS for SKY, and vice versa. Once you have SKY, you can use it
+                    to access Staking Rewards and participate in Sky Ecosystem Governance.
+                  </Text>
+                </li>
+              </ul>
+            </>
+          }
+          imgSrc="/products_trade.png"
+          mobileImgSrc="/products_trade_mobile.png"
+          buttonVariant="twilight-3"
+          buttonText="Start Trading"
+          emphasis="Trade"
+          title="crypto for USDS"
+          postTitle="Trade crypto for USDS"
+          className="col-span-1 tablet:col-span-2 desktop:col-span-1"
+          featurePageId="trade"
+          APY=""
+          TVL=""
+          APYDescription=""
+          TVLDescription=""
+        />
       </div>
     </div>
   );
