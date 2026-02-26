@@ -27,12 +27,13 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
               </TextFeatureCard>
               <ul className="list-disc pl-7">
                 <LiFeatureCard>
-                  Savings Vault — Allocates deposits exclusively into a single sUSDS/USDS lending market.
+                  USDT Savings Vaults — Allocates deposits exclusively into sUSDS collateralized lending
+                  market.
                 </LiFeatureCard>
                 <LiFeatureCard>
                   USDS Flagship Vault — Allocates 80% of deposits into sUSDS earning the Sky Savings Rate,
-                  with the remaining 20% directed to markets with volatile collateral exposure such as
-                  stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
+                  with the remaining 20% directed to markets with volatile bluechip collateral exposure such
+                  as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
                 </LiFeatureCard>
                 <LiFeatureCard>
                   USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS/USDS lending

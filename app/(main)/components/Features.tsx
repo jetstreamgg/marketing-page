@@ -519,8 +519,8 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
               Choose from a range of vaults with different market exposure, risk levels, and yields.
               <br />
               <br />
-              When you deposit, your stablecoins are allocated to carefully selected lending markets, where
-              borrowers post native Sky protocol tokens or established crypto assets as collateral.
+              When you deposit, your stablecoins are allocated to selected lending markets, where borrowers
+              post native Sky protocol tokens or established crypto assets as collateral.
             </Text>
           }
           postTitle="Vaults"
@@ -532,14 +532,15 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
               <ul className="mb-4 list-disc space-y-2 pl-5 desktop:mb-[18px] desktop-xl:mb-[20px]">
                 <li>
                   <Text tag="span" variant="p3">
-                    Savings Vault — Allocates deposits exclusively into a single sUSDS/USDS lending market.
+                    USDT Savings Vaults — Allocates deposits exclusively into sUSDS collateralized lending
+                    market.
                   </Text>
                 </li>
                 <li>
                   <Text tag="span" variant="p3">
                     USDS Flagship Vault — Allocates 80% of deposits into sUSDS earning the Sky Savings Rate,
-                    with the remaining 20% directed to markets with volatile collateral exposure such as
-                    stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
+                    with the remaining 20% directed to markets with volatile bluechip collateral exposure such
+                    as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
                   </Text>
                 </li>
                 <li>
