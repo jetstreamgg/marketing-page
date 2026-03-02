@@ -75,6 +75,7 @@ export const FeatureCard = ({
     >
       <Transition
         state={state}
+        colorVariant={buttonVariant}
         postTransitionClassName="scrollbar-hidden"
         postTransitionView={
           <div

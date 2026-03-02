@@ -15,6 +15,7 @@ export const ExpertCard = ({ data }: { data: FetchedData }) => {
       id="expert"
       tabs={[
         {
+          label: 'Access stUSDS tokens with USDS',
           title: 'Access stUSDS tokens with USDS',
           content: (
             <>

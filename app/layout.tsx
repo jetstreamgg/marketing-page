@@ -1,7 +1,6 @@
 import './globals.css';
 import { Providers } from './providers';
 import type { Metadata } from 'next';
-import { AuthWrapper } from '@/app/components/AuthWrapper';
 import { PageAnimatePresence } from '@/app/components/PageAnimatePresence';
 import { circleStdClassName } from '@/app/lib/fonts';
 import { Header } from '@/app/components/Header';
@@ -45,13 +44,7 @@ export default async function RootLayout({ children }: { children?: React.ReactN
         <Providers>
           <ExternalLinkModal />
           <Header />
-          {process.env.NEXT_PUBLIC_SKIP_AUTH_CHECK == 'true' ? (
-            <PageAnimatePresence>{children}</PageAnimatePresence>
-          ) : (
-            <AuthWrapper>
-              <PageAnimatePresence>{children}</PageAnimatePresence>
-            </AuthWrapper>
-          )}
+          <PageAnimatePresence>{children}</PageAnimatePresence>
         </Providers>
         <SpeedInsights />
       </body>

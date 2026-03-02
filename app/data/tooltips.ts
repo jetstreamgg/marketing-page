@@ -275,6 +275,12 @@ Bundled transaction: Active`
       'The Sky Savings Rate is variable, determined by decentralized, onchain Sky Ecosystem Governance, and configured on the Ethereum blockchain. Sky Ecosystem Governance is able to adapt the SSR and other relevant parameters at any time at its discretion and without notice, based on market conditions, protocol surplus and other factors. The rate shown here is an estimate of the Sky Savings Rate representing the expected compounded rate per annum. It should be automatically updated every 5 minutes, and is powered by data provided by a third party ([Block Analitica](https://blockanalitica.com/)). This figure does not promise or guarantee future results.'
   },
   {
+    id: 'vaults-rate',
+    title: 'Vault Rate',
+    tooltip:
+      'The vault rate provided is variable and calculated over the last 6 hours. It includes native yield from the vault markets plus incentive rewards, minus fees. The rate is provided by a third party provider (Morpho). This estimate is for informational purposes only and does not guarantee future results.'
+  },
+  {
     id: 'rewards-rate',
     title: 'Rewards Rate',
     tooltip: `The Sky Token Rewards Rate is different for each type of token rewarded, and always fluctuates, determined by the following factors:
