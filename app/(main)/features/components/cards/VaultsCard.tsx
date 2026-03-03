@@ -36,9 +36,8 @@ export const VaultsCard = ({ data }: { data: FetchedData }) => {
                   as stUSDS/USDS, cbBTC/USDS, wstETH/USDS, and WETH/USDS.
                 </LiFeatureCard>
                 <LiFeatureCard>
-                  USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS/USDS lending
-                  markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as
-                  collateral.
+                  USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS lending markets,
+                  where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as collateral.
                 </LiFeatureCard>
               </ul>
               <TextFeatureCard>

@@ -545,9 +545,8 @@ export function HomepageFeatures({ data }: { data: FetchedData }) {
                 </li>
                 <li>
                   <Text tag="span" variant="p3">
-                    USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS/USDS lending
-                    markets, where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as
-                    collateral.
+                    USDS, USDC, and USDT Risk Capital Vaults — Allocate deposits into stUSDS lending markets,
+                    where borrowers post stUSDS, Sky&apos;s higher-yield and higher-risk token, as collateral.
                   </Text>
                 </li>
               </ul>
