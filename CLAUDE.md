@@ -37,9 +37,10 @@ pnpm playwright test e2e/homepage.spec.ts
 
 ### Content Synchronization
 
-- `./scripts/sync-content.sh` - Sync FAQ content from the corpus repository
+- `./scripts/sync-content.sh` - Sync FAQ and tooltips content from the corpus repository
 - Content version controlled via `.content-version` file (contains commit hash/tag)
 - FAQs are synced to `app/(main)/faq/faqData/`
+- Tooltips are synced to `app/data/tooltips.ts`
 
 ## Architecture Overview
 
@@ -110,26 +111,29 @@ The AppContext (`/app/context/AppContext.tsx`) manages global UI state. When add
 
 ## Content Management
 
-### FAQ Content
+### Synced Content
 
-The marketing site's FAQ content is managed externally in the corpus repository and synced via automation:
+The marketing site's FAQ and tooltips content is managed externally in the corpus repository and synced via automation:
 
-1. **Content Source**: FAQ content originates from `github.com/sky-ecosystem/corpus`
+1. **Content Source**: Content originates from `github.com/sky-ecosystem/corpus`
 2. **Version Control**: The `.content-version` file specifies which corpus version to use
 3. **Sync Process**: The `scripts/sync-content.sh` script:
    - Clones the corpus repo at the specified version
-   - Runs the website extraction script to generate FAQ files
+   - Runs the website extraction script to generate content files
    - Copies FAQ content from `output/website/faqs/` to `app/(main)/faq/faqData/`
+   - Copies tooltips from `output/website/tooltips/tooltips.ts` to `app/data/tooltips.ts`
    - Formats files with Prettier for consistency
-4. **Location**: Synced FAQ data lives in `app/(main)/faq/faqData/`
+4. **Locations**:
+   - FAQs: `app/(main)/faq/faqData/`
+   - Tooltips: `app/data/tooltips.ts`
 
 ### Updating Content
 
-To update FAQ content:
+To update synced content:
 
 1. Update the commit hash/tag in `.content-version`
 2. Run `./scripts/sync-content.sh`
-3. Commit the updated FAQ files
+3. Commit the updated files
 
 Note: The sync script will gracefully skip if authentication or network issues occur, using existing content as fallback.
 

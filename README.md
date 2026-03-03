@@ -25,11 +25,9 @@ The materials in this repository may include references to our trademarks as wel
 To run the application locally, you need to set the following environment variables in your `.env` file:
 
 - `NPM_TOKEN`: Your NPM token.
-- `NEXT_PUBLIC_SKIP_AUTH_CHECK`: Set this to `true` for local development to bypass auth checks
 - `NEXT_PUBLIC_TERMS_LINK`: Array containing links to terms of use
 - `NEXT_PUBLIC_FOOTER_LINKS`: Array containing links to show in the footer
 - `NEXT_PUBLIC_WEBAPP_URL`: The URL of the webapp
-- `NEXT_PUBLIC_AUTH_URL`: The URL of the auth service
 - `API_URL`: The URL of the API service
 
 You can find an example of how to set these in the `.env example` file.

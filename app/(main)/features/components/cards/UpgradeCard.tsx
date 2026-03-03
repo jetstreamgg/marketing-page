@@ -9,6 +9,7 @@ export const UpgradeCard = ({ data }: { data: FetchedData }) => (
     id="upgrade"
     tabs={[
       {
+        label: 'Upgrade to USDS and SKY',
         title: 'Upgrade to USDS and SKY',
         content: (
           <>
