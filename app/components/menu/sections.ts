@@ -13,14 +13,6 @@ export const menuSections: Record<
       href: '/features'
     },
     {
-      title: 'Upgrade',
-      href: 'features#upgrade'
-    },
-    {
-      title: 'Trade',
-      href: 'features#trade'
-    },
-    {
       title: 'Sky Token Rewards',
       href: 'features#rewards'
     },
@@ -33,12 +25,20 @@ export const menuSections: Record<
       href: 'features#stake'
     },
     {
+      title: 'Vaults',
+      href: 'features#vaults'
+    },
+    {
       title: 'Expert',
       href: 'features#expert'
     },
     {
-      title: 'SkyLink',
-      href: 'features#skylink'
+      title: 'Upgrade',
+      href: 'features#upgrade'
+    },
+    {
+      title: 'Trade',
+      href: 'features#trade'
     }
   ],
   participate: [

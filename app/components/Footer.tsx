@@ -21,13 +21,13 @@ const linksA: LinkSection[] = [
     'Explore',
     [
       { title: 'All Features', url: '/features' },
-      { title: 'Upgrade', url: '/features#upgrade' },
-      { title: 'Trade', url: '/features#trade' },
       { title: 'Sky Token Rewards', url: '/features#rewards' },
       { title: 'Sky Savings Rate', url: '/features#savings' },
       { title: 'Staking Engine', url: '/features#stake' },
+      { title: 'Vaults', url: '/features#vaults' },
       { title: 'Expert', url: '/features#expert' },
-      { title: 'SkyLink', url: '/features#skylink' }
+      { title: 'Upgrade', url: '/features#upgrade' },
+      { title: 'Trade', url: '/features#trade' }
     ]
   ],
   [

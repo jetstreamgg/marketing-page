@@ -17,8 +17,8 @@ type Stat = {
 };
 
 type CardTab = {
-  label?: string;
-  title: string;
+  label: string;
+  title: ReactNode;
   content: ReactNode;
   stats?: Stat[];
   buttonCta?: string;
@@ -60,7 +60,7 @@ export function FeaturesPageCard({
   id: string;
 }) {
   const { baseUrl } = useSkyUrl();
-  const [selectedTab, setSelectedTab] = useState(tabs[0].label || tabs[0].title);
+  const [selectedTab, setSelectedTab] = useState(tabs[0].label);
   const { trackCTAClick } = useMarketingAnalytics();
 
   return (
@@ -79,10 +79,15 @@ export function FeaturesPageCard({
               </Text>
             </div>
           )}
-          <div className="mb-2 flex flex-col-reverse items-center justify-between tablet:mb-4 tablet:flex-row">
+          <div
+            className={cn(
+              'flex flex-col-reverse items-center justify-between tablet:flex-row',
+              tabs.length > 1 && 'mb-2 tablet:mb-4'
+            )}
+          >
             {tabs.length > 1 && (
               <TabsList className="flex w-fit flex-wrap justify-start gap-2 tablet:max-w-[80%]">
-                {tabs.map(({ title, label = title }) => (
+                {tabs.map(({ title, label }) => (
                   <TabsTrigger variant="secondary" key={label} value={label}>
                     {label}
                   </TabsTrigger>
@@ -101,7 +106,7 @@ export function FeaturesPageCard({
             {tabs.map(
               ({
                 title,
-                label = title,
+                label,
                 content,
                 stats,
                 buttonCta,
@@ -152,17 +157,19 @@ export function FeaturesPageCard({
                                         <Text variant="p3" className="pr-2">
                                           {label}
                                         </Text>
-                                        {['rewards', 'savings', 'stake', 'expert'].includes(id) &&
+                                        {['rewards', 'savings', 'stake', 'expert', 'vaults'].includes(id) &&
                                           statId === 'rate' && (
                                             <PopoverInfo
                                               type={
-                                                id === 'savings'
-                                                  ? 'ssr'
-                                                  : id === 'stake'
-                                                    ? 'srr'
-                                                    : id === 'expert'
-                                                      ? 'stusds'
-                                                      : 'str'
+                                                id === 'vaults'
+                                                  ? 'vaults'
+                                                  : id === 'savings'
+                                                    ? 'ssr'
+                                                    : id === 'stake'
+                                                      ? 'srr'
+                                                      : id === 'expert'
+                                                        ? 'stusds'
+                                                        : 'str'
                                               }
                                             />
                                           )}

@@ -8,6 +8,7 @@ export const ActivationCard = () => (
     id="activation"
     tabs={[
       {
+        label: 'Get rewards with Activation',
         title: 'Get rewards with Activation',
         content: (
           <>

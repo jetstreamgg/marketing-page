@@ -14,6 +14,7 @@ import { cn } from '../lib/utils';
 const getContent = () => {
   // Get tooltips from centralized system
   const rewardsRateTooltip = getTooltipById('rewards-rate');
+  const vaultsRateTooltip = getTooltipById('vaults-rate');
   const rateTooltip = getTooltipById('sky-savings-rate');
   const psmTooltip = getTooltipById('psm');
   const stakingRewardsRateTooltip = getTooltipById('staking-rewards-rates-srrs');
@@ -95,6 +96,14 @@ const getContent = () => {
           {parseMarkdownLinks(delegateTooltip?.tooltip)}
         </Text>
       )
+    },
+    vaults: {
+      title: vaultsRateTooltip?.title || '',
+      description: (
+        <Text className="leading-5 text-white/80" variant="ui-small-regular">
+          {parseMarkdownLinks(vaultsRateTooltip?.tooltip)}
+        </Text>
+      )
     }
   };
 };
@@ -114,7 +123,8 @@ export const PopoverInfo = ({
     | 'liquidation-price-staking'
     | 'borrow'
     | 'borrow-rate'
-    | 'delegate';
+    | 'delegate'
+    | 'vaults';
 }) => {
   const content = getContent();
 

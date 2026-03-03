@@ -14,6 +14,7 @@ export const TradeCard = ({ data }: { data: FetchedData }) => {
       id="trade"
       tabs={[
         {
+          label: 'Trade crypto for USDS',
           title: 'Trade crypto for USDS',
           content: (
             <>
