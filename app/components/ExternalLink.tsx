@@ -1,3 +1,4 @@
+import posthog from 'posthog-js';
 import { cn } from '../lib/utils';
 import { useAppContext } from '../context/AppContext';
 import { ALLOWED_DOMAINS, RESTRICTED_DOMAINS } from '../constants';
@@ -55,6 +56,17 @@ export function ExternalLink({
       e.preventDefault();
       setExternalLinkModalUrl(href);
       setExternalLinkModalOpened(true);
+      return;
+    }
+
+    // For app links, append PostHog identity params at click time
+    // (PostHog may not be loaded during render, so we do this here)
+    if (isAppLink) {
+      const finalUrl = appendPostHogParams(href);
+      if (finalUrl !== href) {
+        e.preventDefault();
+        window.open(finalUrl, target);
+      }
     }
   };
 
@@ -68,4 +80,25 @@ export function ExternalLink({
       {children}
     </a>
   );
+}
+
+/**
+ * Appends PostHog identity params to a URL for cross-domain attribution.
+ * Called at click time (not render time) because PostHog may not be loaded during render.
+ */
+function appendPostHogParams(url: string): string {
+  try {
+    const distinctId = posthog.get_distinct_id?.();
+    const sessionId = posthog.get_session_id?.();
+
+    // Don't append if PostHog isn't initialized or IDs are the cookieless placeholder
+    if (!distinctId || distinctId === '$posthog_cookieless') return url;
+
+    const urlObj = new URL(url);
+    if (distinctId) urlObj.searchParams.set('__ph_id', distinctId);
+    if (sessionId) urlObj.searchParams.set('__ph_session_id', sessionId);
+    return urlObj.toString();
+  } catch {
+    return url;
+  }
 }
