@@ -13,7 +13,7 @@ export function Socials({
   const socials = [
     {
       icon: Twitter,
-      href: 'https://x.com/SkyEcosystem'
+      href: 'https://x.com/SkyDotMoney'
     },
     {
       icon: Discord,
