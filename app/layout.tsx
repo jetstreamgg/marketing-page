@@ -38,6 +38,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children?: React.ReactNode }) {
+  console.log('test');
   return (
     <html lang="en">
       <body className={`flex min-h-screen flex-col overflow-x-hidden ${circleStdClassName}`}>
