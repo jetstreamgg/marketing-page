@@ -48,14 +48,11 @@ let hasInitializedPostHog = false;
 // Consent is stored in the cross-subdomain sky_consent cookie (shared across *.sky.money).
 //
 // - Rejected users: PostHog is NOT initialized at all (zero events, zero network requests).
-// - Pending users: Cookieless anonymous tracking via server-side hash (cookieless_mode: 'always').
+// - Pending users: Memory-only persistence (persistence: 'memory'). Each user gets a real UUID
+//   distinct_id that lives only in JavaScript heap memory — no cookies, localStorage, or
+//   sessionStorage. Cleared on page close/refresh. This enables cross-domain attribution
+//   by passing the UUID via URL params when navigating to app.sky.money.
 // - Accepted users: Full persistent tracking from the first $pageview.
-//
-// Why cookieless_mode: 'always' for pending users (not 'on_reject')?
-// The 'on_reject' mode only activates when isExplicitlyOptedOut() is true, which requires
-// an explicit opt_out_capturing() call — opt_out_capturing_by_default doesn't trigger it.
-// Using 'always' guarantees cookieless tracking from the first event for pending users.
-// The CookieConsentBanner switches the mode via set_config() when the user makes a choice.
 export function initializePostHogIfNeeded(forceAccepted = false) {
   if (typeof window === 'undefined' || !POSTHOG_ENABLED || !POSTHOG_KEY || hasInitializedPostHog) {
     return;
@@ -84,20 +81,11 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
     // Also includes scroll depth metrics (max_scroll, last_scroll) automatically.
     capture_pageleave: true,
 
-    // PERSISTENCE: localStorage+cookie for cross-session and cross-subdomain attribution.
-    // Most data stored in localStorage (keeps headers small), but identity properties
-    // (distinct_id, device_id, session_id) are also persisted in cookies so that
-    // cross_subdomain_cookie: true can share them across *.sky.money subdomains.
-    persistence: 'localStorage+cookie',
-
-    // COOKIELESS MODE
-    // Pending users: 'always' → server-side hashed identity, no cookies/localStorage for tracking.
-    //   distinct_id is '$posthog_cookieless' (replaced server-side with daily hash).
-    //   Each day produces a new hash, so cross-day tracking is impossible.
-    // Accepted users: undefined → full persistent tracking with stable UUID distinct_id.
-    // Rejected users: never reach here (PostHog not initialized).
-    // Requires "Cookieless server hash mode" enabled in PostHog project settings.
-    cookieless_mode: hasAccepted ? undefined : 'always',
+    // PERSISTENCE
+    // Accepted users: localStorage+cookie for cross-session and cross-subdomain attribution.
+    // Pending users: memory only — UUID exists in JS heap, no device storage.
+    //   Enables cross-domain attribution via URL params (see ExternalLink component).
+    persistence: hasAccepted ? 'localStorage+cookie' : 'memory',
 
     autocapture: true,
 
@@ -120,7 +108,7 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
 
       // Restore consent for returning accepted users.
       // Rejected users never reach here (PostHog not initialized).
-      // Pending users are already in cookieless mode via cookieless_mode: 'always'.
+      // Pending users use memory persistence — no opt-in needed.
       if (hasAccepted) {
         posthogClient.opt_in_capturing();
       }
@@ -139,7 +127,7 @@ initializePostHogIfNeeded();
 
 /**
  * Apply a consent change at runtime.
- * Handles the cookieless → full tracking transition (and vice versa)
+ * Handles the memory → full tracking transition (and vice versa)
  * using the global posthog singleton directly.
  * Consent is written to the cross-subdomain sky_consent cookie via saveConsent().
  */
@@ -148,16 +136,13 @@ export function applyPostHogConsent(enabled: boolean) {
     // Ensure PostHog is initialized (handles rejected → accepted transition)
     initializePostHogIfNeeded(true);
 
-    // Disable cookieless mode and switch to full persistent tracking.
-    // reset() clears the cookieless $posthog_cookieless distinct_id
-    // so opt_in_capturing() generates a fresh persistent UUID.
-    posthog.set_config({ cookieless_mode: undefined });
-    posthog.reset();
+    // Upgrade from memory to persistent storage and opt in.
+    // The existing in-memory distinct_id carries over so the session continues seamlessly.
+    posthog.set_config({ persistence: 'localStorage+cookie' });
     posthog.opt_in_capturing();
     posthog.register({ app_name: 'marketing' });
   } else {
     if (!hasInitializedPostHog) return;
-    posthog.set_config({ cookieless_mode: undefined });
     // reset() MUST come before opt_out — reset clears all stored data including
     // opt flags. opt_out_capturing() must be last so the opt-out flag persists.
     posthog.reset();
