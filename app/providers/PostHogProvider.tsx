@@ -70,10 +70,10 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
     api_host: POSTHOG_HOST,
 
     // PERSON PROFILES
-    // 'always' ensures PostHog creates person profiles for all users, including
-    // pending-consent users with memory-only persistence. Without this, the SDK
-    // defaults to 'identified_only' which requires posthog.identify() calls.
-    person_profiles: 'always',
+    // Accepted users: 'always' creates person profiles with browser/OS properties.
+    // Pending users: 'identified_only' defers profile creation until consent is granted.
+    // Upgraded to 'always' at runtime in applyPostHogConsent() when user accepts.
+    person_profiles: hasAccepted ? 'always' : 'identified_only',
 
     // PAGE VIEW TRACKING
     // 'history_change' automatically captures $pageview on every URL change.
@@ -144,7 +144,7 @@ export function applyPostHogConsent(enabled: boolean) {
 
     // Upgrade from memory to persistent storage and opt in.
     // The existing in-memory distinct_id carries over so the session continues seamlessly.
-    posthog.set_config({ persistence: 'localStorage+cookie' });
+    posthog.set_config({ persistence: 'localStorage+cookie', person_profiles: 'always' });
     posthog.opt_in_capturing();
     posthog.register({ app_name: 'marketing' });
   } else {
