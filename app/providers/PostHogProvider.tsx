@@ -69,6 +69,12 @@ export function initializePostHogIfNeeded(forceAccepted = false) {
   posthog.init(POSTHOG_KEY, {
     api_host: POSTHOG_HOST,
 
+    // PERSON PROFILES
+    // 'always' ensures PostHog creates person profiles for all users, including
+    // pending-consent users with memory-only persistence. Without this, the SDK
+    // defaults to 'identified_only' which requires posthog.identify() calls.
+    person_profiles: 'always',
+
     // PAGE VIEW TRACKING
     // 'history_change' automatically captures $pageview on every URL change.
     // Works with App Router client-side navigation.
